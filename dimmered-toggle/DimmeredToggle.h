@@ -33,7 +33,7 @@ enum signals // segnali tra timer callbacks e loop() (flags)
 	NSGN        	=8
 };
 
-typedef void (*SweepCallbackSimple)(int outr[], int cr[], bool stop[], uint8_t state[], byte n);
+typedef void (*SweepCallbackSimple)(int outr, int cr);
 typedef void (*FeedbackCallbackSimple)(String buf);
 //String v[MAXQUEUE];  // coda messaggi
 	
@@ -97,7 +97,15 @@ class DimmeredToggle
 				//Serial.println(target_tt[n]-half);
 				outval[n] = (float) t[n]/maxt[n]*100;
 				countr[n] = (float) t[n]/tstep[n];
-				(*sweepCallback)(outval,countr,stop,stato,n);
+				int cr,out;
+				if(stop[OUT1]){
+					cr = countr[OUT3];	//condizionamento digitale input 1
+					out = outval[OUT3];
+				}else{
+					cr = stato[STTGL1]*countr[OUT1];
+					out = stato[STTGL1]*outval[OUT1];
+				}
+				(*sweepCallback)(out,cr);
 				//Serial.println("++++++++++++++");
 				//Serial.println((String) "t:"+t[n]+" pr.value:"+outval[n]+" stop: "+String(stop[n])+" dir:"+direct[n]+" target:"+target_tt[n]+" tmax:"+maxt[n]+" tstep:"+tstep[n]+" n:"+n+" countr:"+countr[n]);
 			}else{
@@ -151,7 +159,15 @@ class DimmeredToggle
 				Serial.println(direct[n]);
 				outval[n] = target_p[n];
 				countr[n] = (float) (target_p[n] + 1) / 100 * nstep[n];
-				(*sweepCallback)(outval,countr,stop,stato,n);
+				int cr, out;
+				if(stop[OUT1]){
+					cr = countr[OUT3];	//condizionamento digitale input 1
+					out = outval[OUT3];
+				}else{
+					cr = stato[STTGL1]*countr[OUT1];
+					out = stato[STTGL1]*outval[OUT1];
+				}
+				(*sweepCallback)(out,cr);
 				stop[n]=true;
 			}
 			Serial.println("NEXT TO START");

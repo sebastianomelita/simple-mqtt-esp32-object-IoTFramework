@@ -150,30 +150,25 @@ void loop() {
 void feedbackAction(String buf){
 	mqttClient.publish(outtopic, buf);
 };
-void sweepAction1(int outr[], int cr[], bool stop[], uint8_t stato[], byte n){
-	int condizout = 0;
-	if(stop[OUT1]){
-		condizout = cr[OUT3];	//condizionamento digitale input 1
-	}else{
-		condizout = stato[STTGL1]*cr[OUT1];	//condizionamento digitale input 1
-	}
-	Serial.println((String) "r: "+cr[n]+" n:"+n);
-	if(condizout > 0){
-		Serial2.println((String)"@l"+condizout);
-		Serial.println((String)"@l"+condizout);
+void sweepAction1(int outr, int cr){	
+	Serial.println((String) "r: "+cr);
+	if(cr > 0){
+		Serial2.println((String)"@l"+cr);
+		Serial.println((String)"@l"+cr);
 	}else{
 		Serial2.println((String)"@lo");
 		Serial.println((String)"@lo");
 	}
 };
-void sweepAction2(int outr[], int cr[], bool stop[], uint8_t stato[], byte n){
-	int condizout = 0;
-	if(stop[OUT1]){
-		condizout = cr[OUT3];	//condizionamento digitale input 1
+void sweepAction2(int outr, int cr){
+	Serial.println((String) "r: "+cr);
+	if(cr > 0){
+		//Serial2.println((String)"@l"+cr);
+		Serial.println((String)"@l"+cr);
 	}else{
-		condizout = stato[STTGL1]*cr[OUT1];	//condizionamento digitale input 1
+		//Serial2.println((String)"@lo");
+		Serial.println((String)"@lo");
 	}
-	Serial.println((String) "r: "+cr[n]+" n:"+n);
 };
 /////// gestore messaggi MQTT in ricezione (callback)     
 void messageReceived(String &topic, String &payload) {
