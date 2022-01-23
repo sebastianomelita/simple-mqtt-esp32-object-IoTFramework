@@ -31,9 +31,6 @@ class RemoteBase
 		// calcola lo stato dei due pulsanti 
 		void remoteCntrl(uint8_t targetval, uint8_t stbtna, uint8_t stbtnb, uint8_t sgnbtna, uint8_t sgnsld, uint8_t n, uint8_t mult=1);
 		/////    GESTORE EVENTI (callback)    /////////////////////////////////////////////////////////////////////////////////
-		String getToggleFeedback(uint8_t toggleState, uint8_t n);
-		String getSliderFeedback(uint8_t target, uint8_t n);
-		String getSliderFeedback2(uint8_t target, uint8_t n);
 	public:
 		RemoteBase(String id, uint8_t startIndex, uint8_t nsgn, uint8_t nstates, uint8_t nout);
 		void onFeedback(FeedbackCallbackSimple cb);
@@ -93,6 +90,7 @@ class DimmeredToggle : public RemoteBase
 		int webdir(uint8_t n);
 		/////    GESTORE EVENTI (callback)    /////////////////////////////////////////////////////////////////////////////////
 		String getDimmeredToggleFeedback(uint8_t on, uint8_t off, uint8_t to, long t, short dir, unsigned nstep, unsigned long maxt, uint8_t n);
+		String getSliderFeedback2(uint8_t target, uint8_t n);
 		String getOnOffFeedback(uint8_t on, uint8_t off, long t, short dir, unsigned long maxt, uint8_t n);
 		String getOnOffFeedback2(uint8_t on, uint8_t off, long t, short dir, uint8_t n);
 		String getDimmeredToggleInitFeedback(uint8_t on, uint8_t off, uint8_t to, short dir, unsigned nstep, unsigned long maxt, long t,uint8_t n);

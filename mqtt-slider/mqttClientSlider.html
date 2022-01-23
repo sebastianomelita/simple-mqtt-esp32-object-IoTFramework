@@ -248,11 +248,16 @@
 				press(vls[0]);
 			};
 			conn.onMessageArrived = function (e) {
-				var obj = JSON.parse(e.payloadString);
-				//controlla se è indirizzato al dispositivo associato alla pagina
-				if(obj.devid==''+mqttid+''||obj.devid=='FF'){//FF id broadcast valido per tutti i dispositivi
-					console.log('Received: '+e.payloadString);
-					onRcv(e.payloadString);
+				console.log('Received: '+e.payloadString);
+				if(e.payloadString){
+					var obj = JSON.parse(e.payloadString);
+					//controlla se è indirizzato al dispositivo associato alla pagina
+					if(obj.devid==''+mqttid+''||obj.devid=='FF'){//FF id broadcast valido per tutti i dispositivi
+						console.log('Received: '+e.payloadString);
+						onRcv(e.payloadString);
+					}
+				}else{
+					console.log('Message received error: '+e.payloadString);
 				}
 			};
 			conn.onConnectionLost  = function (resObj) {		
@@ -267,23 +272,11 @@
 			};
 		};
 		function send(str){
-			//str = '{"devid":"soggiorno-gruppo06","sld1":"45"}';
-			console.log('send: '+str);
+		    console.log('send: '+str);
 			var msg = new Paho.MQTT.Message(str);
 			msg.destinationName = intopic;
 			console.log('topic: '+msg.destinationName);
 			conn.send(msg);
-		};
-		function condsend(arr,i,eid,cs){
-			var el=document.getElementById(eid);
-			var c=arr[i].replace(cs, el.value.trim());
-			send(c);
-			console.log('condsend: '+c);
-		};
-		function actsend(jsn,str,cs){
-			var v=jsn.replace(cs, str.trim());
-			console.log('actsend: '+v+'-subwith:'+str.trim()+'-cs:'+cs);
-			send(v);
 		};
 		function press(s){
 			send(s);
@@ -353,6 +346,7 @@
 				var el = document.getElementById(x);
 				if(el){  //controlla se il campo esiste nel DOM della pagina
 					//console.log(x);
+					//console.log(obj[x]);
 					if(x=='pr1'){
 						console.log('stato:'+obj[x]); 
 						el.value = Number(obj[x]);
