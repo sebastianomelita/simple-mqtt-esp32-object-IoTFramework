@@ -90,22 +90,6 @@ void RemoteBase::remoteCntrl(uint8_t targetval, uint8_t stbtna, uint8_t stbtnb, 
 		}
 	}
 }
-/////    GESTORE EVENTI (callback)    /////////////////////////////////////////////////////////////////////////////////
-String RemoteBase::getToggleFeedback(uint8_t toggleState, uint8_t n){
-	String str = "{\"devid\":\""+String(mqttid)+"\",\"to"+String(n+1)+"\":\""+String(toggleState)+"\"}";
-	//Serial.println("Str: " + str);
-	return str;
-}
-String RemoteBase::getSliderFeedback(uint8_t target, uint8_t n){
-	String str = "{\"devid\":\""+String(mqttid)+"\",\"pr"+String(n+1)+"\":\""+String(target)+"\"}";
-	//Serial.println("Str: " + str);
-	return str;
-}
-String RemoteBase::getSliderFeedback2(uint8_t target, uint8_t n){
-	String str = "{\"devid\":\""+String(mqttid)+"\",\"sld"+String(n+1)+"\":\""+String(target)+"\"}";
-	//Serial.println("Str: " + str);
-	return str;
-}
 //// DIMMERED TOGGLE ///////////////////////////////////////////////////////////////
 void DimmeredToggle::remoteCntrlSweepInit(){
 	for(int i=0; i<NOUT; i++){
@@ -564,10 +548,10 @@ bool Slider::remoteCntrlEventsParser(){
 		signal[SGNSLD1] = false;
 		Serial.print("SLD1: ");
 		Serial.println(target_p[OUT1]);
-		buf = getSliderFeedback(target_p[OUT1], OUT1+k);
 		int cr, out;
 		cr = (float) (target_p[OUT1]) / 100 * nstep[OUT1];
 		out = target_p[OUT1];
+		buf = getSliderFeedback(target_p[OUT1], OUT1+k);
 		(*actionkCallback)(out,cr,k);
 		(*feedbackCallback)(buf);
 	}
