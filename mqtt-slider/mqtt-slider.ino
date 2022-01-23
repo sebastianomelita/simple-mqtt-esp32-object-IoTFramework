@@ -6,10 +6,6 @@
 
 #define WIFIRECONNECTIME  2000
 #define MQTTRECONNECTIME  2000
-#define MAXT1 		10000
-#define MAXT2 		10000
-#define MAXT3 		10000
-#define MAXT4 		10000
 #define NLEVEL1		9
 #define NLEVEL2		100
 #define NLEVEL3		9
@@ -33,8 +29,8 @@ Ticker mqttReconnectTimer;
 Ticker wifiReconnectTimer;
 
 /********* FINE DEFINIZIONE SEGNALI **************************/
-const char ssid[] = "xxxxxx";
-const char pass[] = "yyyyyy";
+const char ssid[] = "WebPocket-E280";
+const char pass[] = "dorabino.7468!";
 const char mqttserver[] = "broker.hivemq.com";
 const int mqttport = 1883;
 const char intopic[] = "soggiorno/in"; 
