@@ -357,6 +357,7 @@ bool DimmeredToggle::remoteCntrlEventsParser(){
 		buf = getDimmeredToggleFeedback(stato[STTGL1]*targetbis[OUT3],stato[STTGL1]*targetbis[OUT3]*0,stato[STTGL1],t[OUT3],webdir(OUT3),nstep[OUT3],maxt[OUT3],OUT1+k);
 		(*feedbackCallback)(buf);
 	}
+	delay(0);
 	return ismsg;
 }
 //// FADED SLIDER ///////////////////////////////////////////////////////////////
@@ -526,6 +527,8 @@ bool FadedSlider::remoteCntrlEventsParser(){
 		buf = getFadedSliderSweepInitFeedback(t[OUT1], webdir(OUT1), maxt[OUT1], nstep[OUT1], OUT1+k);
 		(*feedbackCallback)(buf);
 	}
+	delay(0);
+	return ismsg;
 }
 //// SLIDER ///////////////////////////////////////////////////////////////
 String Slider::getSliderFeedback(uint8_t target, uint8_t n){
@@ -574,6 +577,8 @@ bool Slider::remoteCntrlEventsParser(){
 		int cr, out;
 		(*feedbackCallback)(buf);
 	}
+	delay(0);
+	return ismsg;
 }
 Slider::Slider(String id, uint8_t startIndex, unsigned nlevels):RemoteBase(id,startIndex,NSGN,NSTATES,NOUT){
 	nstep[OUT1] = nlevels;
@@ -615,6 +620,8 @@ bool Toggle::remoteCntrlEventsParser(){
 		buf = getToggleFeedback(stato[STTGL1], OUT1+k);
 		(*feedbackCallback)(buf);
 	}
+	delay(0);
+	return ismsg;
 }
 void Toggle::remoteToggle(){
 	RemoteBase::remoteToggle(255,STTGL1,SGNTGL1,OUT1);
