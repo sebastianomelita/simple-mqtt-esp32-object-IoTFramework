@@ -212,6 +212,11 @@ String DimmeredToggle::getDimmeredToggleInitFeedback(uint8_t on, uint8_t off, ui
 	Serial.println("Str: " + str);
 	return str;
 }
+String DimmeredToggle::getSliderFeedback2(uint8_t target, uint8_t n){
+	String str = "{\"devid\":\""+String(mqttid)+"\",\"sld"+String(n+1)+"\":\""+String(target)+"\"}";
+	//Serial.println("Str: " + str);
+	return str;
+}
 DimmeredToggle::DimmeredToggle(String id, uint8_t startIndex, uint8_t precision, unsigned nlevel, unsigned long maxtime):RemoteBase(id,startIndex,NSGN,NSTATES,NOUT){
 	remoteCntrlSweepInit();
 	sharp[OUT1] = sharp[OUT3] = precision;
