@@ -234,7 +234,7 @@ void DimmeredToggle::remoteCntrlOn(uint8_t targetval){
 	RemoteBase::remoteCntrl(targetval,STBTN1,STBTN2,SGNBTN1,SGNOP,OUT1);
 }
 void DimmeredToggle::remoteCntrlOff(void){
-	RemoteBase::remoteCntrl(255,STBTN2,STBTN1,STBTN1,SGNOP,OUT1,0);
+	RemoteBase::remoteCntrl(255,STBTN2,STBTN1,SGNBTN2,SGNOP,OUT1,0);
 }
 void DimmeredToggle::remoteSlider(uint8_t targetval){
 	RemoteBase::remoteSlider(targetval,SGNSLD1,OUT4);
@@ -621,5 +621,88 @@ void Toggle::remoteConf(void){
 void Toggle::onAction(SweepCallbackSimple cb){
 	this->actionkCallback = cb;
 }
+//// DIMMERED TOGGLE ///////////////////////////////////////////////////////////////
+String Motor::getUpDownFeedback(uint8_t up, uint8_t down, short dir, uint8_t n){
+	String str =  "{\"devid\":\""+String(mqttid)+"\",\"up"+String(n+1)+"\":\""+up+"\",\"down"+String(n+1)+"\":\""+down+"\",\"dr"+String(n+1)+"\":\""+String(dir)+"\"}";
+	Serial.println("Str: " + str);
+	return str;
+}
+Motor::Motor(String id, uint8_t startIndex):RemoteBase(id,startIndex,NSGN,NSTATES,NOUT){
+	mqttid = id;
+}
+void Motor::remoteCntrlUp(void){
+	RemoteBase::remoteCntrl(255,STBTN1,STBTN2,SGNBTN1,SGNOP,OUT1);
+}
+void Motor::remoteCntrlDown(void){
+	RemoteBase::remoteCntrl(255,STBTN2,STBTN1,SGNBTN2,SGNOP,OUT1);
+}
+void Motor::remoteConf(void){
+	signal[SGNINIT] = true;
+}
+void Motor::onAction(SweepCallbackSimple cb){
+	this->actionkCallback = cb;
+}
+bool Motor::remoteCntrlEventsParser(){
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Più SPA posono comandare uno stesso dispositivo
+	// lo stato dei pulsanti viene calcolato sul dispositivo ed inviato alle SPA 
+	// lo stato di un pulsante viene inviato alle SPA come feedback 
+	// immediatamente dopo la ricezione di un camando su quel pulsante
+	// Ogni feedback certifica: l'avvenuta ricezione di un comando, lo stato del dispositivo dopo la ricezione del comando.
+	// Una SPA non ricalcola in locale lo stato dei pulsanti ma si limita a copiarlo dal dispositivo.
+	// Ogni SPA emula in locale la funzione di spostamento della barra (sweep) utilizzando lo stesso algoritmo di scivolamento 
+	// temporale (sweepAction()) utilizzato dal dispositivo al fine di mantenere un perfetto sincronismo tra
+	// disposititvo e SPA e tra le diverse SPA che comandano uno stesso dispositivo.
+	// Sono previsti aggiornamenti periodici dello stato dei pulsanti inviati alle SPA su iniziativa del dispositivo per ovviare // alla eventuale perdita di un feedback a causa di un problema di connessione.
+	// Le SPA possono richiedere lo stato completo dei pulsanti ad ogni connessione/riconnessione inviando il comando conf.
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	// gestori dei segnali inviati da parte dei moduli di calcolo dello stato dei pulsanti
+	// possono non essere raccolti tutti a seconda di quali pulsanti sono implemntati dalla SPA 
+	// (potrebbe, ad es., mancare uno slider o un toggle)
+	// generano i feedback dello stato dei pulsanti
+	// possono essere parziali a seconda di quali pulsanti sono implemntati dalla SPA
+	// se sono completi non succede nulla di anomalo in uanto la SPA potrebbe ignorare i feedback a pulsanti non implementati
+	bool ismsg = false;
+	String buf;
+	
+	if(signal[SGNBTN1]){
+		signal[SGNBTN1] = false;
+		Serial.print("BTN1: ");
+		Serial.println(stato[STBTN1]);
+		ismsg = true;
+		if(stato[STBTN1]){
+			direct[OUT1] = 1;
+		}else if(stop[OUT1]){
+			direct[OUT1] = 0;
+		}
+		buf =  getUpDownFeedback(stato[STBTN1],stato[STBTN2],direct[OUT1], OUT1+k);
+		(*actionkCallback)(!stop[OUT1],direct[OUT1],k);
+		(*feedbackCallback)(buf);
+	}
+	if(signal[SGNBTN2]){
+		signal[SGNBTN2] = false;
+		Serial.print("BTN2: ");
+		Serial.println(stato[STBTN2]);
+		ismsg = true;
+		if(stato[STBTN2]){
+			direct[OUT1] = -1;
+		}else if(stop[OUT1]){
+			direct[OUT1] = 0;
+		}
+		buf =  getUpDownFeedback(stato[STBTN1],stato[STBTN2],direct[OUT1], OUT1+k);
+		(*actionkCallback)(!stop[OUT1],direct[OUT1],k);
+		(*feedbackCallback)(buf);
+	}
+	if(signal[SGNINIT]){
+		signal[SGNINIT] = false;
+		stato[STBTN1] = LOW;
+		stato[STBTN2] = LOW;
+		ismsg = true;
+		buf = getUpDownFeedback(stato[STBTN1],stato[STBTN2],direct[OUT1],OUT1+k);
+		(*feedbackCallback)(buf);
+	}
+	delay(0);
+	return ismsg;
+}
 
