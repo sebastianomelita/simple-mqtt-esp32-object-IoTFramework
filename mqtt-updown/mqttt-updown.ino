@@ -32,9 +32,6 @@ const char mqttid[] = "soggiorno-gruppo06";
 //WiFiClientSecure net;
 WiFiClient wifi;
 MQTTClient mqttClient(1024);
-//DimmeredToggle sw1(mqttid,0,SHARPNESS1,NLEVEL1,MAXT1);
-//DimmeredToggle sw2(mqttid,1,SHARPNESS2,NLEVEL2,MAXT2);
-
 Motor m1(mqttid,0);
 Motor m2(mqttid,1);
 
