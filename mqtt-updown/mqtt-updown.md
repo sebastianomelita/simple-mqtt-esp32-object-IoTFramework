@@ -1,3 +1,7 @@
+### **Layout pagina**
+
+![motor](motor.png)
+
 ### **Parser dei comandi**
 
 - ```cmdParser(str,payload,"cmd",MAXLEN)```. Ricerca un certo commando ```cmd``` all’interno di una stringa e ne restituisce il valore sotto forma di stringa sul parametro di out str. Ritorna ```true``` se ha trovato un'occorenza del comando, ```false``` altrimenti.
