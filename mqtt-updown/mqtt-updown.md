@@ -1,11 +1,13 @@
 ### **Parser dei comandi**
 
-```cmdParser(str,payload,"cmd",MAXLEN)```. Restituisce ```true``` se nella stringa di input ```payload``` è presente la sottostringa ```cmd```, ```false``` altrimenti.
+```cmdParser(str,payload,"cmd",MAXLEN)```. Ricerca un certo commando ```cmd``` all’interno di una stringa e ne restituisce il valore sotto forma di stringa sul parametro di out str. Ritorna ```true``` se ha trovato un'occorenza del comando, ```false``` altrimenti.
 
 
 ### **Formato JSON ingressi**
 
 ```C++
+{"devid":"soggiorno-gruppo06","up1":"255"}
+{"devid":"soggiorno-gruppo06","down1":"255"}
 
 ```
 
