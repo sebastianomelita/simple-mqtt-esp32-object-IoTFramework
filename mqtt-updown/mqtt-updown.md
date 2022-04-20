@@ -1,6 +1,6 @@
 ### **Metodi**
 
-- ```Motor(String id, uint8_t startIndex)```. Costruttore. P1: id_mqtt univoco, P2: indice dispositivo nel gruppo (0,1,2,...)
+- ```Motor(String id, uint8_t startIndex)```. Costruttore. P1: devid univoco, P2: indice dispositivo nel gruppo (0,1,2,...)
 - ```remoteCntrlUp(void)```. Pulsante marcia avanti, attiva il motore nella direzione 1 se il motore è fermo, lo blocca se il motore è in marcia.
 - ```remoteCntrlDown(void)```. Pulsante marcia indietro, attiva il motore nella direzione -1 se il motore è fermo, lo blocca se il motore è in marcia.
 - ```remoteConf(void)```. Interroga lo stato corrente del dispositivo.
