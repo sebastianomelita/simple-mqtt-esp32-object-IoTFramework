@@ -12,6 +12,14 @@
 
 ```
 
+### **Formato JSON feedback**
+
+```C++
+{"devid":"soggiorno-gruppo06","up1":"255","down1":"0","dr1":"1"}
+{"devid":"soggiorno-gruppo06","up1":"0","down1":"255","dr1":"-1"}
+{"devid":"soggiorno-gruppo06","up2":"0","down2":"0","dr2":"0"}
+```
+
 ### **Metodi**
 
 - ```Motor(String id, uint8_t startIndex)```. Costruttore. P1: devid univoco, P2: indice dispositivo nel gruppo (0,1,2,...)
