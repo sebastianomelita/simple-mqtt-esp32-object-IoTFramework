@@ -1,3 +1,14 @@
+### **Parser dei comandi**
+
+```cmdParser(str,payload,"cmd",MAXLEN)```. Restituisce ```true``` se nella stringa di input ```payload``` è presente la sottostringa ```cmd```, ```false``` altrimenti.
+
+
+### **Formato JSON ingressi**
+
+```C++
+
+```
+
 ### **Metodi**
 
 - ```Motor(String id, uint8_t startIndex)```. Costruttore. P1: devid univoco, P2: indice dispositivo nel gruppo (0,1,2,...)
@@ -6,6 +17,7 @@
 - ```remoteConf(void)```. Interroga lo stato corrente del dispositivo.
 - ```remoteCntrlEventsParser()```. Genratore di eventi di feedback ed azioni esterne a partire da ingressi e stato corrente.
 - ```onAction(SweepCallbackSimple cb)```. Definisce la callback delle azioni esterne.
+
 
 
 ### **Callback MQTT**
