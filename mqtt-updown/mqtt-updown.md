@@ -31,7 +31,26 @@
 
 
 
-### **Callback MQTT**
+### **Callback MQTT corta**
+
+```C++
+void messageReceived(String &topic, String &payload) {
+	Serial.println("incoming: " + topic + " - " + payload);
+	// Note: Do not use the client in the callback to publish, subscribe or
+	// unsubscribe as it may cause deadlocks when other things arrive while
+	// sending and receiving acknowledgments. Instead, change a global variable,
+	// or push to a queue and handle it in the loop after calling `client.loop()`.
+	
+	//if(topic == intopic){
+		m1.processCmd(mqttid, payload, MAXLEN);
+		m2.processCmd(mqttid, payload, MAXLEN);
+	//}
+};
+
+    ```
+    
+
+### **Callback MQTT lunga**
 
 ```C++
 /////// gestore messaggi MQTT in ricezione (callback)     
@@ -68,6 +87,4 @@ void messageReceived(String &topic, String &payload) {
 		}
 	//}
 };
-
-
     ```
