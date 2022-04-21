@@ -74,6 +74,8 @@ Mentre
 ```
 definisce una **griglia** che possiede un numero imprecisato di righe ma esattamente **dodici colonne** di 1fr cioè di una parte delle dodici parti in cui è diviso lo spazio disponibile. Le parti sono ovviamente tutte di **ugual dimensione**.
 
+In **ambito web**, ormai da molti anni, è prassi consolidata **non** disporre gli oggetti in orrizzontale in **posizioni arbitrarie** ma semplificare la progettazione del layout scegliendo una **posizione fissa** tra un numero massimo. Di solito **dodici** è ritenuto il numero di colonne che massimo che si riesce a gestire con sufficiente comodità. Infatti questa è la soluzione adottata dalla magggior parte dei **framework CSS** utilizzati per il teamplating della pagine, uno fra tutti **Bootstrap**.
+
 Esempio ```soggiorno.html```
 
 ```html
