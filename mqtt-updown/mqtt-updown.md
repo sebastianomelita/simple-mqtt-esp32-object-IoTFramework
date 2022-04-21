@@ -65,7 +65,7 @@
 - ```remoteCntrlEventsParser()```. Genratore di eventi di feedback ed azioni esterne a partire da ingressi e stato corrente.
 - ```onAction(SweepCallbackSimple cb)```. Definisce la callback delle azioni esterne.
 
-### **Schema sketch Arduino**
+### **Struttura sketch Arduino**
 
 ```C++
 Motor m1(mqttid,0);
