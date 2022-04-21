@@ -21,6 +21,7 @@ Il **ciclo di vita** di una SPA tipicamente consiste in:
 
 Il **modello di applicazione** proposto nel **progetto** consiste in un una **costellazione di dispositivi** IOT dotati di client MQTT per operazioni di **pubblicazione** e **notifica** di contenuti e in un **server centrale** con funzione di **server web** per le pagine statiche delle web app e con funzione di **broker MQTT** per lo **smistamento** delle comunicazioni reciproche tra dispositivi IOT e tra dispositivi IOT e web apps.
 
+![mqtt](mqtt1-1024x540-1.png)
 
 
 **Sitografia:**
