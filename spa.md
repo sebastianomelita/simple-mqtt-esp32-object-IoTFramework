@@ -76,6 +76,8 @@ definisce una **griglia** che possiede un numero imprecisato di righe ma esattam
 
 In **ambito web**, ormai da molti anni, è prassi consolidata **non** disporre gli oggetti in orrizzontale in **posizioni arbitrarie** ma semplificare la progettazione del layout scegliendo una **posizione fissa** tra un numero massimo. Di solito **dodici** è ritenuto il numero di colonne che massimo che si riesce a gestire con sufficiente comodità. Infatti questa è la soluzione adottata dalla magggior parte dei **framework CSS** utilizzati per il teamplating della pagine, uno fra tutti **Bootstrap**.
 
+Ne deriva che la **dimensione minima** orizzontale (ampiezza) di un oggetto html è di almeno ```1/12``` dello spazio orizzontale disponibile. Ma quanto vale la **larghezza massima**? Quella è ovviamente tutto lo spazio disponibile visto come un'unica colonna. Ma allora è possibile definire oggetti di **dimensione intermedia** tra ```1/12``` e tutto lo spazio disponibile? La risposta è si a patto che la dimensione di un generico oggetto sia sempre un **multiplo intero** della dimensione minima cioè ```1/12```. Quindi sono possibili 12 dimensioni che variano nell'intervallo ```1/12, 2/12, 3/12,....12/12=tutto```.
+
 Esempio ```soggiorno.html```
 
 <img src="soggiorno.png" alt="alt text" width="1000">
