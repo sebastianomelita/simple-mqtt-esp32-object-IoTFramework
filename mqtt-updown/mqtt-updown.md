@@ -70,7 +70,7 @@ La **pagina** ```mqttupdown.html``` può essere caricata sul browser da una cart
 
 ### **Struttura sketch Arduino**
 
-Lo **sketch** ```mqttt-updown.ino``` deve essere caricato sull'IDE di Arduino e caricato sul dispositivo ESP32 dopo aver selezionato correttamente la scheda e la porta della seriale e, chiaramente, dopo aver connesso il dispositivo alla porta usb del PC.
+Lo **sketch** ```mqttt-updown.ino``` deve essere aperto con l'IDE di Arduino e caricato sul dispositivo ESP32 dopo aver selezionato correttamente la scheda e la porta della seriale e, chiaramente, dopo aver connesso il dispositivo alla porta usb del PC.
 
 ```C++
 Motor m1(mqttid,0);
