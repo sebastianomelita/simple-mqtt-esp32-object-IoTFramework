@@ -37,7 +37,7 @@
 
 ### **Libreria MQTT**
 
-[Torna all'indice generale](https://github.com/sebastianomelita/ArduinoBareMetal/blob/master/gateway.md#Client-MQTT-per-ESP32,-ESP8266-e-Arduino-con metodo di connessione-bloccante)
+[Gateway mqtt](https://github.com/sebastianomelita/ArduinoBareMetal/blob/master/gateway.md)
 
 
 ### **Formato JSON ingressi**
