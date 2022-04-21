@@ -41,6 +41,77 @@ body {
 
 ### **Grid layout**
 
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+		.grid-container {
+			display: grid;
+			grid-template-columns: 1fr;
+		}
+
+		table {
+			width: 100%;
+		}
+
+		@media only screen and (min-width: 600px) {
+		  /* For tablets: */
+		  .grid-container {
+			  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+		  }
+		  .col-s-1 {grid-column: span 1;}
+		  .col-s-2 {grid-column: span 2;}
+		  .col-s-3 {grid-column: span 3;}
+		  .col-s-4 {grid-column: span 4;}
+		  .col-s-5 {grid-column: span 5;}
+		  .col-s-6 {grid-column: span 6;}
+		  .col-s-7 {grid-column: span 7;}
+		  .col-s-8 {grid-column: span 8;}
+		  .col-s-9 {grid-column: span 9;}
+		  .col-s-10 {grid-column: span 10;}
+		  .col-s-11 {grid-column: span 11;}
+		  .col-s-12 {grid-column: span 12;}
+		}
+
+		@media only screen and (min-width: 768px) {
+		  /* For desktop: */
+		  .grid-container {
+			  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+		  }
+		  .col-1 {grid-column: span 1;}
+		  .col-2 {grid-column: span 2;}
+		  .col-3 {grid-column: span 3;}
+		  .col-4 {grid-column: span 4;}
+		  .col-5 {grid-column: span 5;}
+		  .col-6 {grid-column: span 6;}
+		  .col-7 {grid-column: span 7;}
+		  .col-8 {grid-column: span 8;}
+		  .col-9 {grid-column: span 9;}
+		  .col-10 {grid-column: span 10;}
+		  .col-11 {grid-column: span 11;}
+		  .col-12 {grid-column: span 12;}
+		}
+        .luci{
+        	border: 1px solid black;
+        }
+</style>
+</head>
+<body>	
+	<div class="header"><h1>Gestione luci soggiorno</h1></div>
+	<div class="grid-container">
+		<div class="col-4 col-s-3 luci"><h1>Lume</h1></div>
+		<div class="col-4 col-s-9 luci"><h1>Piantana</h1></div>
+		<div class="col-4 col-s-12 luci"><h1>Lampadario</h1</div>
+	</div>
+	<div class="footer"><p>Pagina responsiva.</p>
+	</div>
+</html>
+```
+
+
+
+Lo spazio in questo contesto conviene misurarlo in unità frazionarie, dove 1fr rappresenta una parte dello spazio disponibile. 
 
 **Sitografia:**
 - https://www.4next.eu/news/mqtt-capitolo-2/
