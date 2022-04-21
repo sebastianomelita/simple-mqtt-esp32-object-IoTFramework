@@ -21,11 +21,28 @@ Il **ciclo di vita** di una SPA tipicamente consiste in:
 
 Il **modello di applicazione** proposto nel **progetto** consiste in un una **costellazione di dispositivi** IOT dotati di client MQTT per operazioni di **pubblicazione** e **notifica** di contenuti e in un **server centrale** con funzione di **server web** per le pagine statiche delle web app e con funzione di **broker MQTT** per lo **smistamento** delle comunicazioni reciproche tra dispositivi IOT e tra dispositivi IOT e web apps.
 
-![canale](canale_mqtt.png)
+### **broker MQTT**
 
 ![broker](broker.png)
 
+MQTT Fornisce un **canale multicast** di livello applicativo (L7) tramite cui un utente col ruolo di publisher è in grado di notificare una replica dello stesso messaggio a più subscribers.
+
+Il canale multicast è realizzato da un dispositivo intermedio detto **broker** che realizza un routing di livello applicativo (L7) delle informazioni, smistandole in base ad una **etichetta** di destinazione detta **topic**.
+
+L’indirizzamento fisico dei dispositivi può essere o solo L2 (MAC) o sia L2 che L3 (IP) ma è implicito e noto solo al broker. I client per inviare un messaggio non sono tenuti a conoscere l’indirizzo fisico degli altri interlocutori ma solo quello del broker ed il topic. 
+
+Gli utenti si comportano tutti come client poiché sono loro che iniziano la connessione con il broker e non il viceversa, ma si dividono in due ruoli:
+- PUBLISHER coloro che inviano le informazioni. Un publisher deve solo connettersi, decidere il topic e inviare l’informazione.
+- SUBSCRIBERS coloro che ricevono le informazioni. Un subscriber deve preventivamente registrarsi ad uno o più topic presso il server affinchè possa ricevere l’informazione quando questa verrà pubblicata.
+
+### **Fasi MQTT**
+
 ![sequenza](sequenza_mqtt.png)
+
+1)Il Subscriber dichiara presso il broker il proprio interesse a ricevere notifiche riguardo ad un certo argomento (topic)
+2) il publisher pubblica un messaggio che riguarda un certo topic
+3) Il broker inoltra il messaggio a tutti i subscriber interessati al suo topic
+
 
 
 **Sitografia:**
