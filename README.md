@@ -8,6 +8,8 @@ La pagina della web app è divisa sostanzialmente in **due parti** non necessari
 - **sezioni statiche** comuni a tutti i contenuti che vengono caricate da un **server web** con una normale **richiesta HTTP** (POST o GET) e sono composte da codice HTML, CSS e javascript statico. Costituiscono il **layout di base** della pagina.
 - **sezioni dinamiche** specifiche i cui contenuti possono essere caricati da server diversi con **protocolli eterogenei** ed **assemblati localmente** dal client nel layout statico della pagina. Per recuperare i contenuti sono comuni richieste **HTTP** dinamiche in tecnologia **AJAX** (e suoi derivati quali JQUERY e Angular) ma anche richieste **MQTT** e **COAP**.
 
+Spesso le **WebApp** sono assimilabili alle tradizionali **applicazioni distribuite** desktop in virtù della **bidirezionalità del canale** tra le due componenti client e server. Nelle **applicazioni desktop** il **canale bidirezionale** è (a basso livello) basato sulle API standard dei **socket BSD**. Nella applicazioni web app il canale bidirezionale è ormai quasi sempre realizzato con le **API websocket** e raramente ormai con tecniche di **long polling** del server.
+
  ![spacicle](Traditional-vs-SPA-lifecycle.ppm)
  
 Il **ciclo di vita** di una SPA tipicamente consiste in:
@@ -17,5 +19,7 @@ Il **ciclo di vita** di una SPA tipicamente consiste in:
 4) **interpretazione della risposta** in formato JSON o XML
 5) **inserimento dei contenuti dinamici** nelle sezioni della pagina statica mediante codice lato client in javascript che modifica il **modello ad oggetti** della pagina (DOM) o **direttamente** mediante comandi di manipolazione della **rappresentazione ad oggetti** degli elementi HTML (getElementById() e appendChild()) o **indirettamente** mediante iniezione con document.write() **di tag html e istruzioni CSS** dinamici che si sovrappongono a quelli statici del layout.
 
-Il **modello di applicazione** proposto nel **progetto** consiste in un una **costellazione di dispositivi** IOT dotati di client MQTT per operazioni di **pubblicazione** e **notifica** di contenuti e in un **server centrale** con funzione di **server web** per le pagine statiche delle web app e con funzione di **broker MQTT** per lo smistamento delle comunicazioni reciproche tra dispositivi IOT e tra dispositivi IOT e web apps.
+Il **modello di applicazione** proposto nel **progetto** consiste in un una **costellazione di dispositivi** IOT dotati di client MQTT per operazioni di **pubblicazione** e **notifica** di contenuti e in un **server centrale** con funzione di **server web** per le pagine statiche delle web app e con funzione di **broker MQTT** per lo **smistamento** delle comunicazioni reciproche tra dispositivi IOT e tra dispositivi IOT e web apps.
+
+
 
