@@ -34,12 +34,6 @@
 	  <p>Resize the browser window to see how the content respond to the resizing.</p>
 </div>
 ```
-### **Parser dei comandi**
-
-- ```cmdParser(str,payload,"cmd",MAXLEN)```. Ricerca un certo commando ```cmd``` all’interno di una stringa e ne restituisce il valore sotto forma di stringa sul parametro di out str. Ritorna ```true``` se ha trovato un'occorenza del comando, ```false``` altrimenti.
-- ```processCmd(String id, String payload)```. Elabora la richiesta remota interpretando la stringa json del messaggio in base al tipo di dispositivo IOT.
-
-
 ### **Formato JSON ingressi**
 
 ```C++
@@ -55,8 +49,12 @@
 {"devid":"soggiorno-gruppo06","up1":"0","down1":"255","dr1":"-1"}
 {"devid":"soggiorno-gruppo06","up2":"0","down2":"0","dr2":"0"}
 ```
+### **Metodi di base**
 
-### **Metodi**
+- ```cmdParser(str,payload,"cmd",MAXLEN)```. Ricerca un certo commando ```cmd``` all’interno di una stringa e ne restituisce il valore sotto forma di stringa sul parametro di out str. Ritorna ```true``` se ha trovato un'occorenza del comando, ```false``` altrimenti.
+- ```processCmd(String id, String payload)```. Elabora la richiesta remota interpretando la stringa json del messaggio in base al tipo di dispositivo IOT.
+
+### **Metodi specifici**
 
 - ```Motor(String id, uint8_t startIndex)```. Costruttore. P1: devid univoco, P2: indice dispositivo nel gruppo (0,1,2,...)
 - ```remoteCntrlUp(void)```. Pulsante marcia avanti, attiva il motore nella direzione 1 se il motore è fermo, lo blocca se il motore è in marcia.
