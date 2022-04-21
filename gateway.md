@@ -23,7 +23,7 @@ L'installazione di SDK, loader e librerie in Arduino si può fare seguendo, nell
 
 <img src="gestoreschede3.webp" alt="alt text" width="700">
 
-<img src="gestoreschede4.png" alt="alt text" width="700">
+<img src="gestoreschede4.png" alt="alt text" width="1000">
 
 3. Selezionare la scheda ESP32 dalla lista di schede disponibili:
 
