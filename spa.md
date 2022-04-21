@@ -122,6 +122,12 @@ La classi delle griglie small si distinguono da quelle normali avendo l'accortez
 
 Esempio ```soggiorno.html```
 
+Si vuole una **pagina responsiva** che per **schermi grandi** deve avere il seguente layout di **tre colonne** per 3 elementi HTML (in questo caso un div) tutti disposti in una stessa riga (somma 12). 
+
+Per **schermi intermedi** deve avere un layout di 2 righe in cui la prima deve contenere solo due elementi rispettivamente di 3 colonne e di 9 colonne (somma 12), mentre la seconda riga deve contenere un solo elemento che quindi occuperà tutte e 12 le colonne a disposizione.
+
+Per **schermi molto piccoli** vale il **layout di default** monocolonna per ciascun elemento che quindi verranno allocati complessivamente su 3 righe.
+
 <img src="soggiorno.png" alt="alt text" width="1000">
 
 ```html
