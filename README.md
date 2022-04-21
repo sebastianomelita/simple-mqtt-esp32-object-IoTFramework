@@ -10,3 +10,9 @@ La pagina della web app è divisa sostanzialmente in due parti:
 
  ![spacicle](Traditional-vs-SPA-lifecycle.ppm)
  
+Il ciclo di vita di una SPA è:
+1) Richiesta iniziale del layout comune
+2) una o più richieste dei contenuti specifici via AJAX o MQTT o COAP
+3) interpretazione della risposta in formato JSON o XML
+4) modifica, mediante programmazione lato client in javascript, del modello ad oggetti della pagina (DOM), direttamente mediante comandi di manipolazione degli elementi HTML (getElementById() e appendChild()) o indirettamente mediante stampa condocument.write(), per la l'inserimento dei contenuti dinamici nelle sezioni della pagina statica.
+
