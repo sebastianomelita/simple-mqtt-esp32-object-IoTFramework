@@ -74,6 +74,8 @@ Mentre
 ```
 definisce una **griglia** che possiede un numero imprecisato di righe ma esattamente **dodici colonne** di 1fr cioè di una parte delle dodici parti in cui è diviso lo spazio disponibile. Le parti sono ovviamente tutte di **ugual dimensione**.
 
+### **Dimensioni discretizzate**
+
 In **ambito web**, ormai da molti anni, è prassi consolidata **non** disporre gli oggetti in orrizzontale in **posizioni arbitrarie** ma semplificare la progettazione del layout scegliendo una **posizione fissa** tra un numero massimo. Di solito **dodici** è ritenuto il numero di colonne che massimo che si riesce a gestire con sufficiente comodità. Infatti questa è la soluzione adottata dalla magggior parte dei **framework CSS** utilizzati per il teamplating della pagine, uno fra tutti **Bootstrap**.
 
 Ne deriva che la **dimensione minima** orizzontale (ampiezza) di un oggetto html è di almeno ```1/12``` dello spazio orizzontale disponibile. 
@@ -83,6 +85,15 @@ Ma quanto vale la **larghezza massima**? Quella è ovviamente tutto lo spazio di
 Ma allora è possibile definire oggetti di **dimensione intermedia** tra ```1/12``` e tutto lo spazio disponibile? La risposta è si a patto che la dimensione di un generico oggetto sia sempre un **multiplo intero** della dimensione minima cioè ```1/12```. 
 
 Quindi, in definitiva, sono possibili **12 dimensioni** che variano nell'intervallo ```1/12, 2/12, 3/12,....12/12=tutto```.
+
+### **Dichiarazione span**
+
+La parola chiave CSS ```span``` permette di definire efficacemente la dimensione di un elemento HTML a partire dalla sua posizione iniziale per un certo numero di colonne della griglia definite dal numero che segue ```span```. La posizione iniziale dell'elemento è relativa  al margine destro dell'elemento che lo precede e quindi, dalla sua larghezza. Lo stesso per tutti quelli che lo precedono.
+
+In sostanza, creo il primo mattoncino a partire dalll'estremo margine sinistro e lo spalmo sulla riga corrente per un certo numero di colonne dato dal qualificatore ```span```, subito dopo spalmo il secondo mattoncino per ul atronumero di colonne stabilito dal suo qualificatore, e così per i mattoncini a seguire.
+
+Se il numero complessivo delle colonne di tutti i mattoncini è minore di 12 allora tutti i mattoncini stanno su una sola riga, aòtrimenti le colonne che superano la dodicesima andranno a capo e troveranno posto nella riga a seguire. Così per tutte le righe.
+
 
 Esempio ```soggiorno.html```
 
