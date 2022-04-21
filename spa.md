@@ -108,7 +108,7 @@ body {
 	</div>
 </html>
 ```
-[soggiorno](soggiorno.html)
+[soggiorno](https://sebastianomelita.github.io/simple-mqtt-esp32-object-IoTFramework/soggiorno.html)
 
 
 
