@@ -2,8 +2,10 @@
 
 ![motor](motor.png)
 
-
 ### **Struttura HTML**
+
+La pagina ```mqttupdown.html``` può essere caricata sul browser da una cartella sul PC o può essere caricata su un server web di pagine statiche.
+
 ```html
 <div class="header">
 	 <h1>Gestione luci soggiorno</h1>
@@ -65,6 +67,8 @@
 - ```onAction(SweepCallbackSimple cb)```. Definisce la callback delle azioni esterne.
 
 ### **Struttura sketch Arduino**
+
+Lo sketch ```mqttt-updown.ino``` deve essere caricato sull'IDE di Arduino e caricato sul dispositivo ESP32 dopo aver selezionato correttamente la scheda e la porta della seriale e, chiaramente, dopo aver connesso il dispositivo alla porta usb del PC.
 
 ```C++
 Motor m1(mqttid,0);
