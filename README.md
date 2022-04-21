@@ -23,9 +23,9 @@ Il **modello di applicazione** proposto nel **progetto** consiste in un una **co
 
 ### **Broker MQTT**
 
-![broker](broker.png)
-
 MQTT Fornisce un **canale multicast** di livello applicativo (L7) tramite cui un utente col ruolo di publisher è in grado di notificare una replica dello stesso messaggio a più subscribers.
+
+![broker](broker.png)
 
 Il canale multicast è realizzato da un dispositivo intermedio detto **broker** che realizza un routing di livello applicativo (L7) delle informazioni, smistandole in base ad una **etichetta** di destinazione detta **topic**.
 
