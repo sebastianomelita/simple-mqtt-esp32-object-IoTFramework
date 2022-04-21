@@ -1,4 +1,4 @@
->[Torna all'indice generale](index.md)
+>[Torna all'indice generale](README.md)
 
 ### **Libreria MQTT**
 
@@ -157,3 +157,8 @@ WL_CONNECTION_LOST: assigned when the connection is lost;
 WL_DISCONNECTED: assigned when disconnected from a network;
 \*/
 ```
+
+Per dettagli ulteriori sui gateway MQTT e per esplorare l'utilizzo di altre librerie per esp32 sempre programmabili mediante con l'IDE di Arduino vedere:
+- https://github.com/sebastianomelita/ArduinoBareMetal/blob/master/gateway.md
+
+>[Torna all'indice generale](README.md)
