@@ -94,6 +94,31 @@ In sostanza, creo il primo mattoncino a partire dalll'estremo margine sinistro e
 
 Se il numero complessivo delle colonne di tutti i mattoncini è minore di 12 allora tutti i mattoncini stanno su una sola riga, aòtrimenti le colonne che superano la dodicesima andranno a capo e troveranno posto nella riga a seguire. Così per tutte le righe.
 
+Il **passo successivo** è etichettare tutti mattoncini con un **selettore di classe** in modo da poterci allocare un generico **elemento HTML** assegnadolo alla classe del mattoncino di dimensione voluta.
+
+Ad esempio:
+
+```.col-1 {grid-column: span 1;}``` è una dichiarazione CSS che attribuisce agli elementi della classe .col-1 la dimensione di un sola colonna. 
+
+```.col-2 {grid-column: span 2;}``` è una dichiarazione CSS che attribuisce agli elementi della classe .col-2 la dimensione di due colonne. 
+
+
+### **Griglie responsive**
+
+nella pratica si preferisce definire un certo numero di grid layout uguali nella struttura ma con mattoncini di **nome diverso**. I mattoncini di griglie diverse saranno utilizzati per **risoluzioni diverse** dello schermo del dispositivo che li visualizza. Per ogni risoluzione si progetta un layout più appropriato:
+- Le risoluzioni maggiori possono permettersi di spalmare gli elementi HTML su molte colonne (al limite tutte e 12). 
+- Quelli con risoluzione più bassa cercheranno di ottimizzare la visualizzazione allocando gli elementi HTML su poche colonne (al limite solo una).
+
+Normalmante la risoluzione di **default** è la minima con una griglia di una sola colonna. Poi si definisce una **risoluzione normale** per schermi grandi e per finire si definisce una risoluzione **small** per schermi intermedi. Per le basse riaoluzioni degli schermi molto piccoli si usa la griglia di default.
+
+La classi delle griglie small si distinguono da quelle normali avendo l'accortezza di inserire il **suffisso s** al loro interno. Ad esempio:
+- ```".col-4 .col-s-8"``` rappresenta un elemento HTML in 4 colonne negli schermi grandi e in 8 colonne in quelli piccoli.
+
+```html
+<div class="col-4 col-s-8 luci">
+```
+
+**ATTENZIONE**. Per evitare di mandare a capo gli elementi che si desiderano stiano in una **stessa riga** è un **requisito essenziale** che la **somma complessiva** delle ampiezze degli elementi HTML che devono stare in **quella riga** sia esattamente 12. Non una colonna in meno ma neppure una in più.
 
 Esempio ```soggiorno.html```
 
