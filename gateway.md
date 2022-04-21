@@ -23,17 +23,7 @@ L'installazione di SDK, loader e librerie in Arduino si può fare seguendo, nell
 
 <img src="gestoreschede3.webp" alt="alt text" width="700">
 
-
-3. Selezionare la scheda **Lora Board**:
-
-<img src="selezscheda.png" alt="alt text" width="700">
-
-4. Andare su **strumenti/Board part number** librerie e selezionare il BSP (Arduino Board Support) **RAK811 Lora Tracker** 
-
-5. Scaricare e installare STM32CubeIDE. Per poter utilizzare un STM32 con l'ambiente Arduino, si deve installare lo strumento STM32CubeIDE, che è disponibile al link https://www.st.com/en/development-tools/stm32cubeide.html.
-6. In Strumenti > Metodo di caricamento: scegliere **STM32CubeProgrammer (SWD)**
-
-<img src="selectcube.png" alt="alt text" width="700">
+<img src="gestoreschede4.png" alt="alt text" width="700">
 
 
 ### **Client MQTT per ESP32, ESP8266 e Arduino con metodo di connessione bloccante**
