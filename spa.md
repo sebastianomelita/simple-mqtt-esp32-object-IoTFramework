@@ -108,6 +108,7 @@ body {
 	</div>
 </html>
 ```
+[soggiorno](soggiorno.html)
 
 
 
