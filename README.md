@@ -16,3 +16,5 @@ Il **ciclo di vita** di una SPA tipicamente consiste in:
 3) **interpretazione della risposta** in formato JSON o XML
 4) **inserimento dei contenuti dinamici** nelle sezioni della pagina statica mediante codice lato client in javascript che modifica il modello ad oggetti della pagina (DOM) o direttamente mediante comandi di manipolazione degli elementi HTML (getElementById() e appendChild()) o indirettamente mediante stampa con document.write().
 
+Il **modello di applicazione** proposto nel **progetto** consiste in un una costellazione di dispositivi IOT dotati di client MQTT per operazioni di **pubblicazione** e **notifica** di contenuti e in un server centrale con funzione di server web per le pagine statiche delle web app e con funzione di broker MQTT per lo smistamento delle comunicazioni tra dispositivi IOT e tra dispositivi IOT e web apps.
+
