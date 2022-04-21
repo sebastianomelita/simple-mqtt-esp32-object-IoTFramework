@@ -94,9 +94,9 @@ Esempio ```soggiorno.html```
 	  .col-11 {grid-column: span 11;}
 	  .col-12 {grid-column: span 12;}
 	}
-.luci{
-	border: 1px solid black;
-}
+	.luci{
+		border: 1px solid black;
+	}
 </style>
 </head>
 <body>	
