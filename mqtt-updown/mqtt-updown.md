@@ -69,6 +69,7 @@
 
 ```C++
 Motor m1(mqttid,0);
+
 void setup() {
 	//inizializza la coda con il valore 0 su tutte le celle
 	m1.onFeedback(feedbackAction);
