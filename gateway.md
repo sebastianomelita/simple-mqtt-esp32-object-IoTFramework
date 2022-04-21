@@ -25,6 +25,8 @@ L'installazione di SDK, loader e librerie in Arduino si può fare seguendo, nell
 
 <img src="gestoreschede4.png" alt="alt text" width="700">
 
+<img src="gestoreschede5.png" alt="alt text" width="1000">
+
 
 ### **Client MQTT per ESP32, ESP8266 e Arduino con metodo di connessione bloccante**
 
