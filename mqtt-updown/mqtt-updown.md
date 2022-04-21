@@ -126,7 +126,6 @@ void messageReceived(String &topic, String &payload) {
 	
 	//if(topic == intopic){
 		m1.processCmd(mqttid, payload, MAXLEN);
-		m2.processCmd(mqttid, payload, MAXLEN);
 	//}
 };
 ```
