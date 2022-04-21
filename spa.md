@@ -47,13 +47,23 @@ body {
 
 Il **layout grid** è un layout regolare che riproduce una schema grafico **tabellare** partendo da un **elemento contenitore** (di solito un div) che possiede al suo interno uno o più **elementi figli** (di solito altri div).
 
-la definizione dello schema grafico si fa nel CSS tramite:
+la definizione dello schema grafico si fa nel **CSS** tramite:
 
 ```css
 .grid-container {
 	display: grid;
 	grid-template-columns: 1fr;
 }
+```
+
+la definizione della gerarchia di contenitori e contenuti si fa nel **HTML** tramite:
+
+```html
+div class="grid-container">
+	<div class="col-4 col-s-3 luci"><h1>Lume</h1></div>
+	<div class="col-4 col-s-9 luci"><h1>Piantana</h1></div>
+	<div class="col-4 col-s-12 luci"><h1>Lampadario</h1</div>
+</div>
 ```
 
 Esempio ```soggiorno.html```
