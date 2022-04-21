@@ -45,7 +45,7 @@ Le **fasi** scambio delle informazioni via MQTT tipicamente sono:
 
 Realizazione componenti:
 - [SPA di comando: pagine responsive](spa.md)
-- - [SPA di comando: ascoltatori](spa.md)
+- [SPA di comando: ascoltatori](spa.md)
 - [Gateway MQTT](gateway.md)
 
 Definizione oggetti IOT:
