@@ -34,6 +34,30 @@
 	  <p>Resize the browser window to see how the content respond to the resizing.</p>
 </div>
 ```
+```C++
+Motor m1(mqttid,0);
+void setup() {
+	//inizializza la coda con il valore 0 su tutte le celle
+	m1.onFeedback(feedbackAction);
+	m1.onAction(motorAction1);
+}
+
+void loop() {
+	mqttClient.loop();
+	//delay(10);  // <- fixes some issues with WiFi stability
+	m1.remoteCntrlEventsParser();
+	// schedulatore eventi dispositivo
+	// pubblica lo stato dei pulsanti dopo un minuto
+	if (millis() - lastMillis > STATEPERIOD) {
+		lastMillis = millis();
+		
+		if(mqttClient.connected()){
+			Serial.println("Ritrasm. periodica stato: ");
+			m1.remoteConf();
+		}
+	}
+}
+```
 
 ### **Parser dei comandi**
 
