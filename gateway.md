@@ -13,7 +13,7 @@ Il **middleware** in genere è composto da **librerie di terze parti** da **comp
 In questo caso gran parte delle funzioni del middleware, quelle relative alla comunicazione via stack WiFi, è implementato all'interno del sistema a microprocessore (MCU). Nello specifico, le funzioni di livello applicativo, che in ambito IoT, sono tutte quelle comprese tra il livello 2 e il livello 7 ISO/OSI sono compito della MCU mentre il livello fisico è realizzato in HW dal chip del modem.
 
 L'installazione di SDK, loader e librerie in Arduino si può fare seguendo, nell'ordine, le seguenti fasi:
-	1. installareo SDK **Arduino Core per ESP32**. https://github.com/espressif/arduino-esp32. Per far ciò bisogna aggiungre alla fine della lista presente **"su url aggiuntive per il gestore schede"**: "https://dl.espressif.com/dl/package_esp32_index.json" che sitrova sul menu **File>Impostazioni**:
+	1. installareo SDK **Arduino Core per ESP32**. https://github.com/espressif/arduino-esp32. Per far ciò bisogna aggiungre alla fine della lista presente **"su url aggiuntive per il gestore schede"**: "https://dl.espressif.com/dl/package_esp32_index.json" che si trova sul menu **File>Impostazioni**:
 
 <img src="gestoreschede.png" alt="alt text" width="700">
 
