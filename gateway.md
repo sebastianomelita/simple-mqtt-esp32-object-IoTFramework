@@ -21,6 +21,9 @@ L'installazione di SDK, loader e librerie in Arduino si può fare seguendo, nell
 
 <img src="gestoreschede2.png" alt="alt text" width="1000">
 
+<img src="gestoreschede3.webp" alt="alt text" width="700">
+
+
 3. Selezionare la scheda **Lora Board**:
 
 <img src="selezscheda.png" alt="alt text" width="700">
