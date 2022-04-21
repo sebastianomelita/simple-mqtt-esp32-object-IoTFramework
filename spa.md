@@ -7,6 +7,8 @@ Il **design responsivo**, o responsive web design (RWD), indica una tecnica di w
 
 **Media query**
 
+Esempio resptest.html
+
 Le **Media Queries** (conosciute anche come Media Query) sono dichiarazioni CSS con le quali è possibile identificare il tipo di dispositivo o una sua caratteristica allo scopo di applicare stili o condizioni differenti in base ad un elenco di regole.
 
 ```CSS
@@ -38,6 +40,8 @@ body {
 </body>
 </html>
   ```
+  [resptest.html]( https://sebastianomelita.github.io/simple-mqtt-esp32-object-IoTFramework/resptest.html)
+ 
 
 ### **Grid layout**
 
