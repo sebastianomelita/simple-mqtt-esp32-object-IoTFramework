@@ -177,4 +177,4 @@ void messageReceived(String &topic, String &payload) {
 };
 ```
 
->[Torna all'indice generale](README.md)
+>[Torna all'indice generale](../README.md)
