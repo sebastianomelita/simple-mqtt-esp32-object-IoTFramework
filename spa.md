@@ -69,8 +69,8 @@ che definisce una **griglia** che possiede un numero imprecisato di righe ma esa
 Mentre 
 ```css
 .grid-container {
-		  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-	  }
+  	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
 ```
 definisce una **griglia** che possiede un numero imprecisato di righe ma esattamente **dodici colonne** di 1fr cioè di una parte delle dodici parti in cui è diviso lo spazio disponibile. Le parti sono ovviamente tutte di **ugual dimensione**.
 
