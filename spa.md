@@ -55,6 +55,13 @@ la definizione dello schema grafico si fa nel **CSS** tramite:
 	grid-template-columns: 1fr;
 }
 ```
+ma anche in:
+
+```css
+.grid-container {
+		  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	  }
+```
 
 la definizione della gerarchia di contenitori e contenuti si fa nel **HTML** tramite:
 
