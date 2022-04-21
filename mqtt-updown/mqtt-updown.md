@@ -93,6 +93,13 @@ void loop() {
 		}
 	}
 }
+
+void feedbackAction(String buf){
+	mqttClient.publish(outtopic, buf);
+};
+void motorAction1(int enabled, int dir, uint8_t n){
+	Serial.println("Enabled " + String(enabled) + " - dir: " +  String(dir)+ " - n: " +  String(n));
+};
 ```
 
 ### **Callback MQTT corta**
