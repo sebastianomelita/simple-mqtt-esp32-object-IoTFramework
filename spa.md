@@ -109,7 +109,7 @@ nella pratica si preferisce definire un certo numero di grid layout uguali nella
 - Le risoluzioni maggiori possono permettersi di spalmare gli elementi HTML su molte colonne (al limite tutte e 12). 
 - Quelli con risoluzione più bassa cercheranno di ottimizzare la visualizzazione allocando gli elementi HTML su poche colonne (al limite solo una).
 
-Normalmante la risoluzione di **default** è la minima con una griglia di una sola colonna. Poi si definisce una **risoluzione normale** per schermi grandi e per finire si definisce una risoluzione **small** per schermi intermedi. Per le basse riaoluzioni degli schermi molto piccoli si usa la griglia di default.
+Normalmante la risoluzione di **default** è la minima con una griglia di una sola colonna. Poi si definisce una **risoluzione normale** per schermi grandi e per finire si definisce una risoluzione **small** per schermi intermedi. Per le basse risoluzioni degli schermi molto piccoli si usa la griglia di default.
 
 La classi delle griglie small si distinguono da quelle normali avendo l'accortezza di inserire il **suffisso s** al loro interno. Ad esempio:
 ```".col-4 .col-s-8"``` rappresenta un elemento HTML in 4 colonne negli schermi grandi e in 8 colonne in quelli piccoli.
