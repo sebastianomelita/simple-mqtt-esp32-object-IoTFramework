@@ -46,6 +46,6 @@ Le **fasi** scambio delle informazioni via MQTT tipicamente sono:
 
 [Realizazione Gateway MQTT](gateway.md)
 
-[Realizzazione SPA di comando(spa.md)
+[Realizzazione SPA di comando](spa.md)
 
 
