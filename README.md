@@ -39,7 +39,8 @@ Gli utenti si comportano tutti come client poiché sono loro che iniziano la con
 
 ![sequenza](sequenza_mqtt.png)
 
-1)Il Subscriber dichiara presso il broker il proprio interesse a ricevere notifiche riguardo ad un certo argomento (topic)
+Le fasi scambio delle informazioni via MQTT tipicamente sono:
+1) Il Subscriber dichiara presso il broker il proprio interesse a ricevere notifiche riguardo ad un certo argomento (topic)
 2) il publisher pubblica un messaggio che riguarda un certo topic
 3) Il broker inoltra il messaggio a tutti i subscriber interessati al suo topic
 
