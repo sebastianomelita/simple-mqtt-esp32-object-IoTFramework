@@ -34,6 +34,12 @@
 	  <p>Resize the browser window to see how the content respond to the resizing.</p>
 </div>
 ```
+
+### **Libreria MQTT**
+
+[Torna all'indice generale](https://github.com/sebastianomelita/ArduinoBareMetal/blob/master/gateway.md#Client-MQTT-per-ESP32,-ESP8266-e-Arduino-con metodo di connessione-bloccante)
+
+
 ### **Formato JSON ingressi**
 
 ```C++
