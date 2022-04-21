@@ -19,7 +19,7 @@ L'installazione di SDK, loader e librerie in Arduino si può fare seguendo, nell
 
 2. Andare su **strumenti>scheda/Arduino/Genuino Uno** librerie e installare la scheda  **ESP32**:
 
-<img src="gestoreschede2.png" alt="alt text" width="700">
+<img src="gestoreschede2.png" alt="alt text" width="1000">
 
 3. Selezionare la scheda **Lora Board**:
 
