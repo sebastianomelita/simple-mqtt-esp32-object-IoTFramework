@@ -128,6 +128,16 @@ Per **schermi intermedi** deve avere un layout di 2 righe in cui la prima deve c
 
 Per **schermi molto piccoli** vale il **layout di default** monocolonna per ciascun elemento che quindi verranno allocati complessivamente su 3 righe.
 
+In definitiva:
+
+```html
+<div class="grid-container">
+	<div class="col-4 col-s-3 luci"><h1>Lume</h1></div>
+	<div class="col-4 col-s-9 luci"><h1>Piantana</h1></div>
+	<div class="col-4 col-s-12 luci"><h1>Lampadario</h1</div>
+</div>
+```
+
 <img src="soggiorno.png" alt="alt text" width="1000">
 
 ```html
