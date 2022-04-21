@@ -45,6 +45,7 @@ Le **fasi** scambio delle informazioni via MQTT tipicamente sono:
 3) Il **broker** inoltra il messaggio a tutti i subscriber interessati al suo topic
 
 [Realizazione Gateway MQTT](gateway.md)
+
 [Realizzazione SPA di comando(spa.md)
 
 
