@@ -29,20 +29,20 @@ MQTT Fornisce un **canale multicast** di livello applicativo (L7) tramite cui un
 
 Il canale multicast è realizzato da un dispositivo intermedio detto **broker** che realizza un routing di livello applicativo (L7) delle informazioni, smistandole in base ad una **etichetta** di destinazione detta **topic**.
 
-L’indirizzamento fisico dei dispositivi può essere o solo L2 (MAC) o sia L2 che L3 (IP) ma è implicito e noto solo al broker. I client per inviare un messaggio non sono tenuti a conoscere l’indirizzo fisico degli altri interlocutori ma solo quello del broker ed il topic. 
+L’**indirizzamento** fisico dei dispositivi può essere o solo L2 (MAC) o sia L2 che L3 (IP) ma è **implicito** e noto solo al broker. I client per inviare un messaggio non sono tenuti a conoscere l’indirizzo fisico degli altri interlocutori ma solo quello del **broker** ed il **topic**. 
 
-Gli utenti si comportano tutti come client poiché sono loro che iniziano la connessione con il broker e non il viceversa, ma si dividono in due ruoli:
-- PUBLISHER coloro che inviano le informazioni. Un publisher deve solo connettersi, decidere il topic e inviare l’informazione.
-- SUBSCRIBERS coloro che ricevono le informazioni. Un subscriber deve preventivamente registrarsi ad uno o più topic presso il server affinchè possa ricevere l’informazione quando questa verrà pubblicata.
+Gli utenti si comportano tutti come **client** poiché sono loro che **iniziano la connessione** con il broker e non il viceversa, ma si dividono in **due ruoli**:
+- **PUBLISHER** coloro che inviano le informazioni. Un publisher deve solo connettersi, **decidere il topic** e **inviare** l’informazione.
+- **SUBSCRIBERS** coloro che ricevono le informazioni. Un subscriber deve preventivamente **registrarsi** ad uno o più topic presso il server affinchè possa **ricevere** l’informazione quando questa verrà pubblicata.
 
 ### **Fasi MQTT**
 
 ![sequenza](sequenza_mqtt.png)
 
-Le fasi scambio delle informazioni via MQTT tipicamente sono:
-1) Il Subscriber dichiara presso il broker il proprio interesse a ricevere notifiche riguardo ad un certo argomento (topic)
-2) il publisher pubblica un messaggio che riguarda un certo topic
-3) Il broker inoltra il messaggio a tutti i subscriber interessati al suo topic
+Le **fasi** scambio delle informazioni via MQTT tipicamente sono:
+1) Il **Subscriber** dichiara presso il broker il proprio interesse a ricevere notifiche riguardo ad un certo argomento (topic)
+2) il **publisher** pubblica un messaggio che riguarda un certo topic
+3) Il **broker** inoltra il messaggio a tutti i subscriber interessati al suo topic
 
 
 
