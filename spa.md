@@ -90,7 +90,7 @@ Quindi, in definitiva, sono possibili **12 dimensioni** che variano nell'interva
 
 La parola chiave CSS ```span``` permette di definire efficacemente la dimensione di un elemento HTML a partire dalla sua posizione iniziale per un certo numero di colonne della griglia definite dal numero che segue ```span```. La posizione iniziale dell'elemento è relativa  al margine destro dell'elemento che lo precede e quindi, dalla sua larghezza. Lo stesso per tutti quelli che lo precedono.
 
-In sostanza, creo il primo mattoncino a partire dalll'estremo margine sinistro e lo spalmo sulla riga corrente per un certo numero di colonne dato dal qualificatore ```span```, subito dopo spalmo il secondo mattoncino per ul atronumero di colonne stabilito dal suo qualificatore, e così per i mattoncini a seguire.
+In sostanza, creo il primo mattoncino a partire dalll'estremo margine sinistro e lo spalmo sulla riga corrente per un certo numero di colonne dato dal qualificatore ```span```, subito dopo spalmo il secondo mattoncino per un altro numero di colonne stabilito dal suo qualificatore ```span```, e così per i mattoncini a seguire.
 
 Se il numero complessivo delle colonne di tutti i mattoncini è minore di 12 allora tutti i mattoncini stanno su una sola riga, aòtrimenti le colonne che superano la dodicesima andranno a capo e troveranno posto nella riga a seguire. Così per tutte le righe.
 
