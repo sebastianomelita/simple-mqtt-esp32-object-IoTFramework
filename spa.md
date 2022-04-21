@@ -41,6 +41,8 @@ body {
 
 ### **Grid layout**
 
+Esempio soggiorno.html
+
 ```html
 <!DOCTYPE html>
 <html>
