@@ -13,7 +13,7 @@ La pagina della web app è divisa sostanzialmente in **due parti** non necessari
 Il **ciclo di vita** di una SPA tipicamente consiste in:
 1) **Richiesta iniziale** del layout comune statico
 2) **acquisizione degli input** utente mediante caselle di testo o pulsanti solitamente, in ambito SPA, gestiti tramite **ascoltatori di eventi** realizzati in javascript
-3) **una o più richieste** dei contenuti specifici aventi come **parametri** gli input e veicolate via AJAX o MQTT o COAP
+3) **una o più richieste** dei contenuti specifici aventi come **parametri** gli input e veicolate via AJAX o MQTT o COAP (invece delle solite richieste POST dei form)
 4) **interpretazione della risposta** in formato JSON o XML
 5) **inserimento dei contenuti dinamici** nelle sezioni della pagina statica mediante codice lato client in javascript che modifica il **modello ad oggetti** della pagina (DOM) o **direttamente** mediante comandi di manipolazione della **rappresentazione ad oggetti** degli elementi HTML (getElementById() e appendChild()) o **indirettamente** mediante iniezione con document.write() **di tag html e istruzioni CSS** dinamici che si sovrappongono a quelli statici del layout.
 
