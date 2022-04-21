@@ -137,8 +137,9 @@ In definitiva:
 	<div class="col-4 col-s-12 luci"><h1>Lampadario</h1</div>
 </div>
 ```
-
 <img src="soggiorno.png" alt="alt text" width="1000">
+
+**Codice completo della pagina:**
 
 ```html
 <!DOCTYPE html>
