@@ -6,33 +6,33 @@
 ### **Struttura HTML**
 ```html
 <div class="header">
-	  <h1>Gestione luci soggiorno</h1>
+	 <h1>Gestione luci soggiorno</h1>
+</div>
+<div class="grid-container">
+	<div class="col-4 col-s-3 menu">
 	</div>
-	<div class="grid-container">
-		<div class="col-4 col-s-3 menu">
-		</div>
-		<div class="col-4 col-s-9 menu">
-		 <h1>Piantana</h1>
-		 <div id='form'>
-			<form>
-				<input id='up1' type='button' value='Button 1 UP' onmousedown='this.style.opacity="1"' onmouseup='this.style.opacity="0.6"' ontouchstart='this.style.opacity="1"' ontouchend='this.style.opacity="0.6"'>
-				<br>
-				<input id='down1' type='button' value='Button 1 DOWN' onmousedown='this.style.opacity="1"' onmouseup='this.style.opacity="0.6"' ontouchstart='this.style.opacity="1"' ontouchend='this.style.opacity="0.6"'>
-				<br>
-				<h1>Lampadario</h1>
-				<input id='up2' type='button' value='Button 2 UP'  onmousedown='this.style.opacity="1"' onmouseup='this.style.opacity="0.6"' ontouchstart='this.style.opacity="1"' ontouchend='this.style.opacity="0.6"'>
-				<br>
-				<input id='down2' type='button' value='Button 2 DOWN' onmousedown='this.style.opacity="1"' onmouseup='this.style.opacity="0.6"' ontouchstart='this.style.opacity="1"' ontouchend='this.style.opacity="0.6"'>
-				<br>
-			</form>
-		 </div>
-		</div>
-		<div class="col-3 col-s-12">
-		</div>
+	<div class="col-4 col-s-9 menu">
+	<h1>Piantana</h1>
+	<div id='form'>
+		<form>
+			<input id='up1' type='button' value='Button 1 UP' onmousedown='this.style.opacity="1"' onmouseup='this.style.opacity="0.6"' ontouchstart='this.style.opacity="1"' ontouchend='this.style.opacity="0.6"'>
+			<br>
+			<input id='down1' type='button' value='Button 1 DOWN' onmousedown='this.style.opacity="1"' onmouseup='this.style.opacity="0.6"' ontouchstart='this.style.opacity="1"' ontouchend='this.style.opacity="0.6"'>
+			<br>
+			<h1>Lampadario</h1>
+			<input id='up2' type='button' value='Button 2 UP'  onmousedown='this.style.opacity="1"' onmouseup='this.style.opacity="0.6"' ontouchstart='this.style.opacity="1"' ontouchend='this.style.opacity="0.6"'>
+			<br>
+			<input id='down2' type='button' value='Button 2 DOWN' onmousedown='this.style.opacity="1"' onmouseup='this.style.opacity="0.6"' ontouchstart='this.style.opacity="1"' ontouchend='this.style.opacity="0.6"'>
+			<br>
+		</form>
+	 </div>
 	</div>
-	<div class="footer">
-		  <p>Resize the browser window to see how the content respond to the resizing.</p>
+	<div class="col-3 col-s-12">
 	</div>
+</div>
+<div class="footer">
+	  <p>Resize the browser window to see how the content respond to the resizing.</p>
+</div>
 ```
 
 ### **Parser dei comandi**
