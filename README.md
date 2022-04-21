@@ -23,3 +23,6 @@ Il **modello di applicazione** proposto nel **progetto** consiste in un una **co
 
 
 
+**Sitografia:**
+- https://www.4next.eu/news/mqtt-capitolo-2/
+- 
