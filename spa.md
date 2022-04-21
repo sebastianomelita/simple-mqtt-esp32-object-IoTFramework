@@ -78,7 +78,7 @@ In **ambito web**, ormai da molti anni, è prassi consolidata **non** disporre g
 
 Esempio ```soggiorno.html```
 
-<img src="sequenza_mqtt.png" alt="alt text" width="1000">
+<img src="soggiorno.png" alt="alt text" width="1000">
 
 ```html
 <!DOCTYPE html>
