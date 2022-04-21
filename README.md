@@ -25,7 +25,7 @@ Il **modello di applicazione** proposto nel **progetto** consiste in un una **co
 
 MQTT Fornisce un **canale multicast** di livello applicativo (L7) tramite cui un utente col ruolo di publisher è in grado di notificare una replica dello stesso messaggio a più subscribers.
 
-![broker](broker.png)
+<img src="broker.png" alt="alt text" width="700">
 
 Il canale multicast è realizzato da un dispositivo intermedio detto **broker** che realizza un routing di livello applicativo (L7) delle informazioni, smistandole in base ad una **etichetta** di destinazione detta **topic**.
 
@@ -36,8 +36,7 @@ Gli utenti si comportano tutti come **client** poiché sono loro che **iniziano 
 - **SUBSCRIBERS** coloro che ricevono le informazioni. Un subscriber deve preventivamente **registrarsi** ad uno o più topic presso il server affinchè possa **ricevere** l’informazione quando questa verrà pubblicata.
 
 ### **Fasi MQTT**
-
-![sequenza](sequenza_mqtt.png)
+<img src="sequenza_mqtt.png" alt="alt text" width="700">
 
 Le **fasi** scambio delle informazioni via MQTT tipicamente sono:
 1) Il **Subscriber** dichiara presso il broker il proprio interesse a ricevere notifiche riguardo ad un certo argomento (topic)
