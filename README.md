@@ -12,9 +12,10 @@ La pagina della web app è divisa sostanzialmente in **due parti** non necessari
  
 Il **ciclo di vita** di una SPA tipicamente consiste in:
 1) **Richiesta iniziale** del layout comune statico
-2) **una o più richieste** dei contenuti specifici via AJAX o MQTT o COAP
-3) **interpretazione della risposta** in formato JSON o XML
-4) **inserimento dei contenuti dinamici** nelle sezioni della pagina statica mediante codice lato client in javascript che modifica il modello ad oggetti della pagina (DOM) o direttamente mediante comandi di manipolazione degli elementi HTML (getElementById() e appendChild()) o indirettamente mediante stampa con document.write().
+2) **acquisizione degli input** utente mediante caselle di testo o pulsanti solitamente, in ambito domotico, gestiti tramite **ascoltatori di eventi** realizzati in javascript
+3) **una o più richieste** dei contenuti specifici aventi come **parametri** gli input e veicolate via AJAX o MQTT o COAP
+4) **interpretazione della risposta** in formato JSON o XML
+5) **inserimento dei contenuti dinamici** nelle sezioni della pagina statica mediante codice lato client in javascript che modifica il modello ad oggetti della pagina (DOM) o direttamente mediante comandi di manipolazione degli elementi HTML (getElementById() e appendChild()) o indirettamente mediante stampa con document.write().
 
 Il **modello di applicazione** proposto nel **progetto** consiste in un una costellazione di dispositivi IOT dotati di client MQTT per operazioni di **pubblicazione** e **notifica** di contenuti e in un server centrale con funzione di server web per le pagine statiche delle web app e con funzione di broker MQTT per lo smistamento delle comunicazioni tra dispositivi IOT e tra dispositivi IOT e web apps.
 
