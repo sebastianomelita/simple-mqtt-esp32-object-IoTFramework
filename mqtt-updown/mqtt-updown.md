@@ -50,8 +50,7 @@ void messageReceived(String &topic, String &payload) {
 		m2.processCmd(mqttid, payload, MAXLEN);
 	//}
 };
-
-    ```
+```
     
 
 ### **Callback MQTT lunga**
@@ -91,4 +90,4 @@ void messageReceived(String &topic, String &payload) {
 		}
 	//}
 };
-    ```
+```
