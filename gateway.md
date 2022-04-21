@@ -8,6 +8,31 @@ L'**architettura tipica del SW** a bordo di un dispositivo IoT è riassumibile:
 
 Il **middleware** in genere è composto da **librerie di terze parti** da **compilare** all'interno di un **IDE** (ad es. Arduino) o all'interno di un **SDK** cioè un pacchetto di sviluppo per applicazioni che fornisce vari strumenti per compilazione, debug e documentazione (ad es. AWS IoT, Azure IoT, ESP-IDF). Oppure esistono **framework** specifici per IoT Open Source come RIOT che, una volta compilati su una macchina Linux, forniscono veri e propri **SO per IoT** con esattamente ciò che serve per la **comunicazione** di un certo dispositivo.
 
+### **Librerie del progetto**
+
+In questo caso gran parte delle funzioni del middleware, quelle relative alla comunicazione via stack LoRaWan, è implementato all'interno del sistema a microprocessore (MCU). Nello specifico, le funzioni di livello applicativo, che in ambito IoT, sono tutte quelle comprese tra il livello 2 e il livello 7 ISO/OSI sono compito della MCU mentre il livello fisico è realizzato in HW dal chip del modem.
+
+L'installazione di SDK, loader e librerie in Arduino si può fare seguendo, nell'ordine, le seguenti fasi:
+	1. installareo SDK **Arduino Core per Arduino_Core_STM32**. https://github.com/espressif/arduino-esp32. Per far ciò bisogna aggiungre alla fine della lista presente **"su url aggiuntive per il gestore schede"**: "https://dl.espressif.com/dl/package_esp32_index.json" che sitrova sul menu **File>Impostazioni**:
+
+<img src="gestoreschede.png" alt="alt text" width="700">
+
+2. Andare su **strumenti/gestione** librerie e installare la libreria **STM32 Core**:
+
+<img src="gestorelib.png" alt="alt text" width="700">
+
+3. Selezionare la scheda **Lora Board**:
+
+<img src="selezscheda.png" alt="alt text" width="700">
+
+4. Andare su **strumenti/Board part number** librerie e selezionare il BSP (Arduino Board Support) **RAK811 Lora Tracker** 
+
+5. Scaricare e installare STM32CubeIDE. Per poter utilizzare un STM32 con l'ambiente Arduino, si deve installare lo strumento STM32CubeIDE, che è disponibile al link https://www.st.com/en/development-tools/stm32cubeide.html.
+6. In Strumenti > Metodo di caricamento: scegliere **STM32CubeProgrammer (SWD)**
+
+<img src="selectcube.png" alt="alt text" width="700">
+
+
 ### **Client MQTT per ESP32, ESP8266 e Arduino con metodo di connessione bloccante**
 
 In questo caso le librerie che realizzano lo stack TCP/IP e il livello fisico del WiFi sono implementati all'interno del chip che svolge le funzioni di modem, oppure, come nel caso delle MCU ESP8266 e ESP32, sono librerie SW eseguite su un sottosistema HW della stessa MCU con funzioni specifiche di comunicazione. Nel caso della MCU ESP8266 lo stack TCP/IP è eseguito dallo stesso core e all'interno dello stesso thread dell'applicazione principale. Nel caso della MCU ESP832 lo stack TCP/IP è eseguito in un core a parte e in un thread privilegiato rispetto a quello dell'applicazione principale. Il core applicativo è comunque responsabile della comunicazione di livello applicativo realizzata dal protocollo MQTT.  
@@ -156,5 +181,6 @@ WL_DISCONNECTED: assigned when disconnected from a network;
 
 Per dettagli ulteriori sui gateway MQTT e per esplorare l'utilizzo di altre librerie per esp32 sempre programmabili mediante con l'IDE di Arduino vedere:
 - https://github.com/sebastianomelita/ArduinoBareMetal/blob/master/gateway.md
+- https://www.instructables.com/Installing-the-ESP32-Board-in-Arduino-IDE-Windows-/
 
 >[Torna all'indice generale](README.md)
