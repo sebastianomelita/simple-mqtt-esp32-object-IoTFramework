@@ -2,6 +2,9 @@
 
 
 ### **Pagine responsive**
+
+Il **design responsivo**, o responsive web design (RWD), indica una tecnica di web design per la realizzazione di siti in grado di **adattarsi graficamente** in modo automatico al dispositivo coi quali vengono visualizzati (computer con diverse risoluzioni, tablet, smartphone, cellulari, web tv), riducendo al minimo la necessità dell'utente di ridimensionare e scorrere i contenuti.
+
 **Media query**
 
 ```CSS
@@ -27,6 +30,6 @@
 
 **Sitografia:**
 - https://www.4next.eu/news/mqtt-capitolo-2/
-- 
+- https://it.wikipedia.org/wiki/Design_responsivo
 
 >[Torna all'indice generale](README.md)
