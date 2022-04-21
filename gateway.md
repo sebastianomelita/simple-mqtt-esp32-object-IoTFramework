@@ -1,9 +1,5 @@
 >[Torna all'indice generale](README.md)
 
-### **Libreria MQTT**
-
-[Gateway mqtt](https://github.com/sebastianomelita/ArduinoBareMetal/blob/master/gateway.md)
-
 ### **Architettura di riferimento per IoT**
 
 L'**architettura tipica del SW** a bordo di un dispositivo IoT è riassumibile:
