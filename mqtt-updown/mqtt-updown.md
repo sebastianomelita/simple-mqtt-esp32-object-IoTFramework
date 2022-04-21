@@ -35,7 +35,7 @@ La **pagina** ```mqttupdown.html``` può essere caricata sul browser da una cart
 		</form>
 	 </div>
 	</div>
-	<div class="col-3 col-s-12">
+	<div class="col-4 col-s-12">
 	</div>
 </div>
 <div class="footer">
