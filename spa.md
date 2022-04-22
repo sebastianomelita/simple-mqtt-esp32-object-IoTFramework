@@ -1,6 +1,6 @@
 >[Torna all'indice generale](README.md)
 
-## **PARTE STATICA DELLA PAGINA*
+## **PARTE STATICA DELLA PAGINA**
 
 E' la porzione della pagina che viene caricata una sola volta all'inizio da un server web mediante una normale richiesta HTTPS (di tipo GET solitamente). Contiene i contenuti generali in particolare le informazioni sul **layout della pagina**. Il layout lo desideriamo con determinate proprietà:
 - diviso in sezioni standard (header, body e footer)
