@@ -44,7 +44,7 @@ Per scelta progettuale, si è stabilito di lasciare i dispositivi **senza persis
 
 **Architettura dell'applicazione**
 
-Il **modello di applicazione** proposto nel **progetto** consiste in un una **costellazione di dispositivi** IOT dotati di client MQTT per operazioni di **pubblicazione** e **notifica** di contenuti e in un **server centrale** con funzione di **server web** per le pagine statiche delle web app e con funzione di **broker MQTT** per lo **smistamento** delle comunicazioni reciproche tra dispositivi IOT e tra dispositivi IOT e web apps.
+Il **modello di applicazione** proposto nel **progetto** consiste in un una **costellazione di dispositivi** IOT dotati di client MQTT per operazioni di **pubblicazione** e **notifica** di contenuti e in un **server centrale** con funzione di **server web** per le pagine statiche delle web app, con funzione di **broker MQTT** per lo **smistamento** delle comunicazioni reciproche tra dispositivi IOT e tra dispositivi IOT e web apps e, per ultima, con funzione di **persistenza dello stato** di tutti i dispositivi IOT.
 
 ### **Broker MQTT**
 
