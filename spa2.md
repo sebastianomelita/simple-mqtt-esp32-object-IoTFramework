@@ -8,8 +8,8 @@ Consiste generalmente in codice **javascript** che riguarda principalmente:
 - **messaggi** JSON da inviare per ogni input
 - gli **ascoltatori degli eventi** di input (click su tasti o inserimento su caselle di testo, ecc.)
 - **callback del protocollo di comunicazione** adottato per il recupero dei singoli dati, nel nostro caso MQTT.
-- eventuali timer per la **simulazione** dell'evoluzione del tempo delle uscite variabili nel tempo (ad es. apertura di un cancello)
 - **codice di impostazione** dei parametri del canale di comunicazione quali indirizzi IP, indirizzi di porta o topic MQTT.
+- eventuali timer per la **simulazione** dell'evoluzione del tempo delle uscite variabili nel tempo (ad es. apertura di un cancello)
 
 ### **Messaggi JSON**
 
