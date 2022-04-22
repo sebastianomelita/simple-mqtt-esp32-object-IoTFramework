@@ -156,10 +156,6 @@ void motorAction1(int enabled, int dir, uint8_t n){
 
 Lo **sketch** ```mqttt-updown.ino``` deve essere aperto con l'IDE di Arduino e caricato sul dispositivo ESP32 dopo aver selezionato correttamente la scheda e la porta della seriale e, chiaramente, dopo aver connesso il dispositivo alla porta usb del PC.
 
-Si noti che lo **stato** del dispositivo è **comunicato alla pagina** in due modi:
-- in maniera **asincrona**, su richiesta della pagina
-- in maniera **sincrona**, periodicamente ogni STATEPERIOD impostato a 60 sec
-
 ```C++
 Motor m1(mqttid,0);
 
@@ -222,6 +218,9 @@ void messageReceived(String &topic, String &payload) {
 	//}
 };
 ```
+Si noti che lo **stato** del dispositivo è **comunicato alla pagina** in due modi:
+- in maniera **asincrona**, su richiesta della pagina
+- in maniera **sincrona**, periodicamente ogni STATEPERIOD impostato a 60 sec
     
 
 ### **Callback MQTT lunga**
