@@ -36,17 +36,13 @@ dw1.addEventListener('click', function(){press(vls[1]);});
 
 ### **Callback di ricezione feedback**
 
-
+I messaggi di feedback sono **obbligatori** da parte del dispositivo perchè hanno l'importante funzione di **confermare**, a livello applicativo, l'effettiva **applicazione del comando**. Per quanto è possibile, dovrebbero riportare lo **stato effettivo delle porte** di uscita del dispositivo, possibilmente leggendone il reale valore. Al ricevimento delle informazioni di feedback queste devono essere **smistate** all' elemento HTML di input corrispondente al comando a cui esse si riferiscono. Il feedback può coambiare un elemento decorativo quale **colore** di un tasto o **posizione** di un cursore, oppure ripoartare un **valore numerico o testuale** in un **casella di testo**.
 
 ```javascript
 function onRcv(d) {
-	//document.getElementById('p').innerHTML = f.data;\n"
 	var obj = JSON.parse(d);
-	console.log('Arrived data');
 	for(var x in obj){
-		//console.log('x:'+x);
 		var el = document.getElementById(x);
-		//console.log('el:'+el);
 		if(el != null){  //controlla se il campo esiste nel DOM della pagina
 			//console.log(x);
 			if(x=='up1' || x=='down1' || x=='up2' || x=='down2'){
@@ -57,8 +53,6 @@ function onRcv(d) {
 					el.style.backgroundColor = "#00ccff";
 				}
 			}
-			//{"devid":"pippo","up1":"0","sp1":"10000","tr1":"50"}
-			//{"devid":"pippo","up1":"1","sp1":"10000","tr1":"10","pr1":"10"}
 			//errori nel json staccano la connessione!!
 		};
 	}
