@@ -21,10 +21,10 @@ Il **ciclo di vita** di una SPA tipicamente consiste in:
 
 **Gestione dello stato del dispositivo**
 
-Lo stato della pagina è correlato allo stato del dispositivo. Per la **memorizzazione** e per la **gestione** dello stato del dispositivo sono possibili, in linea di principio, 3 possibilità:
-- lo stato del dispositivo è gestito dal dispositivo e dal codice che implementa le sue funzioni
-- lo stato del dispositivo è gestito dalla pagina e dal codice che implementa le sue funzioni
-- lo stato del dispositivo è gestito sia dal codice del dispositivo che da quello della pagina e sono tra loro sincronizzati
+Lo **stato della pagina** è correlato allo stato del dispositivo. Per la **memorizzazione** e per la **gestione** dello stato del dispositivo sono possibili, in linea di principio, **3 possibilità**:
+- lo stato del dispositivo è **gestito dal dispositivo** e dal codice che implementa le sue funzioni
+- lo stato del dispositivo è **gestito dalla pagina** e dal codice che implementa le sue funzioni
+- lo stato del dispositivo è **gestito sia dal codice del dispositivo che da quello della pagina** e sono tra loro **sincronizzati**
 
 Al di la dei vantaggi e degli svantaggi di ciascuna soluzione, per scelta progettuale, si è stabilito di far calcolare e gestire l'**evoluzione temporale dello stato** dei controlli **al dispositivo**, in particolare al codice che, dentro un dispositivo, implementa quei controlli.
  
@@ -32,7 +32,7 @@ Quindi, il dispositivo è **stateful** mentre la pagina è di base **stateless**
 
 Sono possibili situazioni particolari in cui la pagina è costretta a calcolare localmente, in maniera autonoma, una replica dello stato del dispositivo. Ciò accede quando le **uscite** assumono un **andamento variabile** nel tempo **prestabilito** (sweep o scivolamento) che deve essere **riprodotto** nella pagina per evitare di effettuare un **polling** continuo dello stato delle uscite. In questo caso:
 - la **pagina** calcola lo stato delle uscite con la **stessa funzione temporale** utilizzata dal dispositivo, in pratica realizza una vera e propria **emulazione locale** del comportamento del dispositivo.
-- il **dispositivo** invia almeno **due feedback**: uno **iniziale** con il quale parte l'evoluzione locale dell'uscita (sweep) ed uno **finale** con il quale si interrompe l'evoluzione. Il **feedback finale** porta con se anche il **valore vero finale** dell'uscita con il quale viene eventualmente corretto il valore **stimato localmente** dalla pagina.
+- il **dispositivo** invia almeno **due feedback**: uno **iniziale** con il quale parte l'evoluzione locale dell'uscita (sweep) ed uno **finale** con il quale si interrompe l'evoluzione. Il **feedback finale** porta con se anche il **valore vero finale** dell'uscita con il quale viene eventualmente corretto il valore **stimato localmente** dalla pagina. Il feedback ha quindi due funzioni: **sincronizzazione** di emulatore e dispositivo e **verifica** dello stato finale.
 
 **Architettura dell'applicazione**
 
