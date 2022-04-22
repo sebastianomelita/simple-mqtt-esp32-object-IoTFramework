@@ -7,7 +7,7 @@
 
 La **pagina** ```mqttupdown.html``` può essere caricata sul browser da una cartella sul PC o può essere caricata su un server web di pagine statiche.
 
-Il **layout** è statico ed è definito mediante il seguente CSS di tipo GRID:
+Il **layout** è statico, responsivo, diviso in colonne ed è definito mediante il seguente CSS di **tipo GRID**:
 
 ```css
 <style>
