@@ -10,9 +10,11 @@ Il **middleware** in genere è composto da **librerie di terze parti** da **comp
 
 <img src="1600px-Espressif_ESP32_Chip_Function_Block_Diagram.svg.png" alt="alt text" width="1000">
 
-### **Librerie del progetto**
+In questo caso gran parte delle funzioni del middleware, quelle relative alla comunicazione via WiFi, è implementato all'interno del sistema a microprocessore (MCU) sia dal punto di vista HW attraverso un chip wifi dedicato che realizza il livello fisico dei protocolli ma anche dal punto di vista HW attraverso lo stack LWIP che realizza il livelli di collegamento (MAC) e rete (IP) dello stack di comunicazione. 
 
-In questo caso gran parte delle funzioni del middleware, quelle relative alla comunicazione via WiFi, è implementato all'interno del sistema a microprocessore (MCU) sia dal punto di vista HW attraverso un chip wifi dedicato che realizza il livello fisico dei protocolli ma anche dal punto di vista HW attraverso lo stack LWIP che realizza il livelli di collegamento (MAC) e rete (IP) dello stack di comunicazione. LO stack **LWIP** è memorizzato in un FW di bordo e viene eseguito in uno dei due core della CPU alla fine del loop() utente.
+Lo stack **LWIP** è memorizzato in un FW di bordo e viene eseguito in uno dei due core della CPU alla fine del loop() utente.
+
+### **Librerie del progetto**
 
 L'installazione di SDK, loader e librerie in Arduino si può fare seguendo, nell'ordine, le seguenti fasi:
 	1. installareo SDK **Arduino Core per ESP32**. https://github.com/espressif/arduino-esp32. Per far ciò bisogna aggiungre alla fine della lista presente **"su url aggiuntive per il gestore schede"**: "https://dl.espressif.com/dl/package_esp32_index.json" che si trova sul menu **File>Impostazioni**:
