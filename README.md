@@ -19,6 +19,18 @@ Il **ciclo di vita** di una SPA tipicamente consiste in:
 4) **interpretazione della risposta** in formato JSON o XML
 5) **inserimento dei contenuti dinamici** nelle sezioni della pagina statica mediante codice lato client in javascript che modifica il **modello ad oggetti** della pagina (DOM) o **direttamente** mediante comandi di manipolazione della **rappresentazione ad oggetti** degli elementi HTML (getElementById() e appendChild()) o **indirettamente** mediante iniezione con document.write() **di tag html e istruzioni CSS** dinamici che si sovrappongono a quelli statici del layout.
 
+**Gestione dello stato del dispositivo**
+
+Lo stato della pagina è correlato allo stato del dispositivo. Per la **memorizzazione** e per la **gestione** dello stato del dispositivo sono possibili, in linea di principio, 3 possibilità:
+- lo stato del dispositivo è gestito dal dispositivo e dal codice che implementa le sue funzioni
+- lo stato del dispositivo è gestito dalla pagina e dal codice che implementa le sue funzioni
+- lo stato del dispositivo è gestito sia dal codice del dispositivo che da quello della pagina e sono tra loro sincronizzati
+
+Al di la dei vantaggi e degli svantaggi di ciascuna soluzione, per scelta progettuale, si è stabilito di far calcolare e gestire l'**evoluzione temporale dello stato** dei controlli **al dispositivo**, in particolare al codice che, dentro un dispositivo, implementa quei controlli.
+ 
+Quindi, il dispositivo è **stateful** mentre la pagina è di base **stateless** e si limita ad inviare i **comandi** al dispositivo che, li tratterà come degli **ingressi**. Il **dispositivo**, noti gli **ingressi** e il valore corrente dello **stato**, sarà in grado di calcolare le **nuove uscite** ed il **nuovo stato**. Se la **pagina** ha bisogno di conoscere lo stato del dispositivo per visualizzarlo allora utilizzera per questo scopo i messaggi di **feedback** provenienti dal dispositivo a conferma di ogni comando.
+
+
 Il **modello di applicazione** proposto nel **progetto** consiste in un una **costellazione di dispositivi** IOT dotati di client MQTT per operazioni di **pubblicazione** e **notifica** di contenuti e in un **server centrale** con funzione di **server web** per le pagine statiche delle web app e con funzione di **broker MQTT** per lo **smistamento** delle comunicazioni reciproche tra dispositivi IOT e tra dispositivi IOT e web apps.
 
 ### **Broker MQTT**
