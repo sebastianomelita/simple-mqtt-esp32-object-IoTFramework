@@ -40,7 +40,7 @@ I messaggi di feedback sono **obbligatori** da parte del dispositivo perchè han
 
 I messaggi di feddback, come quelli di comando, sono codificati in JSON e pertanto vengono interpretati da un parser JSON fornito dalla classe statica javascript JSON. 
 
-L'istruzione ```javascriptvar obj = JSON.parse(d);``` recupera un oggetto javascript avente per campi i campi della stringa JSON. 
+L'istruzione ```javascript var obj = JSON.parse(d);``` recupera un oggetto javascript avente per campi i campi della stringa JSON. 
 
 
 
