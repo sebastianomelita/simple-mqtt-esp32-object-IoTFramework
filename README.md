@@ -34,7 +34,7 @@ Sono possibili situazioni particolari in cui la pagina è costretta a calcolare 
 - la **pagina** calcola lo stato delle uscite con la **stessa funzione temporale** utilizzata dal dispositivo, in pratica realizza una vera e propria **emulazione locale** del comportamento del dispositivo.
 - il **dispositivo** invia almeno **due feedback**: uno **iniziale** con il quale parte l'evoluzione locale dell'uscita (sweep) ed uno **finale** con il quale si interrompe l'evoluzione. Il **feedback finale** porta con se anche il **valore vero finale** dell'uscita con il quale viene eventualmente corretto il valore **stimato localmente** dalla pagina.
 
-**GArchitettura dell'applicazione**
+**Architettura dell'applicazione**
 
 Il **modello di applicazione** proposto nel **progetto** consiste in un una **costellazione di dispositivi** IOT dotati di client MQTT per operazioni di **pubblicazione** e **notifica** di contenuti e in un **server centrale** con funzione di **server web** per le pagine statiche delle web app e con funzione di **broker MQTT** per lo **smistamento** delle comunicazioni reciproche tra dispositivi IOT e tra dispositivi IOT e web apps.
 
