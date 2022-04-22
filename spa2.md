@@ -36,7 +36,14 @@ dw1.addEventListener('click', function(){press(vls[1]);});
 
 ### **Callback di ricezione feedback**
 
-I messaggi di feedback sono **obbligatori** da parte del dispositivo perchè hanno l'importante funzione di **confermare**, a livello applicativo, l'effettiva **applicazione del comando**. Per quanto è possibile, dovrebbero riportare lo **stato effettivo delle porte** di uscita del dispositivo, possibilmente leggendone il reale valore. Al ricevimento delle informazioni di feedback queste devono essere **smistate** all' elemento HTML di input corrispondente al comando a cui esse si riferiscono. Il feedback può coambiare un elemento decorativo quale **colore** di un tasto o **posizione** di un cursore, oppure riportare un **valore numerico o testuale** in un **casella di testo**.
+I messaggi di feedback sono **obbligatori** da parte del dispositivo perchè hanno l'importante funzione di **confermare**, a livello applicativo, l'effettiva **applicazione del comando**. Per quanto è possibile, dovrebbero riportare lo **stato effettivo delle porte** di uscita del dispositivo, possibilmente leggendone il reale valore. Al ricevimento delle informazioni di feedback queste devono essere **smistate** all' elemento HTML di input corrispondente al comando a cui esse si riferiscono. Il feedback può coambiare un elemento decorativo quale **colore** di un tasto o **posizione** di un cursore, oppure riportare un **valore numerico o testuale** in una **casella di testo**.
+
+I messaggi di feddback, come quelli di comando, sono codificati in JSON e pertanto vengono interpretati da un parser JSON fornito dalla classe statica javascript JSON. 
+
+L'istruzione ```javascriptvar obj = JSON.parse(d);``` recupera un oggetto javascript avente per campi i campi della stringa JSON. 
+
+
+
 
 ```javascript
 function onRcv(d) {
@@ -53,6 +60,8 @@ function onRcv(d) {
 					el.style.backgroundColor = "#00ccff";
 				}
 			}
+			//{"devid":"pippo","up1":"0","sp1":"10000","tr1":"50"}
+			//{"devid":"pippo","up1":"1","sp1":"10000","tr1":"10","pr1":"10"}
 			//errori nel json staccano la connessione!!
 		};
 	}
