@@ -15,7 +15,7 @@ Consiste generalmente in codice **javascript** che riguarda principalmente:
 Per scelta progettuale ogni messaggio di comando deve riprtare l'**indirizzo applicativo MQTT** del dispositivo più la coppia **```tag_comando:valore_comando```**.
 
 ```C++
-var vls = ['{"devid":"'+mqttid+'","up1":"255"}','{"devid":"'+mqttid+'","down1":"255"}','{"devid":"'+mqttid+'","up2":"255"}','{"devid":"'+mqttid+'","down2":"255"}','{"devid":"'+mqttid+'","conf":"255"}'];
+var vls = ['{"devid":"'+mqttid+'","up1":"255"}','{"devid":"'+mqttid+'","down1":"255"}','{"devid":"'+mqttid+'","conf":"255"}'];
 ```
 
 
