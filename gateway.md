@@ -10,7 +10,7 @@ Il **middleware** in genere è composto da **librerie di terze parti** da **comp
 
 <img src="1600px-Espressif_ESP32_Chip_Function_Block_Diagram.svg.png" alt="alt text" width="1000">
 
-In questo caso gran parte delle funzioni del middleware, quelle relative alla comunicazione via WiFi, è implementato all'interno del sistema a microprocessore (MCU) sia dal punto di vista **HW** attraverso un chip wifi dedicato che realizza il **livello fisico** dei protocolli ma anche dal punto di vista **SW** attraverso lo stack LWIP che realizza il livelli di collegamento (MAC) e rete (IP) dello stack di comunicazione. 
+In questo caso gran parte delle **funzioni del middleware**, quelle relative alla comunicazione via **WiFi** o via **Bluetooth**, è implementato all'interno del sistema a microprocessore (MCU) sia dal punto di vista **HW** attraverso un chip wifi dedicato che realizza il **livello fisico** dei protocolli ma anche dal punto di vista **SW** attraverso lo stack LWIP che realizza il livelli di collegamento (MAC) e rete (IP) dello stack di comunicazione. 
 
 Lo stack **LWIP** è memorizzato in un FW di bordo e viene eseguito in uno dei due core della CPU alla fine del loop() utente.
 
