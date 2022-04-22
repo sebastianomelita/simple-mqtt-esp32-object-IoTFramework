@@ -38,7 +38,7 @@ dw1.addEventListener('click', function(){press(vls[1]);});
 
 I messaggi di feedback sono **obbligatori** da parte del dispositivo perchè hanno l'importante funzione di **confermare**, a livello applicativo, l'effettiva **applicazione del comando**. Per quanto è possibile, dovrebbero riportare lo **stato effettivo delle porte** di uscita del dispositivo, possibilmente leggendone il reale valore. Al ricevimento delle informazioni di feedback queste devono essere **smistate** all' elemento HTML di input corrispondente al comando a cui esse si riferiscono. Il feedback può coambiare un elemento decorativo quale **colore** di un tasto o **posizione** di un cursore, oppure riportare un **valore numerico o testuale** in una **casella di testo**.
 
-I messaggi di feddback, come quelli di comando, sono codificati in JSON e pertanto vengono interpretati da un parser JSON fornito dalla classe statica javascript JSON. 
+I messaggi di feddback, come quelli di comando, sono codificati in JSON e possono essere interpretati da un **parser** fornito dalla classe statica javascript JSON. 
 
 L'istruzione 
 ```javascript 
