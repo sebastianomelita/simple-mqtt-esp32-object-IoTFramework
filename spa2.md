@@ -100,6 +100,72 @@ var wsport = "8000";
 var mqttProto ="/mqtt"; //default
 var intopic = "soggiorno/in";
 var outtopic = "soggiorno/out";
+
+start();
+		function start(){
+			var clientID = mqttid+'_' + parseInt(Math.random() * 100);
+			conn = new Paho.MQTT.Client(mqttAddr, Number(wsport), mqttProto,clientID);
+			//client = new Paho.MQTT.Client("iot.eclipse.org", Number(443), "/wss");
+			//"var conn = new Paho.MQTT.Client('{MA}', Number('{MT}'), clientID);"
+			console.log(conn);
+			console.log('broker:'+mqttAddr+', port:'+wsport+', path:'+mqttProto+', id:'+clientID);
+			// connect the client
+			conn.connect(
+				{
+					cleanSession : false, 
+					onSuccess : onConnect,
+					onFailure : onFailed,
+					keepAliveInterval: 30
+				});
+			function onFailed(err) {
+				//"conn.send('Connect ' + new Date());"
+				console.log('Initial connect request failed. Error message : ' + err.errorMessage); 
+			};
+			function onConnect(resObj) {
+				//"conn.send('Connect ' + new Date());"
+				console.log('onConnect');
+				conn.subscribe(outtopic);
+				console.log('Connected to ' + resObj.uri);
+				if (resObj.reconnect){
+					console.log('It was a result of automatic reconnect.');
+				}
+				// carica parametri di configurazione
+				press(vls[4]);
+			};
+			conn.onMessageArrived = function (e) {
+				console.log('Received: '+e.payloadString);
+				if(e.payloadString){
+					var obj = JSON.parse(e.payloadString);
+					//controlla se è indirizzato al dispositivo associato alla pagina
+					if(obj.devid==''+mqttid+''||obj.devid=='FF'){//FF id broadcast valido per tutti i dispositivi
+						console.log('Received: '+e.payloadString);
+						onRcv(e.payloadString);
+					}
+				}else{
+					console.log('Message received error: '+e.payloadString);
+				}
+			};
+			conn.onConnectionLost  = function (resObj) {		
+				//console.log('Lost connection to ' + resObj.uri + ' Error code: ' + resObj.errorCode + ' Error text: ' + resObj.errorMessage);
+				if (resObj.reconnect){
+					console.log('Automatic reconnect is currently active.');
+				}else{
+					console.log('Lost connection to host, reconnect in 5 seconds');
+					// Try to reconnect in 5 seconds
+					setTimeout(function(){start()}, 5000);
+				}
+			};
+		};
+		function send(str){
+		    console.log('send: '+str);
+			var msg = new Paho.MQTT.Message(str);
+			msg.destinationName = intopic;
+			console.log('topic: '+msg.destinationName);
+			conn.send(msg);
+		};
+		function press(s){
+			send(s);
+		};
 ```
 
 >[Torna all'indice generale](README.md)
