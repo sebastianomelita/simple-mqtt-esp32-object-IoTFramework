@@ -34,35 +34,35 @@ up1.addEventListener('click', function(){press(vls[0]);});
 dw1.addEventListener('click', function(){press(vls[1]);});
 ```
 
-### **Callback di ricezione feddback**
+### **Callback di ricezione feedback**
 
 
 
 ```javascript
 function onRcv(d) {
-			//document.getElementById('p').innerHTML = f.data;\n"
-			var obj = JSON.parse(d);
-			console.log('Arrived data');
-			for(var x in obj){
-				//console.log('x:'+x);
-				var el = document.getElementById(x);
-				//console.log('el:'+el);
-				if(el != null){  //controlla se il campo esiste nel DOM della pagina
-					//console.log(x);
-					if(x=='up1' || x=='down1' || x=='up2' || x=='down2'){
-						console.log('stato:'+obj[x]); 
-						if(Number(obj[x]) == 255){
-							el.style.backgroundColor = "#b30000";
-						}else{
-							el.style.backgroundColor = "#00ccff";
-						}
-					}
-					//{"devid":"pippo","up1":"0","sp1":"10000","tr1":"50"}
-					//{"devid":"pippo","up1":"1","sp1":"10000","tr1":"10","pr1":"10"}
-					//errori nel json staccano la connessione!!
-				};
+	//document.getElementById('p').innerHTML = f.data;\n"
+	var obj = JSON.parse(d);
+	console.log('Arrived data');
+	for(var x in obj){
+		//console.log('x:'+x);
+		var el = document.getElementById(x);
+		//console.log('el:'+el);
+		if(el != null){  //controlla se il campo esiste nel DOM della pagina
+			//console.log(x);
+			if(x=='up1' || x=='down1' || x=='up2' || x=='down2'){
+				console.log('stato:'+obj[x]); 
+				if(Number(obj[x]) == 255){
+					el.style.backgroundColor = "#b30000";
+				}else{
+					el.style.backgroundColor = "#00ccff";
+				}
 			}
-		}
+			//{"devid":"pippo","up1":"0","sp1":"10000","tr1":"50"}
+			//{"devid":"pippo","up1":"1","sp1":"10000","tr1":"10","pr1":"10"}
+			//errori nel json staccano la connessione!!
+		};
+	}
+}
 ```
 
 
