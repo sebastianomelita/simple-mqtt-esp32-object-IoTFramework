@@ -67,6 +67,12 @@ Il layout è statico ed è definito mediante il seguente CSS di tipo GRID:
 
 ### **Struttura HTML**
 
+La **pagina statica** ha tre sezioni una sotto l'altra:
+- un **header** con il titolo e le informazioni comuni alla pagina da visualizzare per prima.
+- un **body** organizzato mediante un layout a colonne responsive di tipo grid che contiene il form di comando con gli input e le informazioni di output.
+- un **footer**. che contiene informazioni generali da visualizzare per ultime.
+
+La definizione della **gerarchia di elementi** contenitori e contenuti si fa nel HTML tramite:
 
 ```html
 <div class="header">
