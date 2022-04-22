@@ -66,11 +66,29 @@ L'istruzione
 ```javascript 
 var obj = JSON.parse(d);
 ```
-recupera un oggetto javascript avente per campi i campi della stringa JSON. 
+recupera un oggetto javascript avente per campi i campi della stringa JSON. I **campi** possono essere:
+- nomi corrispondenti ed uguali ad **elementi HTML di input** esistenti nella pagina quando il feedback si riderisce ad uno di questi
+- nomi non corrispondenti a nessun elemento HTML della pagina che, piuttosto che rappresentare il feedback di un input, rappresentano il feedback di qualche **oggetto di simulazione**.
 
-
-
-
+Il ciclo
+```javascript 
+for(var x in obj){
+	var el = document.getElementById(x);
+	if(x=='up1' || x=='down1' || x=='up2' || x=='down2'){
+		if(Number(obj[x]) == 255){
+			el.style.backgroundColor = "#b30000";
+		}else{
+			el.style.backgroundColor = "#00ccff";
+		}
+	}
+}
+```
+- **scorre** i campi dell'oggetto
+- ne **recupera il nome** nella variabile ```x```
+- **filtra** in base al nome del campo quelli che devono produrre un qualche effetto nella pagina tramite un costrutto ```if-then-else```
+- **recupera il valore** del campo trasformandolo in numerico tramite ```Number(obj[x])```
+- **recupera il riferimento** dell'elemento HTML in base al nome del campo tramite var ```el = document.getElementById(x);```
+- **modifica la grafica** dell'elemento HTML accedendo alle proprietà dell'oggetto mediante il riferimento, ad esempio cambiando lo sfondo di un tasto ```el.style.backgroundColor = "#b30000";```
 
 
 
