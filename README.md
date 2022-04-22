@@ -40,7 +40,7 @@ Sono possibili **situazioni particolari** in cui la pagina è costretta a calcol
 
 Lo stato di un dispositivo benchè sotto la responsabilità del codice in esso implementato, **non è persistente** perchè memorizzazto in **memoria RAM**. La RAM è **volatile** e, in qualsiasi, situazione che porti ad uno spegnimento involontario del dispositivo o ad un suo riavvio perde il suo contenuto. Un'alterntiva potrebbe essere memorizzare ogni nuovo stato nella memoria persistente del dispositivo, cioè la **EEPROM**.
 
-Per scelta progettuale, si è stabilito di lasciare i dispositivi **senza persistenza** dello stato al fine di massimizzare la loro **semplicità**. La **persistenza** dello stato per cui è delegata ad un **dispositivo unico cetralizzato** per **tutti** i dispositivi che ha il compito di memorizzarlo su un **datatbase locale** ed, eventualmente, per maggiore sicurezza, anche su un servizio di **storage in cloud**. 
+Per scelta progettuale, si è stabilito di lasciare i dispositivi **senza persistenza** dello stato al fine di massimizzare la loro **semplicità**. La **persistenza** dello stato è delegata ad un **dispositivo unico cetralizzato** per **tutti** i dispositivi che ha il compito di memorizzarlo su un **datatbase locale** ed, eventualmente, per maggiore sicurezza, anche su un servizio di **storage in cloud**. 
 
 **Ogni dispositivo**, allorquando calcola il valore nuovo dello stato, è tenuto a **notificare** la modifica al server di persistenza **via MQTT** in maniera tale che questo possa conservarlo usando come **chiave univoca** l'MQTT_ID del dispositivo. Se un dispossitivo, viene **sostiyuito** o viene **riavviato** si **inizializza** caricando l'**ultimo stato valido** presente nel database centrale.
 
