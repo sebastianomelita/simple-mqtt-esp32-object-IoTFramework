@@ -44,8 +44,8 @@ Le **fasi** scambio delle informazioni via MQTT tipicamente sono:
 3) Il **broker** inoltra il messaggio a tutti i subscriber interessati al suo topic
 
 Realizazione componenti:
-- [SPA di comando: pagine responsive](spa.md)
-- [SPA di comando: ascoltatori](spa.md)
+- [SPA di comando: parte statica](spa.md)
+- [SPA di comando: parte dinamica](spa2.md)
 - [Gateway MQTT](gateway.md)
 
 Definizione oggetti IOT:
