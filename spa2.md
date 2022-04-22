@@ -19,7 +19,7 @@ var vls = ['{"devid":"'+mqttid+'","up1":"255"}','{"devid":"'+mqttid+'","down1":"
 ```
 I messaggi sono raccolti in uno o più array e recuperati mediante un indice che rappresenta la loro posizion nell'arraye. Per quanto riguarda i **pulsanti** la scelta organizzativa adoperata è di tenere vicini i messaggi di un gruppo facendo seguire quelli di un eventuale altro gruppo. Ad esempio Le funzioni "up1" e "down1" del motore 1 sono raggruppate nelle locazion 0 e 1 dell'array, a seguire si troveranno le funzioni "up2" e "down2" del motore 2.
 
-### **Ascoltatori di eventi*
+### **Ascoltatori di eventi**
 
 Per scelta progettuale, le **callback** degli eventi di input non sono inserite nei tag degli elementi HTML della pagina ad esempio con codice tipo ```<button onclick="myFunction()">Click me</button>``` ma si è preferito registrare delle callback inline come **ascoltatori** di eventi specifici di un certo oggetto del DOM della pagina HTML (stile java). Il riferimento alla rappresetazione ad oggetti di un ekemento HTML si recupera tramite la funzione ```document.getElementById('elem_id')``` dove ```elem_id``` è l'attributo univoco **id** del tag HTML di cui si vuole "ascoltare" un certo evento.
 
