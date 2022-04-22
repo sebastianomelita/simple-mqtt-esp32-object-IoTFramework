@@ -90,7 +90,16 @@ for(var x in obj){
 - **recupera il riferimento** dell'elemento HTML in base al nome del campo tramite var ```el = document.getElementById(x);```
 - **modifica la grafica** dell'elemento HTML accedendo alle proprietà dell'oggetto mediante il riferimento, ad esempio cambiando lo sfondo di un tasto ```el.style.backgroundColor = "#b30000";```
 
+### **Codics di impostazione canale**
 
-
+Serve ad impostare i parametri della comunicazione tra la pagina e il broker MQTT:
+```javascript 
+var mqttid = "soggiorno-gruppo06";
+var mqttAddr = "broker.hivemq.com";
+var wsport = "8000";
+var mqttProto ="/mqtt"; //default
+var intopic = "soggiorno/in";
+var outtopic = "soggiorno/out";
+```
 
 >[Torna all'indice generale](README.md)
