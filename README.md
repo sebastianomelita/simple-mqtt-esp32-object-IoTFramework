@@ -42,7 +42,7 @@ Lo stato di un dispositivo benchè sotto la responsabilità del codice in esso i
 
 Per scelta progettuale, si è stabilito di lasciare i dispositivi **senza persistenza** dello stato al fine di massimizzare la loro **semplicità**. La **persistenza** dello stato è delegata ad un **dispositivo unico cetralizzato** per **tutti** i dispositivi che ha il compito di memorizzarlo su un **datatbase locale** ed, eventualmente, per maggiore sicurezza, anche su un servizio di **storage in cloud**. 
 
-**Ogni dispositivo**, allorquando calcola il valore nuovo dello stato, è tenuto a **notificare** la modifica al server di persistenza **via MQTT** in maniera tale che questo possa conservarlo usando come **chiave univoca** l'MQTT_ID del dispositivo. Se un dispossitivo, viene **sostiyuito** o viene **riavviato** si **inizializza** caricando l'**ultimo stato valido** presente nel database centrale.
+**Ogni dispositivo**, allorquando calcola il valore nuovo dello stato, è tenuto a **notificare** la modifica al server di persistenza **via MQTT** in maniera tale che questo possa conservarlo usando come **chiave univoca** l'MQTT_ID del dispositivo. Se un dispossitivo, viene **sostiuito** o viene **riavviato** si **inizializza** caricando l'**ultimo stato valido** presente nel database centrale.
 
 **Architettura dell'applicazione**
 
