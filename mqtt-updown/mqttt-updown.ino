@@ -140,6 +140,7 @@ void motorAction2(int enabled, int dir, uint8_t n){
 	Serial.println("Enabled " + String(enabled) + " - dir: " +  String(dir)+ " - n: " +  String(n));
 };
 /////// gestore messaggi MQTT in ricezione (callback)     
+/////// gestore messaggi MQTT in ricezione (callback)     
 void messageReceived(String &topic, String &payload) {
 	Serial.println("incoming: " + topic + " - " + payload);
 	// Note: Do not use the client in the callback to publish, subscribe or
@@ -148,11 +149,13 @@ void messageReceived(String &topic, String &payload) {
 	// or push to a queue and handle it in the loop after calling `client.loop()`.
 	
 	//if(topic == intopic){
-		String str;	
+		//String str;		
+		m1.processCmd(mqttid, payload, MAXLEN);
+		m2.processCmd(mqttid, payload, MAXLEN);
 		// COMMANDS PARSER /////////////////////////////////////////////////////////////////////////////////////////////
 		// ricerca all'interno del payload l'eventuale occorrenza di un comando presente in un set predefinito 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		m1.cmdParser(str,payload,"devid",MAXLEN);
+		/*m1.cmdParser(str,payload,"devid",MAXLEN);
 		if(str == mqttid){		
 		    if(m1.cmdParser(str,payload,"up1",MAXLEN)){
 				m1.remoteCntrlUp();
@@ -170,11 +173,9 @@ void messageReceived(String &topic, String &payload) {
 				m1.remoteConf();
 				m2.remoteConf();
 			}
-		}
+		}*/
 	//}
 };
-
-
 ////   FINE CALLBACKS UTENTE   ////////////////////////////////////////////////////////////////////////////////////////////////
 /*
 WL_CONNECTED: assigned when connected to a WiFi network;
