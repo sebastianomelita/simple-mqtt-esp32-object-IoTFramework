@@ -203,6 +203,10 @@ void messageReceived(String &topic, String &payload) {
 };
 ```
 
+Si noti che lo **stato** del dispositivo è **comunicato alla pagina** in due modi:
+- in maniera **asincrona**, su richiesta della pagina
+- in maniera **sincrona**, periodicamente ogni STATEPERIOD impostato a 60 sec
+
 ### **Callback MQTT corta**
 
 ```C++
@@ -217,11 +221,7 @@ void messageReceived(String &topic, String &payload) {
 		m1.processCmd(mqttid, payload, MAXLEN);
 	//}
 };
-```
-Si noti che lo **stato** del dispositivo è **comunicato alla pagina** in due modi:
-- in maniera **asincrona**, su richiesta della pagina
-- in maniera **sincrona**, periodicamente ogni STATEPERIOD impostato a 60 sec
-    
+```   
 
 ### **Callback MQTT lunga**
 
