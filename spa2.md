@@ -9,6 +9,7 @@ Consiste generalmente in codice **javascript** che riguarda principalmente:
 - gli **ascoltatori degli eventi** di input (click su tasti o inserimento su caselle di testo, ecc.)
 - **callback del protocollo di comunicazione** adottato per il recupero dei singoli dati, nel nostro caso MQTT.
 - **codice di impostazione** dei parametri del canale di comunicazione quali indirizzi IP, indirizzi di porta o topic MQTT.
+- **codice di gestione degli eventi del canale** sul canale di comunicazione.
 - eventuali timer per la **simulazione** dell'evoluzione del tempo delle uscite variabili nel tempo (ad es. apertura di un cancello)
 
 ### **Messaggi JSON**
@@ -90,7 +91,7 @@ for(var x in obj){
 - **recupera il riferimento** dell'elemento HTML in base al nome del campo tramite var ```el = document.getElementById(x);```
 - **modifica la grafica** dell'elemento HTML accedendo alle proprietà dell'oggetto mediante il riferimento, ad esempio cambiando lo sfondo di un tasto ```el.style.backgroundColor = "#b30000";```
 
-### **Codice di impostazione canale**
+### **Codice di impostazione della connessione**
 
 Serve ad impostare i parametri della comunicazione tra la pagina e il broker MQTT:
 ```javascript 
@@ -100,6 +101,18 @@ var wsport = "8000";
 var mqttProto ="/mqtt"; //default
 var intopic = "soggiorno/in";
 var outtopic = "soggiorno/out";
+```
+
+### **Codice di gestione degli eventi della connessione**
+
+Gli eventi principali sono:
+- ```onFailed```
+- ```onMessageArrived```
+- ```onConnectionLost```
+
+In particolare, critico è l'evento ```onConnectionLost``` che, per evitare perdite di sincronizzazione della pagina con il dispositivo, viene gestito pianificando la **riconnessione periodica** fino ad una nuova connessione avvenuta con successo.
+
+```javascript 
 
 start();
 function start(){
