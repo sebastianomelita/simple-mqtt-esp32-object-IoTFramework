@@ -242,6 +242,27 @@ void DimmeredToggle::remoteSlider(uint8_t targetval){
 void DimmeredToggle::remoteConf(void){
 	signal[SGNINIT] = true;
 }
+void DimmeredToggle::processCmd(String id, String payload, uint16_t maxlen){
+	String str;	
+	cmdParser(str,payload,"devid",maxlen);
+	if(str == id){		
+		if(cmdParser(str,payload,"to"+String(k+1),maxlen)){
+			remoteToggle(255);
+		}
+		if(cmdParser(str,payload,"on"+String(k+1),maxlen)){
+			remoteCntrlOn(atoi(str.c_str()));
+		}
+		if(payload.indexOf("\"off"+String(k+1)+"\":\"255\"") >= 0){
+			remoteCntrlOff();
+		}
+		if(cmdParser(str,payload,"sld"+String(k+1),maxlen)){
+			remoteSlider(atoi(str.c_str()));
+		}
+		if(payload.indexOf("\"conf\":\"255\"") >= 0){
+			remoteConf();
+		}
+	}
+}
 bool DimmeredToggle::remoteCntrlEventsParser(){
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Più SPA posono comandare uno stesso dispositivo
@@ -473,6 +494,18 @@ void FadedSlider::remoteSlider(uint8_t targetval){
 void FadedSlider::remoteConf(void){
 	signal[SGNINIT] = true;
 }
+void FadedSlider::processCmd(String id, String payload, uint16_t maxlen){
+	String str;	
+	cmdParser(str,payload,"devid",maxlen);
+	if(str == id){		
+		if(cmdParser(str,payload,"sld"+String(k+1),maxlen)){
+			remoteSlider(atoi(str.c_str()));
+		}
+		if(payload.indexOf("\"conf\":\"255\"") >= 0){
+			remoteConf();
+		}
+	}
+}
 bool FadedSlider::remoteCntrlEventsParser(){
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Pi? SPA posono comandare uno stesso dispositivo
@@ -524,6 +557,18 @@ String Slider::getSliderFeedback(uint8_t target, uint8_t n){
 	String str = "{\"devid\":\""+String(mqttid)+"\",\"pr"+String(n+1)+"\":\""+String(target)+"\"}";
 	//Serial.println("Str: " + str);
 	return str;
+}
+void Slider::processCmd(String id, String payload, uint16_t maxlen){
+	String str;	
+	cmdParser(str,payload,"devid",maxlen);
+	if(str == id){		
+		if(cmdParser(str,payload,"sld"+String(k+1),maxlen)){
+			remoteSlider(atoi(str.c_str()));
+		}
+		if(payload.indexOf("\"conf\":\"255\"") >= 0){
+			remoteConf();
+		}
+	}
 }
 bool Slider::remoteCntrlEventsParser(){
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -589,6 +634,18 @@ String Toggle::getToggleFeedback(uint8_t toggleState, uint8_t n){
 	//Serial.println("Str: " + str);
 	return str;
 }	
+void Toggle::processCmd(String id, String payload, uint16_t maxlen){
+	String str;	
+	cmdParser(str,payload,"devid",maxlen);
+	if(str == id){		
+		if(cmdParser(str,payload,"to"+String(k+1),maxlen)){
+			remoteToggle();
+		}
+		if(payload.indexOf("\"conf\":\"255\"") >= 0){
+			remoteConf();
+		}
+	}
+}
 bool Toggle::remoteCntrlEventsParser(){
 	bool ismsg = false;
 	String buf;
@@ -641,6 +698,21 @@ void Motor::remoteConf(void){
 }
 void Motor::onAction(SweepCallbackSimple cb){
 	this->actionkCallback = cb;
+}
+void Motor::processCmd(String id, String payload, uint16_t maxlen){
+	String str;	
+	cmdParser(str,payload,"devid",maxlen);
+	if(str == id){		
+		if(cmdParser(str,payload,"up"+String(k+1),maxlen)){
+			remoteCntrlUp();
+		}
+		if(cmdParser(str,payload,"down"+String(k+1),maxlen)){
+			remoteCntrlDown();
+		}
+		if(payload.indexOf("\"conf\":\"255\"") >= 0){
+			remoteConf();
+		}
+	}
 }
 bool Motor::remoteCntrlEventsParser(){
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -696,8 +768,8 @@ bool Motor::remoteCntrlEventsParser(){
 	}
 	if(signal[SGNINIT]){
 		signal[SGNINIT] = false;
-		stato[STBTN1] = LOW;
-		stato[STBTN2] = LOW;
+		//stato[STBTN1] = LOW;
+		//stato[STBTN2] = LOW;
 		ismsg = true;
 		buf = getUpDownFeedback(stato[STBTN1],stato[STBTN2],direct[OUT1],OUT1+k);
 		(*feedbackCallback)(buf);
