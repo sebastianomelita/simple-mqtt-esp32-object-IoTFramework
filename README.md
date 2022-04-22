@@ -34,6 +34,14 @@ Sono possibili **situazioni particolari** in cui la pagina è costretta a calcol
 - la **pagina** calcola lo stato delle uscite con la **stessa funzione temporale** utilizzata dal dispositivo, in pratica realizza una vera e propria **emulazione locale** del comportamento del dispositivo.
 - il **dispositivo** invia almeno **due feedback**: uno **iniziale** con il quale parte l'evoluzione locale dell'uscita (sweep) ed uno **finale** con il quale si interrompe l'evoluzione. Il **feedback finale** porta con se anche il **valore vero finale** dell'uscita con il quale viene eventualmente corretto il valore **stimato localmente** dalla pagina. Il feedback ha quindi due funzioni: **sincronizzazione** di emulatore e dispositivo e **verifica** dello stato finale.
 
+**Persistenza dello stato del dispositivo**
+
+Lo stato di un dispositivo benchè sotto la responsabilità del codice in esso implementato, **non è persistente** perchè memorizzazto in **memoria RAM**. La RAM è **volatile** e, in qualsiasi, situazione che porti ad uno spegnimento involontario del dispositivo o ad un suo riavvio perde il suo contenuto. Un'alterntiva potrebbe essere memorizzare ogni nuovo stato nella memoria persistente del dispositivo, cioè la **EEPROM**.
+
+Per scelta progettuale, si è stabilito di lasciare i dispositivi **senza persistenza** dello stato al fine di massimizzare la loro **semplicità**. La **persistenza** dello stato per cui è delegata ad un **dispositivo unico cetralizzato** per **tutti** i dispositivi che ha il compito di memorizzarlo su un **datatbase locale** ed, eventualmente, per maggiore sicurezza, anche su un servizio di **storage in cloud**. 
+
+**Ogni dispositivo**, allorquando calcola il valore nuovo dello stato, è tenuto a **notificare** la modifica al server di persistenza **via MQTT** in maniera tale che questo possa conservarlo usando come chiave di identificazione il MQTT_ID del dispositivo. Se un dispossitivo, viene **sostiyuito** o viene **riavviato** si **inizializza** caricando l'**ultimo stato valido** presente nel database centrale.
+
 **Architettura dell'applicazione**
 
 Il **modello di applicazione** proposto nel **progetto** consiste in un una **costellazione di dispositivi** IOT dotati di client MQTT per operazioni di **pubblicazione** e **notifica** di contenuti e in un **server centrale** con funzione di **server web** per le pagine statiche delle web app e con funzione di **broker MQTT** per lo **smistamento** delle comunicazioni reciproche tra dispositivi IOT e tra dispositivi IOT e web apps.
