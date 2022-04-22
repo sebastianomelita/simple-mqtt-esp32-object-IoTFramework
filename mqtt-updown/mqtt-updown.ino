@@ -27,7 +27,7 @@ const char mqttserver[] = "broker.hivemq.com";
 const int mqttport = 1883;
 const char intopic[] = "soggiorno/in"; 
 const char outtopic[] = "soggiorno/out"; 
-const char mqttid[] = "soggiorno-gruppo01"; 
+const char mqttid[] = "soggiorno-gruppo06"; 
 
 //WiFiClientSecure net;
 WiFiClient wifi;
