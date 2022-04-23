@@ -176,7 +176,7 @@
 			</form>
 		 </div>
 		</div>
-		<div class="col-3 col-s-12">
+		<div class="col-4 col-s-12">
 		</div>
 	</div>
 	<div class="footer">
@@ -227,7 +227,7 @@
 				console.log('Received: '+e.payloadString);
 				if(e.payloadString){
 					var obj = JSON.parse(e.payloadString);
-					//controlla se è indirizzato al dispositivo associato alla pagina
+					//controlla se Ã¨ indirizzato al dispositivo associato alla pagina
 					if(obj.devid==''+mqttid+''||obj.devid=='FF'){//FF id broadcast valido per tutti i dispositivi
 						console.log('Received: '+e.payloadString);
 						onRcv(e.payloadString);
