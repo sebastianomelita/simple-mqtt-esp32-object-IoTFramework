@@ -4,6 +4,8 @@
 
 # **COMANDO SLIDER**
 
+Si tratta di uno **slider** senza fading dei valori di uscita dato che questi vengono impostati tra un **valore iniziale** ad uno **finale**  **immediatamente** dopo il rilascio del mouse.
+
 ### **Utilizzo**
 
 La pagina ha **4 slider** divisi in **4 gruppi**. Un gruppo comanda l'impostazione del livello di una singola uscita. Le uscite **non** sono direttamente **impostate** dalla libreria perchè sono lasciate volutamente **generiche** in quanto potrebbero attivare, a seconda dei casi, una porta digitale, un comando MODBUS, un comando sulla seriale, ecc.
