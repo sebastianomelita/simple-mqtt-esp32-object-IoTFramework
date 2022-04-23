@@ -76,7 +76,7 @@ Il **layout** è statico, responsivo, diviso in colonne ed è definito mediante 
 </style>
 ```
 
-![motor](motor.png)
+![toggle](toggle.png)
 
 ### **Struttura HTML**
 
