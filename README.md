@@ -79,7 +79,7 @@ Definizione oggetti IOT:
 - [mqtt-updown](mqtt-updown/mqtt-updown.md)
 - [mqtt-toggle](mqtt-toggle/mqtt-toggle.md)
 - [mqtt-slider](mqtt-slider/mqtt-slider.md)
-
+- [mqtt-faded-slider](mqtt-faded-slider/mqtt-faded-slider.md)
 
 
 
