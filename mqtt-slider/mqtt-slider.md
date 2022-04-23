@@ -11,8 +11,7 @@ La pagina ha **4 pulsanti** con funzioni di **toggle** divisi in **4 gruppi**. U
 Il **toggle** è un pulsante con stato che viene invertito ad ogni pressione del pulsante stesso. Lo stato del pulsante **non** è conservato nella pagina ma solamente nel dispositivo. Lo stato viene recuperato per conferma dopo ogni pressione mediante un messaggio di feedback.
 
 Fasi:
-- **Premendo** un qualsiasi **pulsante Toggle** l'uscita commuta dal valore precedente, ```1``` se era ```0```, ```0``` se era ```1```.
-
+- **Trascinando** un qualsiasi **slider** l'uscita viene impostata ad un valore compreso tra ```0``` e ```100```. Il valore però non viene inviato al dispositivo durante il trascinamento ma solamente dopo che il cursore si è fermato ed il click del mouse è stato rilasciato.
 
 Le uscite sono richiamate dalla **callback** ```motorAction1(int enabled, int dir, uint8_t n)``` che restituisce il **numero del gruppo** in ```n```, lo **stato del'uscita** in ```enabled``` con valori possibili ```true``` o ```false``` e la **direzione di marcia** con valori possibili ```1``` o ```-1```.
 
