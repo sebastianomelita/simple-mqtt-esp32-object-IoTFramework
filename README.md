@@ -10,7 +10,7 @@ La pagina della web app è divisa sostanzialmente in **due parti** non necessari
 - **sezioni statiche** comuni a tutti i contenuti che vengono caricate da un **server web** con una normale **richiesta HTTP** (POST o GET) e sono composte da codice HTML, CSS e javascript statico. Costituiscono il **layout di base** della pagina.
 - **sezioni dinamiche** specifiche i cui contenuti possono essere caricati da server diversi con **protocolli eterogenei** ed **assemblati localmente** dal client nel layout statico della pagina. Per recuperare i contenuti sono comuni richieste **HTTP** dinamiche in tecnologia **AJAX** (e suoi derivati quali JQUERY e Angular) ma anche richieste **MQTT** e **COAP**.
 
-Spesso le **WebApp** sono assimilabili alle tradizionali **applicazioni distribuite** desktop in virtù della **bidirezionalità del canale** tra le due componenti client e server. Nelle **applicazioni desktop** il **canale bidirezionale** è (a basso livello) basato sulle API standard dei **socket BSD**. Nella applicazioni web app il canale bidirezionale è ormai quasi sempre realizzato con le **API websocket** e raramente ormai con tecniche di **long polling** del server.
+Spesso le **WebApp** sono assimilabili alle tradizionali **applicazioni distribuite** desktop in virtù della **bidirezionalità del canale** tra le due componenti client e server. Nelle **applicazioni desktop** il **canale bidirezionale** è (a basso livello) basato sulle API standard dei **socket BSD**. Nella applicazioni **web app** il canale bidirezionale è ormai quasi sempre realizzato con le **API websocket** e raramente ormai con tecniche di **long polling** del server.
 
  ![spacicle](Traditional-vs-SPA-lifecycle.ppm)
  
