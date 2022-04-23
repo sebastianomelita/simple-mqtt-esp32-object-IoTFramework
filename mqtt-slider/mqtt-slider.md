@@ -6,9 +6,8 @@
 
 ### **Utilizzo**
 
-La pagina ha **4 pulsanti** con funzioni di **toggle** divisi in **4 gruppi**. Un gruppo comanda l'accensione/spegnimento di una singola uscita. Le uscite **non** sono direttamente **attivate** dalla libreria perchè sono lasciate volutamente **generiche** in quanto potrebbero attivare, a seconda dei casi, una porta digitale, un comando MODBUS, un comando sulla seriale, ecc.
+La pagina ha **4 slider** divisi in **4 gruppi**. Un gruppo comanda l'impostazione del livello di una singola uscita. Le uscite **non** sono direttamente **impostate** dalla libreria perchè sono lasciate volutamente **generiche** in quanto potrebbero attivare, a seconda dei casi, una porta digitale, un comando MODBUS, un comando sulla seriale, ecc.
 
-Il **toggle** è un pulsante con stato che viene invertito ad ogni pressione del pulsante stesso. Lo stato del pulsante **non** è conservato nella pagina ma solamente nel dispositivo. Lo stato viene recuperato per conferma dopo ogni pressione mediante un messaggio di feedback.
 
 Fasi:
 - **Trascinando** un qualsiasi **slider** l'uscita viene impostata ad un valore compreso tra ```0``` e ```100```. Il valore però non viene inviato al dispositivo durante il trascinamento ma solamente dopo che il cursore si è fermato ed il click del mouse è stato rilasciato.
