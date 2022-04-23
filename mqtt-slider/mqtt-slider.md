@@ -169,7 +169,7 @@ buf {"devid":"soggiorno-gruppo06","to4":"1"}
 - ```cmdParser(str,payload,"cmd",MAXLEN)```. Ricerca un certo commando ```cmd``` all’interno di una stringa e ne restituisce il valore sotto forma di stringa sul parametro di out str. Ritorna ```true``` se ha trovato un'occorenza del comando, ```false``` altrimenti.
 - ```processCmd(String id, String payload)```. Elabora la richiesta remota interpretando la stringa json del messaggio in base al tipo di dispositivo IOT.
 
-### **Metodi specifici di Motor**
+### **Metodi specifici di Slider**
 
 - ```Slider(String id, uint8_t startIndex, unsigned nlevels)```. Costruttore. P1: devid univoco, P2: indice dispositivo nel gruppo (0,1,2,...), P3: numero di livelli da valorizzare
 - ```remoteSlider(uint8_t targetval)```. imposta il valore coorente dello slider. Valori da ```0``` a ```100```.
