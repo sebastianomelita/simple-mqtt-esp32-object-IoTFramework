@@ -135,6 +135,62 @@ La definizione della **gerarchia di elementi** contenitori e contenuti del corpo
 </div>
 ```
 
+### **Emulatore scivolamento valori nella pagina**
+
+```javascript
+function startPrgrBar(nstep,delay,tnow,n) {
+	t[n]=tnow;//feedback tempo attuale barra
+	//calcLen(tnow,maxtime[n],n);
+	console.log('t[n]-testa:'+t[n]); 
+	var tstep=0;
+	var r;
+	if(maxtime[n]>0){
+		if(dir[n]!=0){
+			if(t[n]<=0)t[n]=1;
+			if(t[n]>0){
+				tstep=maxtime[n]/nstep; //durata di uno step
+				target_t[n] = target_p[n] /100*maxtime[n];
+				console.log('target: '+target_t[n]+' tstep: '+tstep+' tmax: '+maxtime[n]+' dir: '+dir[n]+' tnow: '+tnow+' nstep: '+nstep+' n: '+n);
+				clearInterval(updt[n]);
+				updt[n]=setInterval(function(){
+					if(stop[n]==false && (dir[n]>0 && t[n]<=target_t[n] || dir[n]<0 && t[n]>=target_t[n])){
+						t[n]=t[n]+dir[n]*tstep;
+						console.log('t:'+t[n]);					
+						r = t[n]/maxtime[n]*100;
+						calcLen(r,n);
+						console.log('++++++++++++++');
+						console.log('target: '+target_t[n]+' t:'+(t[n]-delay*dir[n])+' dir:'+dir[n]+' tmax:'+maxtime[n]+' n:'+n);
+					}else{
+						clearInterval(updt[n]);
+						dir[n]=0;
+						stop[n]=true;
+					};
+				},tstep);
+				console.log('NEXT TO START//////////////////');
+			};
+		}else{
+			console.log('t:'+t[n]);					
+			r = t[n]/maxtime[n]*100;
+			calcLen(r,n);
+		}
+	}else{
+		dir[n]=0;
+		stop[n]=true;
+		r = t[n];
+		console.log('calc speciale r:'+r); 
+		calcLen(r,n);				
+	}
+	console.log('END START/////////////////////////////////');
+};
+function calcLen(r,n){			
+	console.log('r: '+r);
+	let aa=Math.round(r);
+	console.log('aa: '+aa);
+	if(isNaN(aa) || !isFinite(aa))pr[n].value=0; else pr[n].value=aa;
+	return  r;
+};
+```
+
 ### **Formato JSON ingressi**
 
 ```C++
