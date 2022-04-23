@@ -152,7 +152,7 @@ buf {"devid":"soggiorno-gruppo06","pr4":"0"}
 - ```outr```. Stato del pulsante in percentuale. Valore ```0``` o ```100``` 
 - ```cr```. Stato del pulsante. Valore ```0``` o ```NLEVEL``` 
 - ```n```. Numero del pulsante (inizia da 0).
-- 
+
 ```C++
 void sldAction(int outr, int cr, uint8_t n){
 	Serial.println("Out " + String(n) + " - cr: " +  String(cr)+ " - n: " +  String(n));
@@ -175,8 +175,8 @@ buf {"devid":"soggiorno-gruppo06","to4":"1"}
 
 ### **Metodi specifici di Motor**
 
-- ```Toggle(String id,uint8_t startIndex)```. Costruttore. P1: devid univoco, P2: indice dispositivo nel gruppo (0,1,2,...)
-- ```remoteToggle(void)```. Pulsante marcia avanti, attiva il motore nella 
+- ```Slider(String id, uint8_t startIndex, unsigned nlevels)```. Costruttore. P1: devid univoco, P2: indice dispositivo nel gruppo (0,1,2,...), P3: numero di livelli da valorizzare
+- ```remoteSlider(uint8_t targetval)```. imposta il valore coorente dello slider. Valori da ```0``` a ```100```.
 - ```onAction(SweepCallbackSimple cb)```. Definisce la callback delle azioni esterne.
 
 ### **Struttura sketch Arduino**
@@ -234,7 +234,6 @@ void loop() {
 }
 
 void sldAction(int outr, int cr, uint8_t n){
-	//mqttClient.publish(outtopic, buf);
 	Serial.println("Out " + String(n) + " - cr: " +  String(cr)+ " - n: " +  String(n));
 	ledcWrite(n, cr);
 };
