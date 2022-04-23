@@ -21,8 +21,8 @@ Ticker mqttReconnectTimer;
 Ticker wifiReconnectTimer;
 
 /********* FINE DEFINIZIONE SEGNALI **************************/
-const char ssid[] = "WebPocket-E280";
-const char pass[] = "dorabino.7468!";
+const char ssid[] = "XXXX";
+const char pass[] = "YYYY";
 const char mqttserver[] = "broker.hivemq.com";
 const int mqttport = 1883;
 const char intopic[] = "soggiorno/in"; 
