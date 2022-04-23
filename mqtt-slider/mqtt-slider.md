@@ -149,13 +149,14 @@ buf {"devid":"soggiorno-gruppo06","pr4":"0"}
 
 ### **Callback uscite**
 
-- ```outr```. Stato del pulsante. Valore ```0``` o ```1``` 
-- ```cr```. Stato del pulsante. Valore ```0``` o ```100``` 
+- ```outr```. Stato del pulsante in percentuale. Valore ```0``` o ```100``` 
+- ```cr```. Stato del pulsante. Valore ```0``` o ```NLEVEL``` 
 - ```n```. Numero del pulsante (inizia da 0).
 - 
 ```C++
-void tglAction1(int outr, int cr, uint8_t n){
-	digitalWrite(LED1,outr);
+void sldAction(int outr, int cr, uint8_t n){
+	Serial.println("Out " + String(n) + " - cr: " +  String(cr)+ " - n: " +  String(n));
+	ledcWrite(n, cr);
 };
 ```
 
@@ -182,21 +183,30 @@ buf {"devid":"soggiorno-gruppo06","to4":"1"}
 
 Lo **sketch** ```mqtt-toggle.ino``` deve essere aperto con l'IDE di Arduino e caricato sul dispositivo ESP32 dopo aver selezionato correttamente la scheda e la porta della seriale e, chiaramente, dopo aver connesso il dispositivo alla porta usb del PC.
 
+- ```id```. Nome univoco MQTT del dispositivo (uguale per tutti i pulsanti del gruppo.
+- ```startIndex```. Nome univoco MQTT del dispositivo (uguale per tutti i pulsanti del gruppo.
+- ```nlevels```. Numero di livelli che valorizza lo slider.
+
 ```C++
-Toggle tgl1(mqttid,0);
-Toggle tgl2(mqttid,1);
-Toggle tgl3(mqttid,2);
-Toggle tgl4(mqttid,3);
+Slider(String id, uint8_t startIndex, unsigned nlevels)
+```
+
+
+```C++
+Slider sld1(mqttid,0,NLEVEL1);
+Slider sld2(mqttid,1,NLEVEL2);
+Slider sld3(mqttid,2,NLEVEL3);
+Slider sld4(mqttid,3,NLEVEL4);
 
 void setup() {
-	tgl1.onAction(tglAction1);
-	tgl2.onAction(tglAction2);
-	tgl3.onAction(tglAction3);
-	tgl4.onAction(tglAction4);
-	tgl1.onFeedback(feedbackAction);
-	tgl2.onFeedback(feedbackAction);
-	tgl3.onFeedback(feedbackAction);
-	tgl4.onFeedback(feedbackAction);
+	sld1.onAction(sldAction);
+	sld2.onAction(sldAction);
+	sld3.onAction(sldAction);
+	sld4.onAction(sldAction);
+	sld1.onFeedback(feedbackAction);
+	sld2.onFeedback(feedbackAction);
+	sld3.onFeedback(feedbackAction);
+	sld4.onFeedback(feedbackAction);
 	.........................
 	mqttClient.onMessage(messageReceived); 
 }
@@ -204,10 +214,10 @@ void setup() {
 void loop() {
 	mqttClient.loop();
 	//delay(10);  // <- fixes some issues with WiFi stability
-	tgl1.remoteCntrlEventsParser();
-	tgl2.remoteCntrlEventsParser();
-	tgl3.remoteCntrlEventsParser();
-	tgl4.remoteCntrlEventsParser();
+	sld1.remoteCntrlEventsParser();
+	sld2.remoteCntrlEventsParser();
+	sld3.remoteCntrlEventsParser();
+	sld4.remoteCntrlEventsParser();
 	// schedulatore eventi dispositivo
 	// pubblica lo stato dei pulsanti dopo un minuto
 	if (millis() - lastMillis > STATEPERIOD) {
@@ -215,25 +225,18 @@ void loop() {
 		
 		if(mqttClient.connected()){
 			Serial.println("Ritrasm. periodica stato: ");
-			tgl1.remoteConf();
-			tgl2.remoteConf();
-			tgl3.remoteConf();
-			tgl4.remoteConf();
+			sld1.remoteConf();
+			sld2.remoteConf();
+			sld3.remoteConf();
+			sld4.remoteConf();
 		}
 	}
 }
 
-void tglAction1(int outr, int cr, uint8_t n){
-	digitalWrite(LED1,outr);
-};
-void tglAction2(int outr, int cr, uint8_t n){
-	digitalWrite(LED2,outr);
-};
-void tglAction3(int outr, int cr, uint8_t n){
-	digitalWrite(LED3,outr);
-};
-void tglAction4(int outr, int cr, uint8_t n){
-	digitalWrite(LED4,outr);
+void sldAction(int outr, int cr, uint8_t n){
+	//mqttClient.publish(outtopic, buf);
+	Serial.println("Out " + String(n) + " - cr: " +  String(cr)+ " - n: " +  String(n));
+	ledcWrite(n, cr);
 };
 void feedbackAction(String buf){
 	Serial.println("buf " + buf);
@@ -248,10 +251,10 @@ void messageReceived(String &topic, String &payload) {
 	
 	//if(topic == intopic){
 		//String str;	
-		tgl1.processCmd(mqttid, payload, MAXLEN);
-		tgl2.processCmd(mqttid, payload, MAXLEN);
-		tgl3.processCmd(mqttid, payload, MAXLEN);
-		tgl4.processCmd(mqttid, payload, MAXLEN);
+		sld1.processCmd(mqttid, payload, MAXLEN);
+		sld2.processCmd(mqttid, payload, MAXLEN);
+		sld3.processCmd(mqttid, payload, MAXLEN);
+		sld4.processCmd(mqttid, payload, MAXLEN);
 	//}
 };
 ```
@@ -267,7 +270,10 @@ void messageReceived(String &topic, String &payload) {
 	// or push to a queue and handle it in the loop after calling `client.loop()`.
 	
 	//if(topic == intopic){
-		m1.processCmd(mqttid, payload, MAXLEN);
+		sld1.processCmd(mqttid, payload, MAXLEN);
+		sld2.processCmd(mqttid, payload, MAXLEN);
+		sld3.processCmd(mqttid, payload, MAXLEN);
+		sld4.processCmd(mqttid, payload, MAXLEN);
 	//}
 };
 ```
@@ -285,32 +291,31 @@ void messageReceived(String &topic, String &payload) {
 	// or push to a queue and handle it in the loop after calling `client.loop()`.
 	
 	//if(topic == intopic){
-		String str;	
+		String str;		
 		// COMMANDS PARSER /////////////////////////////////////////////////////////////////////////////////////////////
 		// ricerca all'interno del payload l'eventuale occorrenza di un comando presente in un set predefinito 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		tgl1.cmdParser(str,payload,"devid",MAXLEN);
+		sld1.cmdParser(str,payload,"devid",MAXLEN);
 		if(str == mqttid){		
-		    if(tgl1.cmdParser(str,payload,"to1",MAXLEN)){
-				tgl1.remoteToggle();
+		    if(sld1.cmdParser(str,payload,"sld1",MAXLEN)){
+				sld1.remoteSlider(atoi(str.c_str()));
 			}
-			if(tgl2.cmdParser(str,payload,"to2",MAXLEN)){
-				tgl2.remoteToggle();
+			if(sld2.cmdParser(str,payload,"sld2",MAXLEN)){
+				sld2.remoteSlider(atoi(str.c_str()));
 			}
-			if(tgl3.cmdParser(str,payload,"to3",MAXLEN)){
-				tgl3.remoteToggle();
+			if(sld3.cmdParser(str,payload,"sld3",MAXLEN)){
+				sld3.remoteSlider(atoi(str.c_str()));
 			}
-			if(tgl4.cmdParser(str,payload,"to4",MAXLEN)){
-				tgl4.remoteToggle();
+			if(sld4.cmdParser(str,payload,"sld4",MAXLEN)){
+				sld4.remoteSlider(atoi(str.c_str()));
 			}
 			if(payload.indexOf("\"conf\":\"255\"") >= 0){
-				tgl1.remoteConf();
-				tgl2.remoteConf();
-				tgl3.remoteConf();
-				tgl4.remoteConf();
+				sld1.remoteConf();
+				sld2.remoteConf();
+				sld3.remoteConf();
+				sld4.remoteConf();
 			}
 		}
-	//}
 };
 ```
 
