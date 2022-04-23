@@ -1,243 +1,512 @@
-//#include <WiFiClientSecure.h>
-#include <WiFi.h>
-#include <MQTT.h>
-#include <Ticker.h>
-#include "RemoteControl.h"
+ <!DOCTYPE html>
+<html>
+	<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ldap Login</title>
+		<style>
+		* {
+		  box-sizing: border-box;
+		}
 
-#define WIFIRECONNECTIME  2000
-#define MQTTRECONNECTIME  2000
-#define MAXT1 		10000
-#define MAXT2 		10000
-#define MAXT3 		10000
-#define MAXT4 		10000
-#define NLEVEL1		9
-#define NLEVEL2		100
-#define NLEVEL3		9
-#define NLEVEL4		100
-#define MAXLEN		20
-#define STATEPERIOD 60000
-#define SHARPNESS1	20
-#define SHARPNESS2	20
-#define SHARPNESS3	20
-#define SHARPNESS4	20
-// the number of the LED pin
-#define LED1 				16  // GPIO 16
-#define LED2				17  // GPIO 17
-#define LED3				5   // GPIO 5
-#define LED4				18  // GPIO 10 ?
-// setting PWM properties
-#define FREQ 				5000
-#define LEDCHANNEL1 		0
-#define LEDCHANNEL2 		1
-#define LEDCHANNEL3 		2
-#define LEDCHANNEL4 		3
-#define RESOLUTION 			8
+		[class*="col-"] {
+		  padding: 15px;
+		}
 
-Ticker mqttReconnectTimer;
-Ticker wifiReconnectTimer;
+		html {
+		  font-family: "Lucida Sans", sans-serif;
+		}
 
-/********* FINE DEFINIZIONE SEGNALI **************************/
-const char ssid[] = "xxxxxx";
-const char pass[] = "yyyyyy";
-const char mqttserver[] = "broker.hivemq.com";
-const int mqttport = 1883;
-const char intopic[] = "soggiorno/in"; 
-const char outtopic[] = "soggiorno/out"; 
-const char mqttid[] = "soggiorno-gruppo06"; 
+		.header {
+		  background-color: #ff9900;
+		  color: #ffffff;
+		  padding: 15px;
+		}
 
-//WiFiClientSecure net;
-WiFiClient wifi;
-MQTTClient mqttClient(1024);
+		.menu ul {
+		  list-style-type: none;
+		  margin: 0;
+		  padding: 0;
+		}
 
-FadedSlider sld1(mqttid,0,SHARPNESS1,NLEVEL1,MAXT1);
-FadedSlider sld2(mqttid,1,SHARPNESS2,NLEVEL2,MAXT2);
-FadedSlider sld3(mqttid,2,SHARPNESS3,NLEVEL3,MAXT3);
-FadedSlider sld4(mqttid,3,SHARPNESS4,NLEVEL4,MAXT4);
+		.menu li {
+		  padding: 8px;
+		  margin-bottom: 7px;
+		  background-color: #33b5e5;
+		  color: #ffffff;
+		  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+		}
 
-unsigned long lastMillis = 0;
-byte count = 0;
-String buf;
-/////// FINE FUNZIONI DI GESTIONE DEI COMANDI REMOTI   /////////////////////////////////////////////////////////////
-////   GESTIONE WIFI E MQTT    /////////////////////////////////////////////////////////////////////////////////////
-void WiFiEvent(WiFiEvent_t event) {
-	Serial.printf("[WiFi-event] event: %d\n", event);
-	switch(event) {
-	case SYSTEM_EVENT_STA_GOT_IP:
-	  Serial.println("WiFi connected");
-	  Serial.println("IP address: ");
-	  Serial.println(WiFi.localIP());
-	  connectToMqtt();
-	  mqttReconnectTimer.attach_ms(MQTTRECONNECTIME, mqttConnTest);
-	  break;
-	case SYSTEM_EVENT_STA_DISCONNECTED:
-	  Serial.println("WiFi lost connection");
-	  mqttReconnectTimer.detach(); // ensure we don"t reconnect to MQTT while reconnecting to Wi-Fi
-	  wifiReconnectTimer.once_ms(WIFIRECONNECTIME, connectToWifi);
-	  break;
-	}
-}
+		.menu li:hover {
+		  background-color: #0099cc;
+		}
 
-void mqttConnTest() {
-    if (!mqttClient.connected() && WiFi.status() == WL_CONNECTED) {
-		Serial.print("MQTT lastError: ");
-		Serial.println(mqttClient.lastError());
-		connectToMqtt();
-    }
-}
+		.aside {
+		  background-color: #33b5e5;
+		  padding: 15px;
+		  color: #ffffff;
+		  text-align: center;
+		  font-size: 14px;
+		  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+		}
 
-void connectToWifi() {
-	Serial.println("Connecting to Wi-Fi...");
-	WiFi.mode(WIFI_STA);
-	//WiFi.disconnect();
-	WiFi.begin(ssid, pass);
-}
-
-void connectToMqtt() {
-	Serial.print("Connecting to MQTT...");
-	Serial.print("with client id: ");
-	Serial.println(mqttid);
-	mqttClient.connect(mqttid, "tryy", "tryy");
-	if(mqttClient.connected()){
-		Serial.print("Subscribing: ");
-		mqttClient.subscribe(intopic);
-		Serial.println(intopic);
-	}
-	Serial.println("...end");
-	// client.unsubscribe("/hello");
-}
-////  FINE GESTIONE WIFI E MQTT  //////////////////////////////////////////////////////////////////////////////////
-void PWMInit(){
-  // configure LED PWM functionalitites
-  ledcSetup(LEDCHANNEL1, FREQ, RESOLUTION);
-  ledcSetup(LEDCHANNEL2, FREQ, RESOLUTION);
-  ledcSetup(LEDCHANNEL3, FREQ, RESOLUTION);
-  ledcSetup(LEDCHANNEL4, FREQ, RESOLUTION);
-  
-  // attach the channel to the GPIO to be controlled
-  ledcAttachPin(LED1, LEDCHANNEL1);
-  ledcAttachPin(LED2, LEDCHANNEL2);
-  ledcAttachPin(LED3, LEDCHANNEL3);
-  ledcAttachPin(LED4, LEDCHANNEL4);
-}
-
-void setup() {
-	PWMInit();
-	sld1.onSweep(sweepAction);
-	sld2.onSweep(sweepAction);
-	sld3.onSweep(sweepAction);
-	sld4.onSweep(sweepAction);
-	sld1.onFeedback(feedbackAction);
-	sld2.onFeedback(feedbackAction);
-	sld3.onFeedback(feedbackAction);
-	sld4.onFeedback(feedbackAction);
-	Serial.begin(115200);
-	Serial2.begin(9600);
-	WiFi.begin(ssid, pass);
-	WiFi.onEvent(WiFiEvent);
-	// MQTT brokers usually use port 8883 for secure connections.
-	mqttClient.begin(mqttserver, mqttport, wifi);
-	mqttClient.onMessage(messageReceived); 
-	connectToWifi();
-	count = 0;
-	while (WiFi.status() != WL_CONNECTED && count < 10) {
-		delay(500);
-		count++;
-		Serial.print(".");
-	}
-}
-
-void loop() {
-	mqttClient.loop();
-	//delay(10);  // <- fixes some issues with WiFi stability
-	sld1.remoteCntrlEventsParser();
-	sld2.remoteCntrlEventsParser();
-	sld3.remoteCntrlEventsParser();
-	sld4.remoteCntrlEventsParser();
-	// schedulatore eventi dispositivo
-	// pubblica lo stato dei pulsanti dopo un minuto
-	if (millis() - lastMillis > STATEPERIOD) {
-		lastMillis = millis();
+		.footer {
+		  background-color: #0099cc;
+		  color: #ffffff;
+		  text-align: center;
+		  font-size: 12px;
+		  padding: 15px;
+		}
 		
-		if(mqttClient.connected()){
-			Serial.println("Ritrasm. periodica stato: ");
-			sld1.remoteConf();
-			sld2.remoteConf();
-			sld3.remoteConf();
-			sld4.remoteConf();
+		input, textarea, select{
+			width: 100%;
+			min-height: 2.4rem;
+			border-radius: 25px;
+			margin: 20px 0;
+			border: 1px solid #0099cc;
+			font-size: 1.1rem;
 		}
-	}
-}
-/// INIZIO CALLBACKS UTENTE  /////////////////////////////////////////////////////////////////////////////////////
-/// CALCOLO USCITE DELLA FUNZIONE DI SCIVOLAMENTO (callback) 
-void feedbackAction(String buf){
-	mqttClient.publish(outtopic, buf);
-};
-void sweepAction(int outr, int cr, uint8_t n){
-	Serial.println("Out " + String(n) + " - cr: " +  String(cr)+ " - n: " +  String(n));
-	ledcWrite(n, cr);
-};
-/////// gestore messaggi MQTT in ricezione (callback)     
-void messageReceived(String &topic, String &payload) {
-	Serial.println("incoming: " + topic + " - " + payload);
-	// Note: Do not use the client in the callback to publish, subscribe or
-	// unsubscribe as it may cause deadlocks when other things arrive while
-	// sending and receiving acknowledgments. Instead, change a global variable,
-	// or push to a queue and handle it in the loop after calling `client.loop()`.
+		
+		input[type='submit'],input[type='button']{
+			background-color: #333;
+			color: #fff;
+			max-width: 100%;
+			min-width: 50%;
+			//"border-radius: 25px;
+			//"margin: 20px 0;
+			font-size: 1.5rem;
+			padding-left: 0px;
+			min-height: 2.8rem;
+			background-color: #00ccff;
+			border: 3px solid #0099cc;
+			opacity: 0.6;
+			transition: 0.3s;
+		}
 	
-	//if(topic == intopic){
-		String str;		
-		// COMMANDS PARSER /////////////////////////////////////////////////////////////////////////////////////////////
-		// ricerca all'interno del payload l'eventuale occorrenza di un comando presente in un set predefinito 
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		sld1.cmdParser(str,payload,"devid",MAXLEN);
-		if(str == mqttid){		
-		    if(sld1.cmdParser(str,payload,"sld1",MAXLEN)){
-				sld1.remoteSlider(atoi(str.c_str()));
+		.grid-container {
+			display: grid;
+			grid-template-columns: 1fr;
+		}
+
+		table {
+			width: 100%;
+		}
+
+		@media only screen and (min-width: 600px) {
+		  /* For tablets: */
+		  .grid-container {
+			  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+		  }
+		  .col-s-1 {grid-column: span 1;}
+		  .col-s-2 {grid-column: span 2;}
+		  .col-s-3 {grid-column: span 3;}
+		  .col-s-4 {grid-column: span 4;}
+		  .col-s-5 {grid-column: span 5;}
+		  .col-s-6 {grid-column: span 6;}
+		  .col-s-7 {grid-column: span 7;}
+		  .col-s-8 {grid-column: span 8;}
+		  .col-s-9 {grid-column: span 9;}
+		  .col-s-10 {grid-column: span 10;}
+		  .col-s-11 {grid-column: span 11;}
+		  .col-s-12 {grid-column: span 12;}
+		}
+
+		@media only screen and (min-width: 768px) {
+		  /* For desktop: */
+		  .grid-container {
+			  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+		  }
+		  .col-1 {grid-column: span 1;}
+		  .col-2 {grid-column: span 2;}
+		  .col-3 {grid-column: span 3;}
+		  .col-4 {grid-column: span 4;}
+		  .col-5 {grid-column: span 5;}
+		  .col-6 {grid-column: span 6;}
+		  .col-7 {grid-column: span 7;}
+		  .col-8 {grid-column: span 8;}
+		  .col-9 {grid-column: span 9;}
+		  .col-10 {grid-column: span 10;}
+		  .col-11 {grid-column: span 11;}
+		  .col-12 {grid-column: span 12;}
+		}
+
+		input, textarea, select{
+				width: 100%;"
+				min-height: 2.4rem;
+				border-radius: 25px;
+				margin: 20px 0;
+				border: 1px solid #0099cc;
+				font-size: 1.1rem;
+		}
+		
+		.boxed {
+			border-radius: 25px;
+			border: 1px solid gray;
+			margin: 25px 0;
+			padding: 3% 3%;
+		}
+	</style>
+	<script>
+
+		
+		function pushopacity(bid){
+			var btn=document.getElementById(bid);
+			btn.onmousedown='btn.style.opacity="1"';
+			btn.onmouseup='btn.style.opacity="0.6"';
+			btn.ontouchstart='btn.style.opacity="1"';
+			btn.ontouchend='btn.style.opacity="0.6"';
+		}
+	</script>
+</head>
+<body data-rsssl=1 data-rsssl=1>	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+	<div class="header">
+	  <h1>Gestione luci soggiorno</h1>
+	</div>
+	<div class="grid-container">
+		<div class="col-4 col-s-3 menu">
+		</div>
+		<div class="col-4 col-s-9 menu">
+		 <h1>Controllo luci</h1>
+		 <div id='form'>
+			<form>
+				<label for='rng1'>Soggiorno<label>
+			    <div class="boxed">
+					<p>Livello: <span id='val1'></span></p>
+					<meter id='pr1' min='0' max='100' style='width:100%; clear:both; margin:0 auto'>></meter>
+					<br>
+					<input type='range' min='0' max='100' value='50' list='tickmarks' class='slider' id='rng1'>
+				</div>
+				<label for='rng2'>Camera da letto<label>
+				<div class="boxed">
+					<p>Livello: <span id='val2'></span></p>
+					<meter id='pr2' min='0' max='100' style='width:100%; clear:both; margin:0 auto'>></meter>
+					<br>
+					<input type='range' min='0' max='100' value='50' list='tickmarks' class='slider' id='rng2'>
+				</div>
+				<label for='rng3'>Cucina<label>
+				<div class="boxed">
+					<p>Livello: <span id='val3'></span></p>
+					<meter id='pr3' min='0' max='100' style='width:100%; clear:both; margin:0 auto'>></meter>
+					<br>
+					<input type='range' min='0' max='100' value='50' list='tickmarks' class='slider' id='rng3'>
+				</div>
+				<label for='rng4'>Bagno<label>
+				<div class="boxed">
+					<p>Livello: <span id='val4'></span></p>
+					<meter id='pr4' min='0' max='100' style='width:100%; clear:both; margin:0 auto'>></meter>
+					<br>
+					<input type='range' min='0' max='100' value='50' list='tickmarks' class='slider' id='rng4'>
+				</div>
+			</form>
+		 </div>
+		</div>
+		<div class="col-3 col-s-12">
+		</div>
+	</div>
+	<div class="footer">
+		  <p>Resize the browser window to see how the content respond to the resizing.</p>
+	</div>
+		<script>
+		//websocket
+		// Create a client instance
+		var mqttid = "soggiorno-gruppo06";
+		var mqttAddr = "broker.hivemq.com";
+		var wsport = "8000";
+		var mqttProto ="/mqtt"; //default
+		var intopic = "soggiorno/in";
+		var outtopic = "soggiorno/out";
+		var conn;
+		start();
+		function start(){
+			var clientID = mqttid+'_' + parseInt(Math.random() * 100);
+			conn = new Paho.MQTT.Client(mqttAddr, Number(wsport), mqttProto,clientID);
+			//client = new Paho.MQTT.Client("iot.eclipse.org", Number(443), "/wss");
+			//"var conn = new Paho.MQTT.Client('{MA}', Number('{MT}'), clientID);"
+			console.log(conn);
+			console.log('broker:'+mqttAddr+', port:'+wsport+', path:'+mqttProto+', id:'+clientID);
+			// connect the client
+			conn.connect(
+				{
+					cleanSession : false, 
+					onSuccess : onConnect,
+					onFailure : onFailed,
+					keepAliveInterval: 30
+				});
+			function onFailed(err) {
+				//"conn.send('Connect ' + new Date());"
+				console.log('Initial connect request failed. Error message : ' + err.errorMessage); 
+			};
+			function onConnect(resObj) {
+				//"conn.send('Connect ' + new Date());"
+				console.log('onConnect');
+				conn.subscribe(outtopic);
+				console.log('Connected to ' + resObj.uri);
+				if (resObj.reconnect){
+					console.log('It was a result of automatic reconnect.');
+				}
+				// carica parametri di configurazione
+				press(vls[0]);
+			};
+			conn.onMessageArrived = function (e) {
+				console.log('Received: '+e.payloadString);
+				if(e.payloadString){
+					var obj = JSON.parse(e.payloadString);
+					//controlla se è indirizzato al dispositivo associato alla pagina
+					if(obj.devid==''+mqttid+''||obj.devid=='FF'){//FF id broadcast valido per tutti i dispositivi
+						console.log('Received: '+e.payloadString);
+						onRcv(e.payloadString);
+					}
+				}else{
+					console.log('Message received error: '+e.payloadString);
+				}
+			};
+			conn.onConnectionLost  = function (resObj) {		
+				//console.log('Lost connection to ' + resObj.uri + ' Error code: ' + resObj.errorCode + ' Error text: ' + resObj.errorMessage);
+				if (resObj.reconnect){
+					console.log('Automatic reconnect is currently active.');
+				}else{
+					console.log('Lost connection to host, reconnect in 5 seconds');
+					// Try to reconnect in 5 seconds
+					setTimeout(function(){start()}, 5000);
+				}
+			};
+		};
+		function send(str){
+		    console.log('send: '+str);
+			var msg = new Paho.MQTT.Message(str);
+			msg.destinationName = intopic;
+			console.log('topic: '+msg.destinationName);
+			conn.send(msg);
+		};
+		function press(s){
+			send(s);
+		};
+		//end websocket
+		var vls = ['{"devid":"'+mqttid+'","conf":"255"}'];
+		var vlsp = ['{"devid":"'+mqttid+'","sld1":"N"}','{"devid":"'+mqttid+'","sld2":"N"}','{"devid":"'+mqttid+'","sld3":"N"}','{"devid":"'+mqttid+'","sld4":"N"}'];
+		//gestione scivolamento
+		var maxtime=[0,0,0,0];
+		var nlevel=[0,0,0,0];
+		var a=[0,0,0,0];
+		var updt=[0,0,0,0];
+		var dir=[0,0,0,0];
+		var t=[0,0,0,0];
+		var pr=[0,0,0,0];
+		var target_t=[0,0,0,0];
+		var target_p=[0,0,0,0];
+		var stop=[false,false,false,false];
+		pr[0]=document.getElementById('pr1');
+		pr[1]=document.getElementById('pr2');
+		pr[2]=document.getElementById('pr3');
+		pr[3]=document.getElementById('pr4');
+		
+		function startPrgrBar(nstep,delay,tnow,n) {
+			t[n]=tnow;//feedback tempo attuale barra
+			//calcLen(tnow,maxtime[n],n);
+			console.log('t[n]-testa:'+t[n]); 
+			var tstep=0;
+			var r;
+			if(maxtime[n]>0){
+				if(dir[n]!=0){
+					if(t[n]<=0)t[n]=1;
+					if(t[n]>0){
+						tstep=maxtime[n]/nstep; //durata di uno step
+						target_t[n] = target_p[n] /100*maxtime[n];
+						console.log('target: '+target_t[n]+' tstep: '+tstep+' tmax: '+maxtime[n]+' dir: '+dir[n]+' tnow: '+tnow+' nstep: '+nstep+' n: '+n);
+						clearInterval(updt[n]);
+						updt[n]=setInterval(function(){
+							if(stop[n]==false && (dir[n]>0 && t[n]<=target_t[n] || dir[n]<0 && t[n]>=target_t[n])){
+								t[n]=t[n]+dir[n]*tstep;
+								console.log('t:'+t[n]);					
+								r = t[n]/maxtime[n]*100;
+								calcLen(r,n);
+								console.log('++++++++++++++');
+								console.log('target: '+target_t[n]+' t:'+(t[n]-delay*dir[n])+' dir:'+dir[n]+' tmax:'+maxtime[n]+' n:'+n);
+							}else{
+								clearInterval(updt[n]);
+								dir[n]=0;
+								stop[n]=true;
+							};
+						},tstep);
+						console.log('NEXT TO START//////////////////');
+					};
+				}else{
+					console.log('t:'+t[n]);					
+					r = t[n]/maxtime[n]*100;
+					calcLen(r,n);
+				}
+			}else{
+				dir[n]=0;
+				stop[n]=true;
+				r = t[n];
+				console.log('calc speciale r:'+r); 
+				calcLen(r,n);				
 			}
-			if(sld2.cmdParser(str,payload,"sld2",MAXLEN)){
-				sld2.remoteSlider(atoi(str.c_str()));
-			}
-			if(sld3.cmdParser(str,payload,"sld3",MAXLEN)){
-				sld3.remoteSlider(atoi(str.c_str()));
-			}
-			if(sld4.cmdParser(str,payload,"sld4",MAXLEN)){
-				sld4.remoteSlider(atoi(str.c_str()));
-			}
-			if(payload.indexOf("\"conf\":\"255\"") >= 0){
-				sld1.remoteConf();
-				sld2.remoteConf();
-				sld3.remoteConf();
-				sld4.remoteConf();
+			console.log('END START/////////////////////////////////');
+		};
+		function calcLen(r,n){			
+			console.log('r: '+r);
+			let aa=Math.round(r);
+			console.log('aa: '+aa);
+			if(isNaN(aa) || !isFinite(aa))pr[n].value=0; else pr[n].value=aa;
+			return  r;
+		};
+		//gestione comandi in uscita
+		//associa listener ad elementi html con un certo id
+		//gestione slider
+		var sld1 = document.getElementById('rng1');
+		var sld2 = document.getElementById('rng2');
+		var sld3 = document.getElementById('rng3');
+		var sld4 = document.getElementById('rng4');
+		var o1 = document.getElementById('val1');
+		var o2 = document.getElementById('val2');
+		var o3 = document.getElementById('val3');
+		var o4 = document.getElementById('val4');
+		o1.innerHTML = sld1.value;
+		o2.innerHTML = sld2.value;
+		o3.innerHTML = sld3.value;
+		o4.innerHTML = sld4.value;
+		sld1.ontouchend = function() {
+			o1.innerHTML = this.value;
+			var pp1=Number(sld1.value);
+			var vl1=vlsp[0].replace('N', pp1.toString());
+			console.log(vl1);
+			press(vl1);
+		};
+		sld2.ontouchend = function() {
+			o2.innerHTML = this.value;
+			var pp2=Number(sld2.value);
+			var vl2=vlsp[1].replace('N', pp2.toString());
+			console.log(vl2);
+			press(vl2);
+		};
+		sld3.ontouchend = function() {
+			o3.innerHTML = this.value;
+			var pp3=Number(sld3.value);
+			var vl3=vlsp[2].replace('N', pp3.toString());
+			console.log(vl3);
+			press(vl3);
+		};
+		sld4.ontouchend = function() {
+			o4.innerHTML = this.value;
+			var pp4=Number(sld4.value);
+			var vl4=vlsp[3].replace('N', pp4.toString());
+			console.log(vl4);
+			press(vl4);
+		};
+		sld1.oninput = sld1.onchange;
+		sld2.oninput = sld2.onchange;
+		sld3.oninput = sld3.onchange;
+		sld4.oninput = sld4.onchange;
+		sld1.onchange = sld1.ontouchend;
+		sld2.onchange = sld2.ontouchend;
+		sld3.onchange = sld3.ontouchend;
+		sld4.onchange = sld4.ontouchend;
+		//gestione comandi in ingresso
+		//cmd callback
+		function onRcv(d) {
+			//document.getElementById('p').innerHTML = f.data;\n"
+			var obj = JSON.parse(d);
+			console.log('Arrived data');
+			for(x in obj){
+				var el = document.getElementById(x);
+				if(el){  //controlla se il campo esiste nel DOM della pagina
+					//console.log(x);
+					if(x=='pr1'){
+						console.log('stato:'+obj[x]); 
+						o1.innerHTML = Number(obj[x]);
+						target_p[0] =  Number(obj[x]);
+					}
+					if(x=='pr2'){
+						console.log('stato:'+obj[x]); 
+						o2.innerHTML = el.value;
+						target_p[1] =  Number(obj[x]);
+					}
+					if(x=='pr3'){
+						console.log('stato:'+obj[x]); 
+						o3.innerHTML = el.value;
+						target_p[2] =  Number(obj[x]);
+					}
+					if(x=='pr4'){
+						console.log('stato:'+obj[x]); 
+						o4.innerHTML = el.value;
+						target_p[3] =  Number(obj[x]);
+					}
+				}else{
+					if(x=='dr1'){
+						dir[0] = Number(obj[x]);//numero di livelli prima barra
+					}
+					if(x=='dr2'){
+						dir[1] = Number(obj[x]);//numero di livelli seconda barra
+					}
+					if(x=='dr3'){
+						dir[2] = Number(obj[x]);//numero di livelli prima barra
+					}
+					if(x=='dr4'){
+						dir[3] = Number(obj[x]);//numero di livelli seconda barra
+					}
+					if(x=='nl1'){
+						nlevel[0] = Number(obj[x]);//numero di livelli prima barra
+					}
+					if(x=='nl2'){
+						nlevel[1] = Number(obj[x]);//numero di livelli seconda barra
+					}
+					if(x=='nl3'){
+						nlevel[2] = Number(obj[x]);//numero di livelli prima barra
+					}
+					if(x=='nl4'){
+						nlevel[3] = Number(obj[x]);//numero di livelli seconda barra
+					}
+					if(x=='sp1'){
+						maxtime[0] = Number(obj[x]);//numero di livelli prima barra
+					}
+					if(x=='sp2'){
+						maxtime[1] = Number(obj[x]);//numero di livelli seconda barra
+					}
+					if(x=='sp3'){
+						maxtime[2] = Number(obj[x]);//numero di livelli prima barra
+					}
+					if(x=='sp4'){
+						maxtime[3] = Number(obj[x]);//numero di livelli seconda barra
+					}
+					if(x=='tr1') {
+						console.log('START:'+obj[x]); 
+						//tempo dall'avvio cronometrato sul dispositivo barra 1
+						stop[0]=false;
+						startPrgrBar(nlevel[0],0,Number(obj[x]),0);
+						o1.innerHTML = pr[0].value;
+					}						
+					if(x=='tr2'){
+						console.log('START:'+obj[x]); 
+						//tempo dall'avvio cronometrato sul dispositivo barra 2
+						stop[1]=false;
+						startPrgrBar(nlevel[1],0,Number(obj[x]),1);
+						o2.innerHTML = pr[1].value;
+					}
+					if(x=='tr3') {
+						console.log('START:'+obj[x]); 
+						//tempo dall'avvio cronometrato sul dispositivo barra 1
+						stop[2]=false;
+						startPrgrBar(nlevel[2],0,Number(obj[x]),2);
+						o3.innerHTML = pr[2].value;
+					}						
+					if(x=='tr4'){
+						console.log('START:'+obj[x]); 
+						//tempo dall'avvio cronometrato sul dispositivo barra 2
+						stop[3]=false;
+						startPrgrBar(nlevel[3],0,Number(obj[x]),3);
+						o4.innerHTML = pr[3].value;
+					}
+					//{"devid":"pippo","on1":"0","sp1":"10000","tr1":"50"}
+					//{"devid":"pippo","on1":"1","sp1":"10000","tr1":"10","pr1":"10"}
+					//errori nel json staccano la connessione!!
+				};
 			}
 		}
-	//}
-};
-
-
-////   FINE CALLBACKS UTENTE   ////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-WL_CONNECTED: assigned when connected to a WiFi network;
-WL_NO_SHIELD: assigned when no WiFi shield is present;
-WL_IDLE_STATUS: it is a temporary status assigned when WiFi.begin() is called and remains active until the number of attempts expires (resulting in WL_CONNECT_FAILED) or a connection is established (resulting in WL_CONNECTED);
-WL_NO_SSID_AVAIL: assigned when no SSID are available;
-WL_SCAN_COMPLETED: assigned when the scan networks is completed;
-WL_CONNECT_FAILED: assigned when the connection fails for all the attempts;
-WL_CONNECTION_LOST: assigned when the connection is lost;
-WL_DISCONNECTED: assigned when disconnected from a network;
-
-typedef enum {
-  LWMQTT_SUCCESS = 0,
-  LWMQTT_BUFFER_TOO_SHORT = -1,
-  LWMQTT_VARNUM_OVERFLOW = -2,
-  LWMQTT_NETWORK_FAILED_CONNECT = -3,
-  LWMQTT_NETWORK_TIMEOUT = -4,
-  LWMQTT_NETWORK_FAILED_READ = -5,
-  LWMQTT_NETWORK_FAILED_WRITE = -6,
-  LWMQTT_REMAINING_LENGTH_OVERFLOW = -7,
-  LWMQTT_REMAINING_LENGTH_MISMATCH = -8,
-  LWMQTT_MISSING_OR_WRONG_PACKET = -9,
-  LWMQTT_CONNECTION_DENIED = -10,
-  LWMQTT_FAILED_SUBSCRIPTION = -11,
-  LWMQTT_SUBACK_ARRAY_OVERFLOW = -12,
-  LWMQTT_PONG_TIMEOUT = -13,
-\*/
+		// carica i parametri di configurazione della pagina
+		//document.onload=function(){
+		//	press(vls[4]);
+		//};
+	</script>
+</body>
+</html>
