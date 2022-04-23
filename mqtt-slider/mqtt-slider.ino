@@ -29,8 +29,8 @@ Ticker mqttReconnectTimer;
 Ticker wifiReconnectTimer;
 
 /********* FINE DEFINIZIONE SEGNALI **************************/
-const char ssid[] = "xxxx";
-const char pass[] = "yyyy";
+const char ssid[] = "xxxxx";
+const char pass[] = "yyyyy";
 const char mqttserver[] = "broker.hivemq.com";
 const int mqttport = 1883;
 const char intopic[] = "soggiorno/in"; 
@@ -162,7 +162,7 @@ void loop() {
 /// INIZIO CALLBACKS UTENTE  /////////////////////////////////////////////////////////////////////////////////////
 /// CALCOLO USCITE DELLA FUNZIONE DI SCIVOLAMENTO (callback) 
 void sldAction(int outr, int cr, uint8_t n){
-	mqttClient.publish(outtopic, buf);
+	//mqttClient.publish(outtopic, buf);
 	Serial.println("Out " + String(n) + " - cr: " +  String(cr)+ " - n: " +  String(n));
 	ledcWrite(n, cr);
 };
@@ -179,11 +179,15 @@ void messageReceived(String &topic, String &payload) {
 	// or push to a queue and handle it in the loop after calling `client.loop()`.
 	
 	//if(topic == intopic){
-		String str;		
+		//String str;		
+		sld1.processCmd(mqttid, payload, MAXLEN);
+		sld2.processCmd(mqttid, payload, MAXLEN);
+		sld3.processCmd(mqttid, payload, MAXLEN);
+		sld4.processCmd(mqttid, payload, MAXLEN);
 		// COMMANDS PARSER /////////////////////////////////////////////////////////////////////////////////////////////
 		// ricerca all'interno del payload l'eventuale occorrenza di un comando presente in un set predefinito 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		sld1.cmdParser(str,payload,"devid",MAXLEN);
+		/*sld1.cmdParser(str,payload,"devid",MAXLEN);
 		if(str == mqttid){		
 		    if(sld1.cmdParser(str,payload,"sld1",MAXLEN)){
 				sld1.remoteSlider(atoi(str.c_str()));
@@ -203,7 +207,7 @@ void messageReceived(String &topic, String &payload) {
 				sld3.remoteConf();
 				sld4.remoteConf();
 			}
-		}
+		}*/
 	//}
 };
 
