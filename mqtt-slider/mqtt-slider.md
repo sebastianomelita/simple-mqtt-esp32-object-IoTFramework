@@ -141,9 +141,10 @@ La definizione della **gerarchia di elementi** contenitori e contenuti del corpo
 ### **Formato JSON ingressi**
 
 ```C++
-{"devid":"soggiorno-gruppo06","up1":"255"}
-{"devid":"soggiorno-gruppo06","down1":"255"}
-
+buf {"devid":"soggiorno-gruppo06","pr1":"71"}
+buf {"devid":"soggiorno-gruppo06","pr2":"73"}
+buf {"devid":"soggiorno-gruppo06","pr3":"28"}
+buf {"devid":"soggiorno-gruppo06","pr4":"0"}
 ```
 
 ### **Callback uscite**
