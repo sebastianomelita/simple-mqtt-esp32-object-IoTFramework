@@ -182,24 +182,26 @@ Lo **sketch** ```mqtt-toggle.ino``` deve essere aperto con l'IDE di Arduino e ca
 
 - ```id```. Nome univoco MQTT del dispositivo (uguale per tutti i pulsanti del gruppo.
 - ```startIndex```. Nome univoco MQTT del dispositivo (uguale per tutti i pulsanti del gruppo.
-- ```nlevels```. Numero di livelli che valorizza lo slider.
+- ```precision```. numero di livelli che definiscono l'intervallo di isteresi del blocco dello sscivolamento.
+- ```nlevel```. Numero di livelli che valorizza lo slider.
+- ```maxtime```. Tempo che impiega il controllo per raggiungere il massimo livello dello slider.
 
 ```C++
-Slider(String id, uint8_t startIndex, unsigned nlevels)
+FadedSlider(String id, uint8_t startIndex, uint8_t precision, unsigned nlevel, unsigned long maxtime)
 ```
 
 
 ```C++
-Slider sld1(mqttid,0,NLEVEL1);
-Slider sld2(mqttid,1,NLEVEL2);
-Slider sld3(mqttid,2,NLEVEL3);
-Slider sld4(mqttid,3,NLEVEL4);
+FadedSlider sld1(mqttid,0,SHARPNESS1,NLEVEL1,MAXT1);
+FadedSlider sld2(mqttid,1,SHARPNESS2,NLEVEL2,MAXT2);
+FadedSlider sld3(mqttid,2,SHARPNESS3,NLEVEL3,MAXT3);
+FadedSlider sld4(mqttid,3,SHARPNESS4,NLEVEL4,MAXT4);
 
 void setup() {
-	sld1.onAction(sldAction);
-	sld2.onAction(sldAction);
-	sld3.onAction(sldAction);
-	sld4.onAction(sldAction);
+	sld1.onSweep(sweepAction);
+	sld2.onSweep(sweepAction);
+	sld3.onSweep(sweepAction);
+	sld4.onSweep(sweepAction);
 	sld1.onFeedback(feedbackAction);
 	sld2.onFeedback(feedbackAction);
 	sld3.onFeedback(feedbackAction);
