@@ -5,6 +5,10 @@
 
 # **COMANDO FADED SLIDER**
 
+Si tratta di uno slider con fading dei valori di uscita che, i questo caso, non vengono impostati immediatamente da un **valore iniziale** ad uno **finale** ma assumono un certo numero di **valori intermedi** compresi tra il valore iniziale e quello finale con un certo **andamento temporale**. 
+
+L'andamento temporale è, in questo caso, lineare ed calcolato in proporzione ai punti compresi tra i due valori iniziale e finale. Il valore di tempo massimo è relatico all'escursione massima tra il livello ```0``` e quello ```100```.
+
 ### **Utilizzo**
 
 La pagina ha **4 slider** divisi in **4 gruppi**. Un gruppo comanda l'impostazione del livello di una singola uscita. Le uscite **non** sono direttamente **impostate** dalla libreria perchè sono lasciate volutamente **generiche** in quanto potrebbero attivare, a seconda dei casi, una porta digitale, un comando MODBUS, un comando sulla seriale, ecc.
