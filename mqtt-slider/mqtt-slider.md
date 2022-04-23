@@ -12,8 +12,6 @@ La pagina ha **4 slider** divisi in **4 gruppi**. Un gruppo comanda l'impostazio
 Fasi:
 - **Trascinando** un qualsiasi **slider** l'uscita viene impostata ad un valore compreso tra ```0``` e ```100```. Il valore però non viene inviato al dispositivo durante il trascinamento ma solamente dopo che il cursore si è fermato ed il click del mouse è stato rilasciato.
 
-Le uscite sono richiamate dalla **callback** ```motorAction1(int enabled, int dir, uint8_t n)``` che restituisce il **numero del gruppo** in ```n```, lo **stato del'uscita** in ```enabled``` con valori possibili ```true``` o ```false``` e la **direzione di marcia** con valori possibili ```1``` o ```-1```.
-
 
 ### **Layout pagina**
 
