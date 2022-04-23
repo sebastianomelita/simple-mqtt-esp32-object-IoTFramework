@@ -13,9 +13,6 @@ Fasi:
 - **Premendo** un qualsiasi **pulsante Toggle** l'uscita commuta dal valore precedente, ```1``` se era ```0```, ```0``` se era ```1```.
 
 
-Le uscite sono richiamate dalla **callback** ```motorAction1(int enabled, int dir, uint8_t n)``` che restituisce il **numero del gruppo** in ```n```, lo **stato del'uscita** in ```enabled``` con valori possibili ```true``` o ```false``` e la **direzione di marcia** con valori possibili ```1``` o ```-1```.
-
-
 ### **Layout pagina**
 
 La **pagina** ```mqttupdown.html``` può essere caricata sul browser da una cartella sul PC o può essere caricata su un server web di pagine statiche.
