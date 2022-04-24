@@ -244,9 +244,25 @@ L'evento di rilascio di uno slider è l'unico senza feedback.
 - ```n```. Numero del pulsante (inizia da 0).
 
 ```C++
-void sldAction(int outr, int cr, uint8_t n){
-	Serial.println("Out " + String(n) + " - cr: " +  String(cr)+ " - n: " +  String(n));
-	ledcWrite(n, cr);
+void sweepAction1(int outr, int cr, uint8_t n){	
+	Serial.println((String) "r: "+cr);
+	if(cr > 0){
+		Serial2.println((String)"@l"+cr);
+		Serial.println((String)"@l"+cr);
+	}else{
+		Serial2.println((String)"@lo");
+		Serial.println((String)"@lo");
+	}
+};
+void sweepAction2(int outr, int cr, uint8_t n){	
+	Serial.println((String) "r: "+cr);
+	if(cr > 0){
+		//Serial2.println((String)"@l"+cr);
+		Serial.println((String)"@l"+cr);
+	}else{
+		//Serial2.println((String)"@lo");
+		Serial.println((String)"@lo");
+	}
 };
 ```
 
