@@ -219,7 +219,7 @@ L'evento di rilascio di uno slider è l'unico senza feedback.
 - ```tr2```. Tempo target che deve raggiungere lo sweep in msec.
 - ```nl2```. Numero divisioni (valori delle uscite possibili) del gruppo 2.
 
-```json
+```C++
 //impostazione slider
 {"devid":"soggiorno-gruppo06","sld2":"11"}
 // sweep
