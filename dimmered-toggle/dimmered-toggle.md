@@ -198,6 +198,14 @@ function calcLen(r,n){
 
 ### **Formato JSON ingressi**
 
+- ```on2```. ON Pulsante 2. Vale 255 se imposta un livello crescente dello sweep oppure vale il valore impostato se è premuto un TOGGLE.
+- ```off2```. OFF pulsante 2. Vale 255 se imposta un livello decrescente dello sweep oppure vale ```0``` se è premuto un TOGGLE.
+- ```to2```. TOGGLE pulsante 2. Vale ```1``` se è stato acceso, ```0``` se è in stato spento
+- ```sp2```. Tempo massimo dello sweeo del gruppo 2 in msec.
+- ```dr2```. Direzione dello sweep. Se è crescente vale ```1```, se è decrescente vale ```-1```, se deve fermarsi vale ```0```.
+- ```tr2```. Numero del pulsante (inizia da 0). Tempo target che deve raggiungere lo sweep in msec.
+- ```nl2```. Numero del pulsante (inizia da 0). Numero divisioni (valori delle uscite possibili) del gruppo 2.
+
 **Comando pulsante**
 Genera un messaggio asincrono, inviato al momento della pressione di un pulsante o del rilascio di uno slider.
 ```json
