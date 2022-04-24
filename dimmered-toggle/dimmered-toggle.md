@@ -271,11 +271,14 @@ void sweepAction2(int outr, int cr, uint8_t n){
 - ```cmdParser(str,payload,"cmd",MAXLEN)```. Ricerca un certo commando ```cmd``` all’interno di una stringa e ne restituisce il valore sotto forma di stringa sul parametro di out str. Ritorna ```true``` se ha trovato un'occorenza del comando, ```false``` altrimenti.
 - ```processCmd(String id, String payload)```. Elabora la richiesta remota interpretando la stringa json del messaggio in base al tipo di dispositivo IOT.
 
-### **Metodi specifici di FadedSlider**
+### **Metodi specifici di DimmeredToggle**
 
-- ```Slider(String id, uint8_t startIndex, unsigned nlevels)```. Costruttore. P1: devid univoco, P2: indice dispositivo nel gruppo (0,1,2,...), P3: numero di livelli da valorizzare
-- ```remoteSlider(uint8_t targetval)```. imposta il valore coorente dello slider. Valori da ```0``` a ```100```.
-- ```onAction(SweepCallbackSimple cb)```. Definisce la callback delle azioni esterne.
+- ```DimmeredToggle(String id, uint8_t startIndex, uint8_t precision = 2, unsigned nlevel = 100, unsigned long maxtime = 10000)``. Costruttore. P1: devid univoco, P2: indice dispositivo nel gruppo (0,1,2,...), P3: precisione isteresi sweep, P4: numero di livelli da valorizzare, P5: durata massima sweep
+- ```void remoteCntrlOn(uint8_t targetval)```
+- ```void remoteCntrlOff(void)```
+- ```void remoteSlider(uint8_t targetval)```
+- ```void remoteToggle(uint8_t targetval)```. imposta il valore coorente dello slider. Valori da ```0``` a ```100```.
+- ```void onAction(SweepCallbackSimple cb)```. Definisce la callback delle azioni esterne.
 
 ### **Struttura sketch Arduino**
 
