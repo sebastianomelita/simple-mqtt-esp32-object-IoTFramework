@@ -136,6 +136,7 @@ void motorAction1(int enabled, int dir, uint8_t n){
 ### **Formato JSON feedback**
 
 ```C++
+//pressione pulsanti
 {"devid":"soggiorno-gruppo06","up1":"255","down1":"0","dr1":"1"}
 {"devid":"soggiorno-gruppo06","up1":"0","down1":"255","dr1":"-1"}
 {"devid":"soggiorno-gruppo06","up2":"0","down2":"0","dr2":"0"}
