@@ -19,11 +19,11 @@ La pagina ha **2 pulsanti (UP e down)**, **1 barra di stato**, **1 slider** divi
 
 
 **Fasi**:
-- **Trascinando** lo **slider** l'uscita viene impostata ad un valore compreso tra ```0``` e ```100```. Il valore però non viene inviato al dispositivo durante il trascinamento ma solamente dopo che il cursore si è fermato ed il click del mouse è stato rilasciato. Lo slider imposta la velocità del **fading** che può variare da istantanea (assenza di fading) ad un valore minimo che dipende dal tempo massimo impostato al momento dell'intanzizione degli oggetti.
-- premendo uno dei **pulsanti** UP e DOWN si entra nella **modalità di impostazione** della **profondità fading**, cioè del **valore massimo** ell'uscita. L'impostazione avviene **visivamente** osservando la progressione del fading nella barra di stato oppure osservando l'effetto sul dispositivo comandato (ad esempio una lampada dimmerabile). 
-- Quando si ritiene che il livello (della barra o dell'effetto dell'uscita) è quello desiderato si **ripreme un pulsante qualsiasi** ottenendo insieme il **blocco** della progressione, la **memorizzazione** del livello raggiunto e l'uscita dalla modalità di impostazione e l'ingresso in quella di **controllo**.
-- da questo momento una pressione del pulsante **toggle** determina l'**accensione** o lo **spegimento** con **fading** di un dispositivo.
-- in modalità **controllo** è sempre possibile impostare la velocità del fading agendo sullo slider.
+1. **Trascinando** lo **slider** l'uscita viene impostata ad un valore compreso tra ```0``` e ```100```. Il valore però non viene inviato al dispositivo durante il trascinamento ma solamente dopo che il cursore si è fermato ed il click del mouse è stato rilasciato. Lo slider imposta la velocità del **fading** che può variare da istantanea (assenza di fading) ad un valore minimo che dipende dal tempo massimo impostato al momento dell'intanzizione degli oggetti.
+2. premendo uno dei **pulsanti** UP e DOWN si entra nella **modalità di impostazione** della **profondità fading**, cioè del **valore massimo** ell'uscita. L'impostazione avviene **visivamente** osservando la progressione del fading nella barra di stato oppure osservando l'effetto sul dispositivo comandato (ad esempio una lampada dimmerabile). 
+3. Quando si ritiene che il livello (della barra o dell'effetto dell'uscita) è quello desiderato si **ripreme un pulsante qualsiasi** ottenendo insieme il **blocco** della progressione, la **memorizzazione** del livello raggiunto e l'uscita dalla modalità di impostazione e l'ingresso in quella di **controllo**.
+4. da questo momento una pressione del pulsante **toggle** determina l'**accensione** o lo **spegimento** con **fading** di un dispositivo.
+5. in modalità **controllo** è sempre possibile impostare la velocità del fading agendo sullo slider.
 
 
 ### **Layout pagina**
