@@ -197,11 +197,13 @@ function calcLen(r,n){
 
 ### **Formato JSON ingressi**
 
+Ingresso inviato su rilascio dello slider1
+
 ```C++
-buf {"devid":"soggiorno-gruppo06","pr1":"71"}
-buf {"devid":"soggiorno-gruppo06","pr2":"73"}
-buf {"devid":"soggiorno-gruppo06","pr3":"28"}
-buf {"devid":"soggiorno-gruppo06","pr4":"0"}
+//slider
+{"devid":"soggiorno-gruppo06","sld1":"64"}
+//ricarica pagina
+{"devid":"soggiorno-gruppo06","conf":"255"}
 ```
 
 ### **Callback uscite**
@@ -219,11 +221,25 @@ void sldAction(int outr, int cr, uint8_t n){
 
 ### **Formato JSON feedback**
 
+Il **dispositivo** invia almeno **due feedback**: uno **iniziale** con il quale parte l'evoluzione locale dell'uscita (sweep) ed uno **finale** con il quale si interrompe l'evoluzione. Il **feedback finale** porta con se anche il **valore vero finale** dell'uscita con il quale viene eventualmente corretto il valore **stimato localmente** dalla pagina. Il feedback ha quindi due funzioni: **sincronizzazione** di emulatore e dispositivo e **verifica** dello stato finale.
+
+L'evento di rilascio di uno slider è l'unico senza feedback.
+
+- ```pr2```. valore finale espresso in percentuale con un numero intero compreso tra ```0``` e ```100```
+- ```sp2```. Tempo massimo dello sweeo del gruppo 2 in msec.
+- ```dr2```. Direzione dello sweep. Se è crescente vale ```1```, se è decrescente vale ```-1```, se deve fermarsi vale ```0```.
+- ```tr2```. Tempo corrente da dove deve partire lo sweep espresso in msec.
+- ```nl2```. Numero divisioni (valori delle uscite possibili) del gruppo 2.
+- 
 ```C++
-buf {"devid":"soggiorno-gruppo06","to1":"1"}
-buf {"devid":"soggiorno-gruppo06","to2":"1"}
-buf {"devid":"soggiorno-gruppo06","to3":"0"}
-buf {"devid":"soggiorno-gruppo06","to4":"1"}
+//sweep
+{"devid":"soggiorno-gruppo06","pr1":"64","dr1":"1","tr1":"5567"}	//start sweep
+{"devid":"soggiorno-gruppo06","dr1":"0","tr1":"6681"}			//stop sweep	
+//Ritrasm. periodica stato o ricarica della pagina
+{"devid":"soggiorno-gruppo06", "sp1":"10000","dr1":"0","nl1":"9","tr1":"6681"}
+{"devid":"soggiorno-gruppo06", "sp2":"10000","dr2":"0","nl2":"100","tr2":"2897"}
+{"devid":"soggiorno-gruppo06", "sp3":"10000","dr3":"0","nl3":"9","tr3":"0"}
+{"devid":"soggiorno-gruppo06", "sp4":"10000","dr4":"0","nl4":"100","tr4":"0"}
 ```
 ### **Metodi di base comuni a tutti gli oggetti IOT**
 
