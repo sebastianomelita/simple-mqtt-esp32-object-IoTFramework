@@ -75,7 +75,7 @@ Realizazione componenti:
 - [SPA di comando: parte dinamica](spa2.md)
 - [Gateway MQTT](gateway.md)
 
-Definizione oggetti IOT:
+Descrizione oggetti IOT:
 - [mqtt-updown](mqtt-updown/mqtt-updown.md)
 - [mqtt-toggle](mqtt-toggle/mqtt-toggle.md)
 - [mqtt-slider](mqtt-slider/mqtt-slider.md)
