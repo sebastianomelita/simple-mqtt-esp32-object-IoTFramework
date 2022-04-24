@@ -230,7 +230,7 @@ L'evento di rilascio di uno slider è l'unico senza feedback.
 - ```dr2```. Direzione dello sweep. Se è crescente vale ```1```, se è decrescente vale ```-1```, se deve fermarsi vale ```0```.
 - ```tr2```. Tempo corrente da dove deve partire lo sweep espresso in msec.
 - ```nl2```. Numero divisioni (valori delle uscite possibili) del gruppo 2.
-- 
+
 ```C++
 //sweep
 {"devid":"soggiorno-gruppo06","pr1":"64","dr1":"1","tr1":"5567"}	//start sweep
