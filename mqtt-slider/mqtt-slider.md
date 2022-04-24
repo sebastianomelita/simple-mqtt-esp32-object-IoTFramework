@@ -164,11 +164,10 @@ void sldAction(int outr, int cr, uint8_t n){
 // feedback slider al 74%
 buf {"devid":"soggiorno-gruppo06","pr1":"74"}
 // ricarica della pagina e trasmissione periodica stato
-buf {"devid":"soggiorno-gruppo06","pr1":"0"}
-buf {"devid":"soggiorno-gruppo06","pr2":"0"}
-buf {"devid":"soggiorno-gruppo06","pr3":"0"}
-buf {"devid":"soggiorno-gruppo06","pr4":"0"}
-
+{"devid":"soggiorno-gruppo06","pr1":"74"}
+{"devid":"soggiorno-gruppo06","pr2":"0"}
+{"devid":"soggiorno-gruppo06","pr3":"0"}
+{"devid":"soggiorno-gruppo06","pr4":"0"}
 ```
 ### **Metodi di base comuni a tutti gli oggetti IOT**
 
