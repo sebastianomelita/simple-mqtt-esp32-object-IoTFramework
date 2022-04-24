@@ -162,7 +162,7 @@ void sldAction(int outr, int cr, uint8_t n){
 
 ```C++
 // feedback slider al 74%
-buf {"devid":"soggiorno-gruppo06","pr1":"74"}
+{"devid":"soggiorno-gruppo06","pr1":"74"}
 // ricarica della pagina e trasmissione periodica stato
 {"devid":"soggiorno-gruppo06","pr1":"74"}
 {"devid":"soggiorno-gruppo06","pr2":"0"}
