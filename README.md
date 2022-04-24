@@ -80,6 +80,7 @@ Definizione oggetti IOT:
 - [mqtt-toggle](mqtt-toggle/mqtt-toggle.md)
 - [mqtt-slider](mqtt-slider/mqtt-slider.md)
 - [mqtt-faded-slider](mqtt-faded-slider/mqtt-faded-slider.md)
+- [mqtt-dimmered-toggle](dimmered-toggle/dimmered-toggle.md)
 
 
 
