@@ -450,13 +450,13 @@ void messageReceived(String &topic, String &payload) {
 	// or push to a queue and handle it in the loop after calling `client.loop()`.
 	
 	//if(topic == intopic){
-		String str;	
+		//String str;	
 		sw1.processCmd(mqttid, payload, MAXLEN);
 		sw2.processCmd(mqttid, payload, MAXLEN);
 		// COMMANDS PARSER /////////////////////////////////////////////////////////////////////////////////////////////
 		// ricerca all'interno del payload l'eventuale occorrenza di un comando presente in un set predefinito 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		sw1.cmdParser(str,payload,"devid",MAXLEN);
+		/*sw1.cmdParser(str,payload,"devid",MAXLEN);
 		if(str == mqttid){		
 		    if(sw1.cmdParser(str,payload,"to1",MAXLEN)){
 				sw1.remoteToggle(255);
@@ -486,7 +486,7 @@ void messageReceived(String &topic, String &payload) {
 				sw1.remoteConf();
 				sw2.remoteConf();
 			}
-		}
+		}*/
 	//}
 };
 ```
