@@ -97,41 +97,42 @@ La definizione della **gerarchia di elementi** contenitori e contenuti del corpo
 	<div class="col-4 col-s-3 menu">
 	</div>
 	<div class="col-4 col-s-9 menu">
-	 <h1>Controllo luci</h1>
+	 <h1>Piantana</h1>
 	 <div id='form'>
 		<form>
-			<label for='rng1'>Soggiorno<label>
-		    <div class="boxed">
-				<p>Livello: <span id='val1'></span></p>
-				<meter id='pr1' min='0' max='100' style='width:100%; clear:both; margin:0 auto'>></meter>
-				<br>
-				<input type='range' min='0' max='100' value='50' list='tickmarks' class='slider' id='rng1'>
-			</div>
-			<label for='rng2'>Camera da letto<label>
-			<div class="boxed">
-				<p>Livello: <span id='val2'></span></p>
-				<meter id='pr2' min='0' max='100' style='width:100%; clear:both; margin:0 auto'>></meter>
-				<br>
-				<input type='range' min='0' max='100' value='50' list='tickmarks' class='slider' id='rng2'>
-			</div>
-			<label for='rng3'>Cucina<label>
-			<div class="boxed">
-				<p>Livello: <span id='val3'></span></p>
-				<meter id='pr3' min='0' max='100' style='width:100%; clear:both; margin:0 auto'>></meter>
-				<br>
-				<input type='range' min='0' max='100' value='50' list='tickmarks' class='slider' id='rng3'>
-			</div>
-			<label for='rng4'>Bagno<label>
-			<div class="boxed">
-				<p>Livello: <span id='val4'></span></p>
-				<meter id='pr4' min='0' max='100' style='width:100%; clear:both; margin:0 auto'>></meter>
-				<br>
-				<input type='range' min='0' max='100' value='50' list='tickmarks' class='slider' id='rng4'>
-			</div>
+			<input id='to1' type='button' value='Toggle1' onmousedown='this.style.opacity="1"' onmouseup='this.style.opacity="0.6"' ontouchstart='this.style.opacity="1"' ontouchend='this.style.opacity="0.6"'>
+			<br>
+			<input id='on1' type='button' value='Button 1 UP' onmousedown='this.style.opacity="1"' onmouseup='this.style.opacity="0.6"' ontouchstart='this.style.opacity="1"' ontouchend='this.style.opacity="0.6"'>
+			<br>
+			<input id='off1' type='button' value='Button 1 DOWN' onmousedown='this.style.opacity="1"' onmouseup='this.style.opacity="0.6"' ontouchstart='this.style.opacity="1"' ontouchend='this.style.opacity="0.6"'>
+			<br>
+			<p>Livello: <span id='val1'></span></p>
+			<meter id='pr1' min='0' max='100' style='width:100%; clear:both; margin:0 auto'>></meter>
+			<br>
+			<input type='range' min='0' max='100' value='50' list='tickmarks' class='slider' id='rng1'>
+			<datalist id='tickmarks'>
+				<option>0</option>
+				<option>50</option>
+				<option id='mid'></option>
+				<option>100</option>
+			</datalist>
+			<br>
+			<h1>Lampadario</h1>
+			<input id='to2' type='button' value='Toggle2' onmousedown='this.style.opacity="1"' onmouseup='this.style.opacity="0.6"' ontouchstart='this.style.opacity="1"' ontouchend='this.style.opacity="0.6"'>
+			<br>
+			<input id='on2' type='button' value='Button 2 UP'  onmousedown='this.style.opacity="1"' onmouseup='this.style.opacity="0.6"' ontouchstart='this.style.opacity="1"' ontouchend='this.style.opacity="0.6"'>
+			<br>
+			<input id='off2' type='button' value='Button 2 DOWN' onmousedown='this.style.opacity="1"' onmouseup='this.style.opacity="0.6"' ontouchstart='this.style.opacity="1"' ontouchend='this.style.opacity="0.6"'>
+			<br>
+			<p>Livello: <span id='val2'></span></p>
+			<meter id='pr2' min='0' max='100' style='width:100%; clear:both; margin:0 auto'>></meter>
+			<br>
+			<input type='range' min='0' max='100' value='50' list='tickmarks' class='slider' id='rng2'>
+			<br>
 		</form>
 	 </div>
 	</div>
-	<div class="col-3 col-s-12">
+	<div class="col-4 col-s-12">
 	</div>
 </div>
 <div class="footer">
