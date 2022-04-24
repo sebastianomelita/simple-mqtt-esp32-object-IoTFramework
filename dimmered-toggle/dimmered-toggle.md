@@ -198,7 +198,18 @@ function calcLen(r,n){
 
 ### **Formato JSON ingressi**
 
+```C++
+{"devid":"soggiorno-gruppo06","to2":"255"}	// Pressione toggle 
+{"devid":"soggiorno-gruppo06","on2":"255"}	// Pressione on
+{"devid":"soggiorno-gruppo06","off2":"255"}	// Pressione down
+{"devid":"soggiorno-gruppo06","sld2":"33"}	// Rilascio slider
+```
+
+### **Formato JSON feedback**
+
 Il **dispositivo** invia almeno **due feedback**: uno **iniziale** con il quale parte l'evoluzione locale dell'uscita (sweep) ed uno **finale** con il quale si interrompe l'evoluzione. Il **feedback finale** porta con se anche il **valore vero finale** dell'uscita con il quale viene eventualmente corretto il valore **stimato localmente** dalla pagina. Il feedback ha quindi due funzioni: **sincronizzazione** di emulatore e dispositivo e **verifica** dello stato finale.
+
+L'evento di rilascio di uno slider è l'unico senza feedback.
 
 - ```on2```. ON Pulsante 2. Vale 255 se imposta un livello crescente dello sweep oppure vale il valore impostato se è premuto un TOGGLE.
 - ```off2```. OFF pulsante 2. Vale 255 se imposta un livello decrescente dello sweep oppure vale ```0``` se è premuto un TOGGLE.
@@ -208,8 +219,6 @@ Il **dispositivo** invia almeno **due feedback**: uno **iniziale** con il quale 
 - ```tr2```. Tempo target che deve raggiungere lo sweep in msec.
 - ```nl2```. Numero divisioni (valori delle uscite possibili) del gruppo 2.
 
-**Comando pulsante**
-Genera un messaggio asincrono, inviato al momento della pressione di un pulsante o del rilascio di uno slider.
 ```json
 //impostazione slider
 {"devid":"soggiorno-gruppo06","sld2":"11"}
@@ -241,14 +250,6 @@ void sldAction(int outr, int cr, uint8_t n){
 };
 ```
 
-### **Formato JSON feedback**
-
-```C++
-buf {"devid":"soggiorno-gruppo06","to1":"1"}
-buf {"devid":"soggiorno-gruppo06","to2":"1"}
-buf {"devid":"soggiorno-gruppo06","to3":"0"}
-buf {"devid":"soggiorno-gruppo06","to4":"1"}
-```
 ### **Metodi di base comuni a tutti gli oggetti IOT**
 
 - ```cmdParser(str,payload,"cmd",MAXLEN)```. Ricerca un certo commando ```cmd``` all’interno di una stringa e ne restituisce il valore sotto forma di stringa sul parametro di out str. Ritorna ```true``` se ha trovato un'occorenza del comando, ```false``` altrimenti.
