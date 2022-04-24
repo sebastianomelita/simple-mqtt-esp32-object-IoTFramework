@@ -200,7 +200,7 @@ function calcLen(r,n){
 
 **Comando pulsante**
 Genera un messaggio asincrono, inviato al momento della pressione di un pulsante o del rilascio di uno slider.
-```C++
+```json
 //impostazione slider
 {"devid":"soggiorno-gruppo06","sld2":"11"}
 // sweep
