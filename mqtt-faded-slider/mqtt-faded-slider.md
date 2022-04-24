@@ -195,17 +195,6 @@ function calcLen(r,n){
 };
 ```
 
-### **Formato JSON ingressi**
-
-Ingresso inviato su rilascio dello slider1
-
-```C++
-//slider
-{"devid":"soggiorno-gruppo06","sld1":"64"}
-//ricarica pagina
-{"devid":"soggiorno-gruppo06","conf":"255"}
-```
-
 ### **Callback uscite**
 
 - ```outr```. Stato del pulsante in percentuale. Valore ```0``` o ```100``` 
@@ -217,6 +206,17 @@ void sldAction(int outr, int cr, uint8_t n){
 	Serial.println("Out " + String(n) + " - cr: " +  String(cr)+ " - n: " +  String(n));
 	ledcWrite(n, cr);
 };
+```
+
+### **Formato JSON ingressi**
+
+Ingresso inviato su rilascio dello slider1
+
+```C++
+//slider
+{"devid":"soggiorno-gruppo06","sld1":"64"}
+//ricarica pagina
+{"devid":"soggiorno-gruppo06","conf":"255"}
 ```
 
 ### **Formato JSON feedback**
