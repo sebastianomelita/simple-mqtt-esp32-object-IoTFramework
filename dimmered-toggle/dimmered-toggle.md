@@ -224,7 +224,7 @@ L'evento di rilascio di uno slider è l'unico senza feedback.
 - ```to2```. TOGGLE pulsante 2. Vale ```1``` se è stato acceso, ```0``` se è in stato spento
 - ```sp2```. Tempo massimo dello sweeo del gruppo 2 in msec.
 - ```dr2```. Direzione dello sweep. Se è crescente vale ```1```, se è decrescente vale ```-1```, se deve fermarsi vale ```0```.
-- ```tr2```. Tempo target che deve raggiungere lo sweep in msec.
+- ```tr2```. empo corrente da dove deve partire lo sweep espresso in msec.
 - ```nl2```. Numero divisioni (valori delle uscite possibili) del gruppo 2.
 
 ```C++
