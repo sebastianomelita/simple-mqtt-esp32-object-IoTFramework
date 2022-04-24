@@ -9,7 +9,7 @@ Si tratta di uno pulsante **toggle** con **fading automatico** dei valori di usc
 
 L'**andamento temporale** è, in questo caso, **lineare** ed calcolato in proporzione ai punti compresi tra i due valori iniziale e finale. Il valore di **tempo massimo** è relatico all'escursione massima tra il livello ```0``` e quello ```100```.
 
-Lo **scivolamento** (sweep) dei valori avviene sempre tra due estremi e per realizzare **due funzioni** diverse:
+Lo **scivolamento** (sweep) dei valori avviene sempre tra **due estremi** (il primo è zero) per realizzare **due funzioni** diverse:
 - il **toggle con fading automatico** cioé lo scivolamento tra il **valore ```0```** e un **valore preimpostato** e viceversa.
 - l'**impostazione manuale** del tetto del fading, cioè del suo valore superiore. Avviene essa stessa con fading, cioè con uno scivolamento progressivo dei valori che però è **iniziato**, in un certo verso, con la **pressione** di uno dei due pulsante (UP o DOWN) ed è **terminato** con la **pressione** di uno qwualsiasi dei due pulsanti (UP o DOWN) dello stesso gruppo.
 
