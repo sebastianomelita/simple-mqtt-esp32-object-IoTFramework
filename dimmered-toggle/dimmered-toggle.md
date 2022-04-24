@@ -273,7 +273,7 @@ void sweepAction2(int outr, int cr, uint8_t n){
 
 ### **Metodi specifici di DimmeredToggle**
 
-- ```DimmeredToggle(String id, uint8_t startIndex, uint8_t precision = 2, unsigned nlevel = 100, unsigned long maxtime = 10000)``. Costruttore. P1: devid univoco, P2: indice dispositivo nel gruppo (0,1,2,...), P3: precisione isteresi sweep, P4: numero di livelli da valorizzare, P5: durata massima sweep
+- ```DimmeredToggle(String id, uint8_t startIndex, uint8_t precision = 2, unsigned nlevel = 100, unsigned long maxtime = 10000)```. Costruttore. P1: devid univoco, P2: indice dispositivo nel gruppo (0,1,2,...), P3: precisione isteresi sweep, P4: numero di livelli da valorizzare, P5: durata massima sweep
 - ```void remoteCntrlOn(uint8_t targetval)```
 - ```void remoteCntrlOff(void)```
 - ```void remoteSlider(uint8_t targetval)```
