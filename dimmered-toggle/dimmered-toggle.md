@@ -78,7 +78,7 @@ Il **layout** è statico, responsivo, diviso in colonne ed è definito mediante 
 </style>
 ```
 
-![fadedslider](fadedslider.png)
+![dimmeredtoggle](dimmeredtoggle.png)
 
 ### **Struttura HTML**
 
