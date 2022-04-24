@@ -198,6 +198,8 @@ function calcLen(r,n){
 
 ### **Formato JSON ingressi**
 
+Il **dispositivo** invia almeno **due feedback**: uno **iniziale** con il quale parte l'evoluzione locale dell'uscita (sweep) ed uno **finale** con il quale si interrompe l'evoluzione. Il **feedback finale** porta con se anche il **valore vero finale** dell'uscita con il quale viene eventualmente corretto il valore **stimato localmente** dalla pagina. Il feedback ha quindi due funzioni: **sincronizzazione** di emulatore e dispositivo e **verifica** dello stato finale.
+
 - ```on2```. ON Pulsante 2. Vale 255 se imposta un livello crescente dello sweep oppure vale il valore impostato se è premuto un TOGGLE.
 - ```off2```. OFF pulsante 2. Vale 255 se imposta un livello decrescente dello sweep oppure vale ```0``` se è premuto un TOGGLE.
 - ```to2```. TOGGLE pulsante 2. Vale ```1``` se è stato acceso, ```0``` se è in stato spento
