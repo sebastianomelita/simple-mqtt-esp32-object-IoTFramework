@@ -202,7 +202,7 @@ function calcLen(r,n){
 {"devid":"soggiorno-gruppo06","to2":"255"}	// Pressione toggle, vale sempre 255
 {"devid":"soggiorno-gruppo06","on2":"255"}	// Pressione on, vale sempre 255
 {"devid":"soggiorno-gruppo06","off2":"255"}	// Pressione down, vale sempre 255
-{"devid":"soggiorno-gruppo06","sld2":"33"}	// Rilascio slider, vale un intero tra ```0``` e ```100``` 
+{"devid":"soggiorno-gruppo06","sld2":"33"}	// Rilascio slider, vale un intero tra 0 e 100
 ```
 
 ### **Formato JSON feedback**
