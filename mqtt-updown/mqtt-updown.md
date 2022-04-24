@@ -116,19 +116,21 @@ La definizione della **gerarchia di elementi** contenitori e contenuti del corpo
 </div>
 ```
 
-### **Formato JSON ingressi**
-
-```C++
-{"devid":"soggiorno-gruppo06","up1":"255"}
-{"devid":"soggiorno-gruppo06","down1":"255"}
-
-```
-
 ### **Callback uscite**
 ```C++
 void motorAction1(int enabled, int dir, uint8_t n){
 	Serial.println("Enabled " + String(enabled) + " - dir: " +  String(dir)+ " - n: " +  String(n));
 };
+```
+
+### **Formato JSON ingressi**
+
+```C++
+//ricarica dela pagina
+{"devid":"soggiorno-gruppo06","conf":"255"}
+//pressione pulsanti
+{"devid":"soggiorno-gruppo06","up1":"255"}
+{"devid":"soggiorno-gruppo06","down1":"255"}
 ```
 
 ### **Formato JSON feedback**
@@ -138,6 +140,7 @@ void motorAction1(int enabled, int dir, uint8_t n){
 {"devid":"soggiorno-gruppo06","up1":"0","down1":"255","dr1":"-1"}
 {"devid":"soggiorno-gruppo06","up2":"0","down2":"0","dr2":"0"}
 ```
+
 ### **Metodi di base comuni a tutti gli oggetti IOT**
 
 - ```cmdParser(str,payload,"cmd",MAXLEN)```. Ricerca un certo commando ```cmd``` all’interno di una stringa e ne restituisce il valore sotto forma di stringa sul parametro di out str. Ritorna ```true``` se ha trovato un'occorenza del comando, ```false``` altrimenti.
