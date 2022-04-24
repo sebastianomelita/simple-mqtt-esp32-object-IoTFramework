@@ -86,7 +86,7 @@ Librerie del progetto:
 - RemoteControl.h
 - RemoteControl.cpp
 
-sono le **stesse** per tutti i progetti, in base al progetto cambia il **file dello sketch** Arduino ma non cambiano i **file di libreria**. Per gli **esempi** vedere le **cartelle** dei singoli progetti.
+sono le **stesse** per tutti i **controlli**, in base al progetto cambia il **file dello sketch** Arduino ma non cambiano i **file di libreria**. Per gli **esempi** vedere le **cartelle** dei singoli progetti.
 
 
 
