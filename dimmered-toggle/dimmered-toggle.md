@@ -5,9 +5,13 @@
 
 # **COMANDO DIMMERED TOGGLE**
 
-Si tratta di uno slider con fading dei valori di uscita dato che, in questo dispositivo, non vengono impostati immediatamente tra un **valore iniziale** ad uno **finale** ma assumono un certo numero di **valori intermedi** compresi tra quelli estremi con un certo **andamento nel tempo**. 
+Si tratta di uno pulsante **toggle** con **fading automatico** dei valori di uscita dato che, in questo dispositivo, non vengono impostati immediatamente tra un **valore iniziale** ad uno **finale** ma assumono un certo numero di **valori intermedi** compresi tra quelli estremi con un **andamento progressivo nel tempo**. 
 
 L'**andamento temporale** è, in questo caso, **lineare** ed calcolato in proporzione ai punti compresi tra i due valori iniziale e finale. Il valore di **tempo massimo** è relatico all'escursione massima tra il livello ```0``` e quello ```100```.
+
+Lo **scivolamento** (sweep) dei valori avviene sempre tra due estremi e per realizzare **due funzioni** diverse:
+- il **toggle con fading automatico** cio+ lo scivolamento tra il **valore ```0``` **e un **valore preimpostato** e viceversa.
+- l'**impostazione manuale** del tetto del fading, cioè del suo valore superiore. Avviene essa stessa con fading, cioè con uno scivolamento progressivo dei valori che però è **iniziato**, in un certo verso, con la **pressione** di uno dei due pulsante (UP o DOWN) ed è **terminato** con la **pressione** di uno qwualsiasi dei due pulsanti (UP o DOWN) dello stesso gruppo.
 
 ### **Utilizzo**
 
