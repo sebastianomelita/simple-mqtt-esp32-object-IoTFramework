@@ -291,25 +291,19 @@ Lo **sketch** ```mqtt-toggle.ino``` deve essere aperto con l'IDE di Arduino e ca
 - ```maxtime```. Tempo che impiega il controllo per raggiungere il massimo livello dello slider.
 
 ```C++
-FadedSlider(String id, uint8_t startIndex, uint8_t precision, unsigned nlevel, unsigned long maxtime)
+DimmeredToggle(String id, uint8_t startIndex, uint8_t precision = 2, unsigned nlevel = 100, unsigned long maxtime = 10000)
 ```
 
 
 ```C++
-FadedSlider sld1(mqttid,0,SHARPNESS1,NLEVEL1,MAXT1);
-FadedSlider sld2(mqttid,1,SHARPNESS2,NLEVEL2,MAXT2);
-FadedSlider sld3(mqttid,2,SHARPNESS3,NLEVEL3,MAXT3);
-FadedSlider sld4(mqttid,3,SHARPNESS4,NLEVEL4,MAXT4);
+DimmeredToggle sw1(mqttid,0,SHARPNESS1,NLEVEL1,MAXT1);
+DimmeredToggle sw2(mqttid,1,SHARPNESS2,NLEVEL2,MAXT2);
 
 void setup() {
-	sld1.onSweep(sweepAction);
-	sld2.onSweep(sweepAction);
-	sld3.onSweep(sweepAction);
-	sld4.onSweep(sweepAction);
-	sld1.onFeedback(feedbackAction);
-	sld2.onFeedback(feedbackAction);
-	sld3.onFeedback(feedbackAction);
-	sld4.onFeedback(feedbackAction);
+	sw1.onSweep(sweepAction1);
+	sw2.onSweep(sweepAction2);
+	sw1.onFeedback(feedbackAction);
+	sw2.onFeedback(feedbackAction);
 	.........................
 	mqttClient.onMessage(messageReceived); 
 }
@@ -317,10 +311,8 @@ void setup() {
 void loop() {
 	mqttClient.loop();
 	//delay(10);  // <- fixes some issues with WiFi stability
-	sld1.remoteCntrlEventsParser();
-	sld2.remoteCntrlEventsParser();
-	sld3.remoteCntrlEventsParser();
-	sld4.remoteCntrlEventsParser();
+	sw1.remoteCntrlEventsParser();
+	sw2.remoteCntrlEventsParser();
 	// schedulatore eventi dispositivo
 	// pubblica lo stato dei pulsanti dopo un minuto
 	if (millis() - lastMillis > STATEPERIOD) {
@@ -328,22 +320,61 @@ void loop() {
 		
 		if(mqttClient.connected()){
 			Serial.println("Ritrasm. periodica stato: ");
-			sld1.remoteConf();
-			sld2.remoteConf();
-			sld3.remoteConf();
-			sld4.remoteConf();
+			sw1.remoteConf();
+			sw2.remoteConf();
 		}
 	}
 }
 
-void sldAction(int outr, int cr, uint8_t n){
-	Serial.println("Out " + String(n) + " - cr: " +  String(cr)+ " - n: " +  String(n));
-	ledcWrite(n, cr);
-};
 void feedbackAction(String buf){
-	Serial.println("buf " + buf);
 	mqttClient.publish(outtopic, buf);
 };
+void sweepAction1(int outr, int cr, uint8_t n){	
+	Serial.println((String) "r: "+cr);
+	if(cr > 0){
+		Serial2.println((String)"@l"+cr);
+		Serial.println((String)"@l"+cr);
+	}else{
+		Serial2.println((String)"@lo");
+		Serial.println((String)"@lo");
+	}
+};
+void sweepAction2(int outr, int cr, uint8_t n){	
+	Serial.println((String) "r: "+cr);
+	if(cr > 0){
+		//Serial2.println((String)"@l"+cr);
+		Serial.println((String)"@l"+cr);
+	}else{
+		//Serial2.println((String)"@lo");
+		Serial.println((String)"@lo");
+	}
+};
+/////// gestore messaggi MQTT in ricezione (callback)     
+void messageReceived(String &topic, String &payload) {
+	void feedbackAction(String buf){
+	mqttClient.publish(outtopic, buf);
+};
+void sweepAction1(int outr, int cr, uint8_t n){	
+	Serial.println((String) "r: "+cr);
+	if(cr > 0){
+		Serial2.println((String)"@l"+cr);
+		Serial.println((String)"@l"+cr);
+	}else{
+		Serial2.println((String)"@lo");
+		Serial.println((String)"@lo");
+	}
+};
+void sweepAction2(int outr, int cr, uint8_t n){	
+	Serial.println((String) "r: "+cr);
+	if(cr > 0){
+		//Serial2.println((String)"@l"+cr);
+		Serial.println((String)"@l"+cr);
+	}else{
+		//Serial2.println((String)"@lo");
+		Serial.println((String)"@lo");
+	}
+};
+/////// gestore messaggi MQTT in ricezione (callback)     
 void messageReceived(String &topic, String &payload) {
 	Serial.println("incoming: " + topic + " - " + payload);
 	// Note: Do not use the client in the callback to publish, subscribe or
@@ -353,11 +384,8 @@ void messageReceived(String &topic, String &payload) {
 	
 	//if(topic == intopic){
 		//String str;	
-		sld1.processCmd(mqttid, payload, MAXLEN);
-		sld2.processCmd(mqttid, payload, MAXLEN);
-		sld3.processCmd(mqttid, payload, MAXLEN);
-		sld4.processCmd(mqttid, payload, MAXLEN);
-	//}
+		sw1.processCmd(mqttid, payload, MAXLEN);
+		sw2.processCmd(mqttid, payload, MAXLEN);	
 };
 ```
 
@@ -372,11 +400,9 @@ void messageReceived(String &topic, String &payload) {
 	// or push to a queue and handle it in the loop after calling `client.loop()`.
 	
 	//if(topic == intopic){
-		sld1.processCmd(mqttid, payload, MAXLEN);
-		sld2.processCmd(mqttid, payload, MAXLEN);
-		sld3.processCmd(mqttid, payload, MAXLEN);
-		sld4.processCmd(mqttid, payload, MAXLEN);
-	//}
+		//String str;	
+		sw1.processCmd(mqttid, payload, MAXLEN);
+		sw2.processCmd(mqttid, payload, MAXLEN);	
 };
 ```
     
@@ -384,6 +410,29 @@ void messageReceived(String &topic, String &payload) {
 ### **Callback MQTT lunga**
 
 ```C++
+void feedbackAction(String buf){
+	mqttClient.publish(outtopic, buf);
+};
+void sweepAction1(int outr, int cr, uint8_t n){	
+	Serial.println((String) "r: "+cr);
+	if(cr > 0){
+		Serial2.println((String)"@l"+cr);
+		Serial.println((String)"@l"+cr);
+	}else{
+		Serial2.println((String)"@lo");
+		Serial.println((String)"@lo");
+	}
+};
+void sweepAction2(int outr, int cr, uint8_t n){	
+	Serial.println((String) "r: "+cr);
+	if(cr > 0){
+		//Serial2.println((String)"@l"+cr);
+		Serial.println((String)"@l"+cr);
+	}else{
+		//Serial2.println((String)"@lo");
+		Serial.println((String)"@lo");
+	}
+};
 /////// gestore messaggi MQTT in ricezione (callback)     
 void messageReceived(String &topic, String &payload) {
 	Serial.println("incoming: " + topic + " - " + payload);
@@ -393,31 +442,44 @@ void messageReceived(String &topic, String &payload) {
 	// or push to a queue and handle it in the loop after calling `client.loop()`.
 	
 	//if(topic == intopic){
-		String str;		
+		String str;	
+		sw1.processCmd(mqttid, payload, MAXLEN);
+		sw2.processCmd(mqttid, payload, MAXLEN);
 		// COMMANDS PARSER /////////////////////////////////////////////////////////////////////////////////////////////
 		// ricerca all'interno del payload l'eventuale occorrenza di un comando presente in un set predefinito 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		sld1.cmdParser(str,payload,"devid",MAXLEN);
+		sw1.cmdParser(str,payload,"devid",MAXLEN);
 		if(str == mqttid){		
-		    if(sld1.cmdParser(str,payload,"sld1",MAXLEN)){
-				sld1.remoteSlider(atoi(str.c_str()));
+		    if(sw1.cmdParser(str,payload,"to1",MAXLEN)){
+				sw1.remoteToggle(255);
 			}
-			if(sld2.cmdParser(str,payload,"sld2",MAXLEN)){
-				sld2.remoteSlider(atoi(str.c_str()));
+			if(sw2.cmdParser(str,payload,"to2",MAXLEN)){
+				sw2.remoteToggle(255);
 			}
-			if(sld3.cmdParser(str,payload,"sld3",MAXLEN)){
-				sld3.remoteSlider(atoi(str.c_str()));
+			if(sw1.cmdParser(str,payload,"on1",MAXLEN)){
+				sw1.remoteCntrlOn(atoi(str.c_str()));
 			}
-			if(sld4.cmdParser(str,payload,"sld4",MAXLEN)){
-				sld4.remoteSlider(atoi(str.c_str()));
+			if(payload.indexOf("\"off1\":\"255\"") >= 0){
+				sw1.remoteCntrlOff();
+			}
+			if(sw2.cmdParser(str,payload,"on2",MAXLEN)){
+				sw2.remoteCntrlOn(atoi(str.c_str()));
+			}
+			if(payload.indexOf("\"off2\":\"255\"") >= 0){
+				sw2.remoteCntrlOff();
+			}
+			if(sw1.cmdParser(str,payload,"sld1",MAXLEN)){
+				sw1.remoteSlider(atoi(str.c_str()));
+			}
+			if(sw2.cmdParser(str,payload,"sld2",MAXLEN)){
+				sw2.remoteSlider(atoi(str.c_str()));
 			}
 			if(payload.indexOf("\"conf\":\"255\"") >= 0){
-				sld1.remoteConf();
-				sld2.remoteConf();
-				sld3.remoteConf();
-				sld4.remoteConf();
+				sw1.remoteConf();
+				sw2.remoteConf();
 			}
 		}
+	//}
 };
 ```
 
