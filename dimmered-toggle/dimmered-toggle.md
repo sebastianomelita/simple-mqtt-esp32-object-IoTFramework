@@ -198,11 +198,24 @@ function calcLen(r,n){
 
 ### **Formato JSON ingressi**
 
+**Comando pulsante**
+Genera un messaggio asincrono, inviato al momento della pressione di un pulsante o del rilascio di uno slider.
 ```C++
-buf {"devid":"soggiorno-gruppo06","pr1":"71"}
-buf {"devid":"soggiorno-gruppo06","pr2":"73"}
-buf {"devid":"soggiorno-gruppo06","pr3":"28"}
-buf {"devid":"soggiorno-gruppo06","pr4":"0"}
+//impostazione slider
+{"devid":"soggiorno-gruppo06","sld2":"11"}
+// sweep
+{"devid":"soggiorno-gruppo06","on2":"255","off2":"0", "sp2":"10000","dr2":"1","tr2":"2704"}			//up sweep
+{"devid":"soggiorno-gruppo06","on2":"0","off2":"0","dr2":"0","tr2":"4207"}					//stop sweep
+//toggle on
+{"devid":"soggiorno-gruppo06","on2":"42","off2":"0","to2":"1", "sp2":"1100","dr2":"1","nl2":"100","tr2":"1"} 	//toggle on start sweep
+{"devid":"soggiorno-gruppo06","on2":"0","off2":"0","dr2":"0","tr2":"470"}					//toggle on stop sweep
+//toggle off
+{"devid":"soggiorno-gruppo06","on2":"0","off2":"0","to2":"0", "sp2":"1100","dr2":"-1","nl2":"100","tr2":"470"} 	//toggle off start sweep
+{"devid":"soggiorno-gruppo06","on2":"0","off2":"0","dr2":"0","tr2":"-6"}					//toggle off stop sweep
+//Ritrasm. periodica stato: 
+{"devid":"soggiorno-gruppo06","on1":"0","off1":"0","to1":"0", "sp1":"10000","dr1":"0","nl1":"9","tr1":"0"}
+{"devid":"soggiorno-gruppo06","on2":"0","off2":"0","to2":"0", "sp2":"1100","dr2":"0","nl2":"100","tr2":"-6"}
+
 ```
 
 ### **Callback uscite**
