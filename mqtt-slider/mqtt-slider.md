@@ -136,15 +136,6 @@ La definizione della **gerarchia di elementi** contenitori e contenuti del corpo
 </div>
 ```
 
-### **Formato JSON ingressi**
-
-```C++
-buf {"devid":"soggiorno-gruppo06","pr1":"71"}
-buf {"devid":"soggiorno-gruppo06","pr2":"73"}
-buf {"devid":"soggiorno-gruppo06","pr3":"28"}
-buf {"devid":"soggiorno-gruppo06","pr4":"0"}
-```
-
 ### **Callback uscite**
 
 - ```outr```. Stato del pulsante in percentuale. Valore ```0``` o ```100``` 
@@ -158,13 +149,26 @@ void sldAction(int outr, int cr, uint8_t n){
 };
 ```
 
+### **Formato JSON ingressi**
+
+```C++
+// ricarica della pagina
+{"devid":"soggiorno-gruppo06","conf":"255"}
+// slider al 74%
+{"devid":"soggiorno-gruppo06","sld1":"74"}
+```
+
 ### **Formato JSON feedback**
 
 ```C++
-buf {"devid":"soggiorno-gruppo06","to1":"1"}
-buf {"devid":"soggiorno-gruppo06","to2":"1"}
-buf {"devid":"soggiorno-gruppo06","to3":"0"}
-buf {"devid":"soggiorno-gruppo06","to4":"1"}
+// feedback slider al 74%
+buf {"devid":"soggiorno-gruppo06","pr1":"74"}
+// ricarica della pagina e trasmissione periodica stato
+buf {"devid":"soggiorno-gruppo06","pr1":"0"}
+buf {"devid":"soggiorno-gruppo06","pr2":"0"}
+buf {"devid":"soggiorno-gruppo06","pr3":"0"}
+buf {"devid":"soggiorno-gruppo06","pr4":"0"}
+
 ```
 ### **Metodi di base comuni a tutti gli oggetti IOT**
 
