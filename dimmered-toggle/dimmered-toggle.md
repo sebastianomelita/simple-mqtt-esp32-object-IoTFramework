@@ -11,7 +11,7 @@ L'**andamento temporale** è, in questo caso, **lineare** ed calcolato in propor
 
 Lo **scivolamento** (sweep) dei valori avviene sempre tra **due estremi** (il primo è zero) per realizzare **due funzioni** diverse:
 - il **toggle con fading automatico** cioé lo scivolamento tra il **valore ```0```** e un **valore preimpostato** e viceversa.
-- l'**impostazione manuale** del tetto del fading, cioè del suo valore superiore. Avviene essa stessa con fading, cioè con uno scivolamento progressivo dei valori che però è **iniziato**, in un certo verso, con la **pressione** di uno dei due pulsante (UP o DOWN) ed è **terminato** con la **pressione** di uno qwualsiasi dei due pulsanti (UP o DOWN) dello stesso gruppo.
+- l'**impostazione manuale** del tetto del fading, cioè del suo valore superiore. Avviene essa stessa con fading, cioè con uno scivolamento progressivo dei valori che però è **iniziato**, in un certo verso, con la **pressione** di uno dei due pulsante (UP o DOWN) ed è **terminato** con la **pressione** di uno qualsiasi dei due pulsanti (UP o DOWN) dello stesso gruppo.
 
 ### **Utilizzo**
 
