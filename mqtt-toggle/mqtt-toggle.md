@@ -148,10 +148,10 @@ void tglAction1(int outr, int cr, uint8_t n){
 // feedback pulsante 1 spento
 {"devid":"soggiorno-gruppo06","to1":"0"}
 // ricarica pagina o ritrasm. periodica stato
-buf {"devid":"soggiorno-gruppo06","to1":"0"}
-buf {"devid":"soggiorno-gruppo06","to2":"0"}
-buf {"devid":"soggiorno-gruppo06","to3":"0"}
-buf {"devid":"soggiorno-gruppo06","to4":"0"}
+{"devid":"soggiorno-gruppo06","to1":"0"}
+{"devid":"soggiorno-gruppo06","to2":"0"}
+{"devid":"soggiorno-gruppo06","to3":"0"}
+{"devid":"soggiorno-gruppo06","to4":"0"}
 ```
 ### **Metodi di base comuni a tutti gli oggetti IOT**
 
