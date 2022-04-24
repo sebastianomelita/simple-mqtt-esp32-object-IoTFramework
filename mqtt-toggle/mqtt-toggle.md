@@ -117,14 +117,6 @@ La definizione della **gerarchia di elementi** contenitori e contenuti del corpo
 </div>
 ```
 
-### **Formato JSON ingressi**
-
-```C++
-{"devid":"soggiorno-gruppo06","up1":"255"}
-{"devid":"soggiorno-gruppo06","down1":"255"}
-
-```
-
 ### **Callback uscite**
 
 - ```outr```. Stato del pulsante. Valore ```0``` o ```1``` 
@@ -137,13 +129,29 @@ void tglAction1(int outr, int cr, uint8_t n){
 };
 ```
 
+### **Formato JSON ingressi**
+
+```C++
+// ricarica della pagina
+{"devid":"soggiorno-gruppo06","conf":"255"}
+//pressione peulsante 1
+{"devid":"soggiorno-gruppo06","to1":"255"}
+//ripressione peulsante 1
+{"devid":"soggiorno-gruppo06","to1":"255"}
+```
+
 ### **Formato JSON feedback**
 
 ```C++
-buf {"devid":"soggiorno-gruppo06","to1":"1"}
-buf {"devid":"soggiorno-gruppo06","to2":"1"}
+// feedback pulsante 1 acceso
+{"devid":"soggiorno-gruppo06","to1":"1"}
+// feedback pulsante 1 spento
+{"devid":"soggiorno-gruppo06","to1":"0"}
+// ricarica pagina o ritrasm. periodica stato
+buf {"devid":"soggiorno-gruppo06","to1":"0"}
+buf {"devid":"soggiorno-gruppo06","to2":"0"}
 buf {"devid":"soggiorno-gruppo06","to3":"0"}
-buf {"devid":"soggiorno-gruppo06","to4":"1"}
+buf {"devid":"soggiorno-gruppo06","to4":"0"}
 ```
 ### **Metodi di base comuni a tutti gli oggetti IOT**
 
