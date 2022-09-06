@@ -98,7 +98,7 @@ class DimmeredToggle : public RemoteBase
 	public:
 
 		DimmeredToggle(String id, uint8_t startIndex, uint8_t precision = 2, unsigned nlevel = 100, unsigned long maxtime = 10000);//:RemoteBase(id,startIndex,NSGN,NSTATES,NOUT){};
-		void processCmd(String id, String payload, uint16_t maxlen);
+		bool processCmd(String id, String payload, uint16_t maxlen);
 		void sweep(uint8_t n);
 		void onSweep(SweepCallbackSimple cb);
 		void remoteToggle(uint8_t targetval);
@@ -166,7 +166,7 @@ class FadedSlider : public RemoteBase
 		
 	public:
 		FadedSlider(String id, uint8_t startIndex, uint8_t precision = 2, unsigned nlevel = 100, unsigned long maxtime = 10000);
-		void processCmd(String id, String payload, uint16_t maxlen);
+		bool processCmd(String id, String payload, uint16_t maxlen);
 		void sweep(uint8_t n);
 		void onSweep(SweepCallbackSimple cb);
 		void remoteSlider(uint8_t targetval);
@@ -212,7 +212,7 @@ class Slider : public RemoteBase
 		
 	public:
 		Slider(String id, uint8_t startIndex, unsigned nlevels);
-		void processCmd(String id, String payload, uint16_t maxlen);
+		bool processCmd(String id, String payload, uint16_t maxlen);
 		void remoteSlider(uint8_t targetval);
 		void remoteConf(void);
 		bool remoteCntrlEventsParser();
@@ -251,7 +251,7 @@ class Toggle : public RemoteBase
 		
 	public:
 		Toggle(String id,uint8_t startIndex);
-		void processCmd(String id, String payload, uint16_t maxlen);
+		bool processCmd(String id, String payload, uint16_t maxlen);
 		void remoteConf(void);
 		bool remoteCntrlEventsParser();
 		void remoteToggle();
@@ -297,7 +297,7 @@ class Motor : public RemoteBase
 	public:
 
 		Motor(String id, uint8_t startIndex);
-		void processCmd(String id, String payload, uint16_t maxlen);
+		bool processCmd(String id, String payload, uint16_t maxlen);
 		void remoteCntrlUp(void);
 		void remoteCntrlDown(void);
 		void remoteConf(void);
