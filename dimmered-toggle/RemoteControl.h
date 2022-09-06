@@ -98,6 +98,7 @@ class DimmeredToggle : public RemoteBase
 	public:
 
 		DimmeredToggle(String id, uint8_t startIndex, uint8_t precision = 2, unsigned nlevel = 100, unsigned long maxtime = 10000);//:RemoteBase(id,startIndex,NSGN,NSTATES,NOUT){};
+		bool processCmd(String id, String payload, uint16_t maxlen);
 		void sweep(uint8_t n);
 		void onSweep(SweepCallbackSimple cb);
 		void remoteToggle(uint8_t targetval);
@@ -165,6 +166,7 @@ class FadedSlider : public RemoteBase
 		
 	public:
 		FadedSlider(String id, uint8_t startIndex, uint8_t precision = 2, unsigned nlevel = 100, unsigned long maxtime = 10000);
+		bool processCmd(String id, String payload, uint16_t maxlen);
 		void sweep(uint8_t n);
 		void onSweep(SweepCallbackSimple cb);
 		void remoteSlider(uint8_t targetval);
@@ -210,6 +212,7 @@ class Slider : public RemoteBase
 		
 	public:
 		Slider(String id, uint8_t startIndex, unsigned nlevels);
+		bool processCmd(String id, String payload, uint16_t maxlen);
 		void remoteSlider(uint8_t targetval);
 		void remoteConf(void);
 		bool remoteCntrlEventsParser();
@@ -248,9 +251,57 @@ class Toggle : public RemoteBase
 		
 	public:
 		Toggle(String id,uint8_t startIndex);
+		bool processCmd(String id, String payload, uint16_t maxlen);
 		void remoteConf(void);
 		bool remoteCntrlEventsParser();
 		void remoteToggle();
+		void onAction(SweepCallbackSimple cb);
+};
+
+class Motor : public RemoteBase
+{
+    private:	
+		/************** DEFINIZIONE USCITE **************************/
+		enum outs // indice uscite
+		{
+			OUT1			=0, // btn1, btn2
+			NOUT			=1
+		};
+		/********* FINE DEFINIZIONE USCITE **************************/
+		/************** DEFINIZIONE STATI **************************/
+		enum btnstates // stato pulsanti 
+		{
+			STBTN1			=0, 
+			STBTN2			=1,
+			NSTATES         =2
+		};
+		/************** DEFINIZIONE SEGNALI **************************/
+		enum signals // segnali tra timer callbacks e loop() (flags)
+		{
+			SGNBTN1			=0, 
+			SGNBTN2			=1,
+			SGNBTNRST1		=2,
+			SGNINIT			=3,
+			SGNOP			=4,
+			NSGN        	=5
+		}; 
+		int outval[NOUT];
+		int countr[NOUT];
+		int direct[NOUT];
+		uint8_t sharp[NOUT];
+		
+		SweepCallbackSimple actionkCallback = nullptr;
+		/////    GESTORE EVENTI (callback)    /////////////////////////////////////////////////////////////////////////////////
+		String getUpDownFeedback(uint8_t on, uint8_t off, short dir, uint8_t n);
+	
+	public:
+
+		Motor(String id, uint8_t startIndex);
+		bool processCmd(String id, String payload, uint16_t maxlen);
+		void remoteCntrlUp(void);
+		void remoteCntrlDown(void);
+		void remoteConf(void);
+		bool remoteCntrlEventsParser();
 		void onAction(SweepCallbackSimple cb);
 };
 #endif
